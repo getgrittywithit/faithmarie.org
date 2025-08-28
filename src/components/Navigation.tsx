@@ -25,6 +25,12 @@ export default function Navigation() {
               Our Story
             </Link>
             <Link 
+              href="/photos" 
+              className="text-gray-600 hover:text-gray-800 transition-colors"
+            >
+              Photos
+            </Link>
+            <Link 
               href="/resources" 
               className="text-gray-600 hover:text-gray-800 transition-colors"
             >
@@ -75,6 +81,9 @@ export default function Navigation() {
             <div className="flex flex-col space-y-4">
               <Link href="/our-story" className="text-gray-600 hover:text-gray-800 transition-colors">
                 Our Story
+              </Link>
+              <Link href="/photos" className="text-gray-600 hover:text-gray-800 transition-colors">
+                Photos
               </Link>
               <Link href="/resources" className="text-gray-600 hover:text-gray-800 transition-colors">
                 Resources
