@@ -2,7 +2,6 @@
 
 import Navigation from '@/components/Navigation';
 import PhotoGallery from '@/components/PhotoGallery';
-import { useState } from 'react';
 
 export default function Home() {
   return (
@@ -14,7 +13,7 @@ export default function Home() {
           <div className="text-center space-y-8 px-4 max-w-4xl mx-auto">
             <div className="space-y-4">
               <h1 className="text-5xl md:text-7xl font-light text-gray-800">
-                Faith Marie's Legacy
+                Faith Marie&apos;s Legacy
               </h1>
               <p className="text-xl md:text-2xl text-gray-600 font-light">
                 Supporting families through their journey with infant heart conditions
@@ -29,7 +28,7 @@ export default function Home() {
               <div className="grid md:grid-cols-3 gap-6 mt-12">
                 <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                   <h3 className="text-lg font-medium text-gray-800 mb-4">Just Received a Diagnosis</h3>
-                  <p className="text-gray-600 mb-6">Understanding your baby's condition and what comes next</p>
+                  <p className="text-gray-600 mb-6">Understanding your baby&apos;s condition and what comes next</p>
                   <button className="w-full bg-rose-100 text-rose-700 py-3 px-6 rounded-md hover:bg-rose-200 transition-colors">
                     Find Support
                   </button>
@@ -45,7 +44,7 @@ export default function Home() {
                 
                 <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                   <h3 className="text-lg font-medium text-gray-800 mb-4">Walking Through Loss</h3>
-                  <p className="text-gray-600 mb-6">Grief support and ways to honor your baby's memory</p>
+                  <p className="text-gray-600 mb-6">Grief support and ways to honor your baby&apos;s memory</p>
                   <button className="w-full bg-purple-100 text-purple-700 py-3 px-6 rounded-md hover:bg-purple-200 transition-colors">
                     Find Comfort
                   </button>
@@ -58,7 +57,7 @@ export default function Home() {
         {/* Story Section */}
         <section className="py-24 bg-white">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-4xl font-light text-center text-gray-800 mb-16">Faith Marie's Story</h2>
+            <h2 className="text-4xl font-light text-center text-gray-800 mb-16">Faith Marie&apos;s Story</h2>
             
             <div className="prose prose-lg mx-auto text-gray-700 space-y-6">
               <p className="leading-relaxed">
@@ -80,7 +79,7 @@ export default function Home() {
               
               <p className="leading-relaxed font-medium text-rose-700">
                 Every resource we provide, every family we support, and every moment of comfort we offer 
-                is a testament to Faith Marie's enduring legacy of love.
+                is a testament to Faith Marie&apos;s enduring legacy of love.
               </p>
             </div>
           </div>
@@ -134,7 +133,7 @@ export default function Home() {
                 <h3 className="text-2xl font-medium text-gray-800">Our Impact</h3>
                 <div className="space-y-4 text-gray-700">
                   <p className="leading-relaxed">
-                    Through Faith Marie's legacy, we're building a world where no family faces infant heart conditions alone.
+                    Through Faith Marie&apos;s legacy, we&apos;re building a world where no family faces infant heart conditions alone.
                   </p>
                   <div className="grid grid-cols-2 gap-6 mt-8">
                     <div className="text-center p-6 bg-rose-50 rounded-lg">
@@ -148,7 +147,7 @@ export default function Home() {
                   </div>
                   <p className="leading-relaxed mt-6">
                     Every dollar donated goes directly to supporting families in need, 
-                    ensuring that Faith Marie's love continues to touch lives every day.
+                    ensuring that Faith Marie&apos;s love continues to touch lives every day.
                   </p>
                 </div>
               </div>
