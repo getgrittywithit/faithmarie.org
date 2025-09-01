@@ -2,11 +2,13 @@
 
 import Navigation from '@/components/Navigation';
 import ResourcesSearch from '@/components/ResourcesSearch';
+import ResourceModal from '@/components/ResourceModal';
 import { useState } from 'react';
 
 export default function ResourcesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
+  const [selectedResource, setSelectedResource] = useState<any>(null);
 
   const emergencyResources = [
     {
@@ -43,13 +45,45 @@ export default function ResourcesPage() {
           title: 'Understanding Your Baby\'s Condition',
           description: 'Plain-language explanations of common heart conditions',
           type: 'Guide',
-          urgency: 'high'
+          urgency: 'high',
+          content: {
+            type: 'guide',
+            data: {
+              overview: 'Heart conditions in babies can be overwhelming to understand. This guide breaks down the most common conditions in simple terms, helping you understand what your baby is facing.',
+              steps: [
+                'Learn the basic anatomy of your baby\'s heart',
+                'Understand your specific diagnosis in simple terms',
+                'Know what questions to ask your medical team',
+                'Understand treatment options and timelines',
+                'Connect with other families with similar conditions'
+              ],
+              links: [
+                { title: 'American Heart Association - Congenital Heart Defects', url: 'https://www.heart.org/en/health-topics/congenital-heart-defects' },
+                { title: 'Children\'s Hospital Association Resource Guide', url: '#' }
+              ],
+              downloadUrl: '/resources/understanding-heart-conditions.pdf'
+            }
+          }
         },
         {
           title: 'Questions to Ask Your Doctor',
           description: 'Essential questions for your first cardiology appointment',
           type: 'Checklist',
-          urgency: 'high'
+          urgency: 'high',
+          content: {
+            type: 'checklist',
+            data: {
+              description: 'Use this checklist during your appointments to ensure you get all the information you need.',
+              items: [
+                { title: 'What exactly is wrong with my baby\'s heart?', description: 'Ask for a simple explanation you can understand' },
+                { title: 'What treatment options are available?', description: 'Understand all your choices, not just the first recommendation' },
+                { title: 'What are the risks of each treatment option?', description: 'Get specific numbers and percentages when possible' },
+                { title: 'How urgent is this decision?', description: 'Know if you have time to get a second opinion' },
+                { title: 'What will my baby\'s quality of life be like?', description: 'Both short-term and long-term outlook' },
+                { title: 'Are there any experimental treatments available?', description: 'Ask about clinical trials or newer options' }
+              ]
+            }
+          }
         },
         {
           title: 'Finding the Right Specialists',
@@ -107,7 +141,14 @@ export default function ResourcesPage() {
           title: 'Emergency Financial Assistance',
           description: 'Fast-track grants for immediate medical expenses',
           type: 'Application',
-          urgency: 'critical'
+          urgency: 'critical',
+          content: {
+            type: 'application',
+            data: {
+              description: 'Apply for emergency financial assistance. We typically respond within 24 hours for urgent needs.',
+              fields: ['name', 'phone', 'baby_name', 'immediate_need']
+            }
+          }
         },
         {
           title: 'Travel & Lodging Support',
@@ -194,7 +235,29 @@ export default function ResourcesPage() {
                   <h3 className="font-semibold text-red-800 mb-2">{resource.title}</h3>
                   <p className="text-red-700 text-sm mb-3">{resource.description}</p>
                   <div className="text-sm text-red-600 mb-3">{resource.contact}</div>
-                  <button className="bg-red-600 text-white px-4 py-2 rounded text-sm hover:bg-red-700 transition-colors w-full">
+                  <button 
+                    onClick={() => {
+                      if (resource.action === 'Call Now') {
+                        window.location.href = 'tel:1-800-555-0123';
+                      } else if (resource.action === 'Get Help') {
+                        setSelectedResource({
+                          title: 'Emergency Financial Assistance',
+                          description: 'Fast-track grants for immediate medical expenses',
+                          type: 'Application',
+                          urgency: 'critical',
+                          content: {
+                            type: 'application',
+                            data: {
+                              description: 'Apply for emergency financial assistance. We typically respond within 24 hours for urgent needs.'
+                            }
+                          }
+                        });
+                      } else if (resource.action === 'Get Advocate') {
+                        window.location.href = 'mailto:advocacy@faithmarie.org?subject=Insurance Appeal Help Needed';
+                      }
+                    }}
+                    className="bg-red-600 text-white px-4 py-2 rounded text-sm hover:bg-red-700 transition-colors w-full"
+                  >
                     {resource.action}
                   </button>
                 </div>
@@ -242,7 +305,9 @@ export default function ResourcesPage() {
                         <p className="text-gray-600 mb-4 leading-relaxed">
                           {resource.description}
                         </p>
-                        <button className={`w-full py-3 px-4 rounded-md font-medium transition-colors ${
+                        <button 
+                          onClick={() => setSelectedResource(resource)}
+                          className={`w-full py-3 px-4 rounded-md font-medium transition-colors ${
                           resource.urgency === 'critical' ? 'bg-red-600 hover:bg-red-700 text-white' :
                           resource.urgency === 'high' ? 'bg-rose-600 hover:bg-rose-700 text-white' :
                           'bg-gray-100 hover:bg-gray-200 text-gray-700'
@@ -277,6 +342,11 @@ export default function ResourcesPage() {
           </div>
         </div>
       </main>
+      
+      <ResourceModal 
+        resource={selectedResource} 
+        onClose={() => setSelectedResource(null)} 
+      />
     </>
   );
 }
