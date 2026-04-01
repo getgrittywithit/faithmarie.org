@@ -104,7 +104,7 @@ export default function GetInvolvedPage() {
                 </svg>
                 Share on Facebook
               </button>
-              <button className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition-colors flex items-center">
+              <button className="bg-gray-700 text-white px-6 py-2 rounded-md hover:bg-gray-800 transition-colors flex items-center">
                 <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>

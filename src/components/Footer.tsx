@@ -2,36 +2,36 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-teal-50 border-t border-teal-100">
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid md:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="text-xl font-light text-white">Faith Marie Foundation</h3>
-            <p className="text-sm leading-relaxed">
+            <h3 className="text-xl font-light text-gray-800">Faith Marie Foundation</h3>
+            <p className="text-sm leading-relaxed text-gray-600">
               Advancing mental health research through AI — making the latest findings accessible to everyone.
             </p>
-            <p className="text-sm text-teal-400">
+            <p className="text-sm text-teal-700 font-medium">
               In memory of Faith Marie Moses
             </p>
           </div>
 
           {/* Research Links */}
           <div className="space-y-4">
-            <h4 className="text-sm font-medium text-white uppercase tracking-wide">Research</h4>
+            <h4 className="text-sm font-medium text-gray-800 uppercase tracking-wide">Research</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/research" className="hover:text-teal-400 transition-colors">
+                <Link href="/research" className="text-gray-600 hover:text-teal-700 transition-colors">
                   Overview
                 </Link>
               </li>
               <li>
-                <Link href="/research/daily-digests" className="hover:text-teal-400 transition-colors">
+                <Link href="/research/daily-digests" className="text-gray-600 hover:text-teal-700 transition-colors">
                   Daily Digests
                 </Link>
               </li>
               <li>
-                <Link href="/research/topics" className="hover:text-teal-400 transition-colors">
+                <Link href="/research/topics" className="text-gray-600 hover:text-teal-700 transition-colors">
                   Topics
                 </Link>
               </li>
@@ -40,15 +40,15 @@ export default function Footer() {
 
           {/* Tools Links */}
           <div className="space-y-4">
-            <h4 className="text-sm font-medium text-white uppercase tracking-wide">Tools</h4>
+            <h4 className="text-sm font-medium text-gray-800 uppercase tracking-wide">Tools</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/tools/chatbot" className="hover:text-teal-400 transition-colors">
+                <Link href="/tools/chatbot" className="text-gray-600 hover:text-teal-700 transition-colors">
                   AI Chatbot
                 </Link>
               </li>
               <li>
-                <Link href="/knowledge-base" className="hover:text-teal-400 transition-colors">
+                <Link href="/knowledge-base" className="text-gray-600 hover:text-teal-700 transition-colors">
                   Knowledge Base
                 </Link>
               </li>
@@ -57,15 +57,15 @@ export default function Footer() {
 
           {/* About & Crisis */}
           <div className="space-y-4">
-            <h4 className="text-sm font-medium text-white uppercase tracking-wide">About</h4>
+            <h4 className="text-sm font-medium text-gray-800 uppercase tracking-wide">About</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/our-story" className="hover:text-teal-400 transition-colors">
+                <Link href="/our-story" className="text-gray-600 hover:text-teal-700 transition-colors">
                   Our Story
                 </Link>
               </li>
               <li>
-                <Link href="/get-involved" className="hover:text-teal-400 transition-colors">
+                <Link href="/get-involved" className="text-gray-600 hover:text-teal-700 transition-colors">
                   Get Involved
                 </Link>
               </li>
@@ -82,22 +82,22 @@ export default function Footer() {
         </div>
 
         {/* Crisis Hotline Banner */}
-        <div className="mt-12 p-4 bg-gray-800 rounded-lg text-center">
-          <p className="text-sm">
-            <span className="text-red-400 font-medium">If you&apos;re in crisis:</span>{' '}
-            Call or text <span className="text-white font-medium">988</span> (Suicide & Crisis Lifeline)
-            {' '}or text <span className="text-white font-medium">HOME</span> to <span className="text-white font-medium">741741</span> (Crisis Text Line)
+        <div className="mt-12 p-4 bg-red-50 border border-red-200 rounded-lg text-center">
+          <p className="text-sm text-gray-700">
+            <span className="text-red-700 font-medium">If you&apos;re in crisis:</span>{' '}
+            Call or text <span className="font-semibold">988</span> (Suicide & Crisis Lifeline)
+            {' '}or text <span className="font-semibold">HOME</span> to <span className="font-semibold">741741</span> (Crisis Text Line)
           </p>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-sm">
+        <div className="mt-12 pt-8 border-t border-teal-200 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
           <p>&copy; {new Date().getFullYear()} Faith Marie Foundation. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/privacy" className="hover:text-teal-400 transition-colors">
+            <Link href="/privacy" className="hover:text-teal-700 transition-colors">
               Privacy
             </Link>
-            <Link href="/terms" className="hover:text-teal-400 transition-colors">
+            <Link href="/terms" className="hover:text-teal-700 transition-colors">
               Terms
             </Link>
           </div>

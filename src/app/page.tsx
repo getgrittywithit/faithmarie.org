@@ -229,7 +229,7 @@ export default function Home() {
             </p>
             <Link
               href="/our-story"
-              className="inline-block bg-gray-800 text-white px-8 py-4 rounded-md text-lg hover:bg-gray-900 transition-colors"
+              className="inline-block bg-teal-700 text-white px-8 py-4 rounded-md text-lg hover:bg-teal-800 transition-colors"
             >
               Read Our Full Story
             </Link>

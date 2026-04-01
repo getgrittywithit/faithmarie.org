@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindPulse AI Research Foundation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --accent: #1B5E7B;
+    --accent-light: #2980B9;
+    --accent-pale: #E8F4F8;
+    --accent-glow: rgba(27,94,123,0.12);
+    --bg: #F7FAFB;
+    --card: #FFFFFF;
+    --dark: #1A1A2E;
+    --med: #555568;
+    --light: #8888A0;
+    --border: #E2E8F0;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+    --purple: #8B5CF6;
+    --pink: #EC4899;
+    --radius: 12px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--dark); line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-brand svg { width: 32px; height: 32px; }
+  .nav-brand span { font-weight: 700; font-size: 1.15rem; color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--med); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--accent); color: white !important; padding: 8px 18px;
+    border-radius: 8px; font-weight: 600; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--accent-light); }
+
+  /* HERO */
+  .hero {
+    max-width: 1200px; margin: 0 auto; padding: 4rem 2rem 3rem;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--accent-pale); color: var(--accent); padding: 6px 14px;
+    border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  .hero-badge .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--success); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.15; margin-bottom: 1rem; color: var(--dark); }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p { font-size: 1.15rem; color: var(--med); max-width: 640px; margin: 0 auto 2rem; }
+  .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 2.5rem; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+  .hero-stat .label { font-size: 0.8rem; color: var(--light); font-weight: 500; }
+
+  /* SECTION LAYOUT */
+  .section { max-width: 1200px; margin: 0 auto; padding: 2.5rem 2rem; }
+  .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+  .section-header h2 { font-size: 1.4rem; font-weight: 700; color: var(--dark); }
+  .section-header a { font-size: 0.85rem; color: var(--accent); text-decoration: none; font-weight: 600; }
+
+  /* TODAY'S RESEARCH FEED */
+  .today-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+  .feed-card {
+    background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 1.5rem; transition: box-shadow 0.2s, transform 0.15s; cursor: pointer;
+  }
+  .feed-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+  .feed-card .tag {
+    display: inline-block; padding: 3px 10px; border-radius: 6px;
+    font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+  }
+  .tag-ptsd { background: #FEE2E2; color: #DC2626; }
+  .tag-depression { background: #E0E7FF; color: #4F46E5; }
+  .tag-anxiety { background: #FEF3C7; color: #D97706; }
+  .tag-breaking { background: #DCFCE7; color: #16A34A; }
+  .tag-meta { background: #F3E8FF; color: #7C3AED; }
+  .feed-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.4; }
+  .feed-card p { font-size: 0.88rem; color: var(--med); line-height: 1.6; }
+  .feed-meta { display: flex; gap: 1rem; margin-top: 0.75rem; font-size: 0.78rem; color: var(--light); }
+  .feed-meta span { display: flex; align-items: center; gap: 4px; }
+
+  .confidence-bar { height: 4px; border-radius: 2px; background: var(--border); margin-top: 0.6rem; }
+  .confidence-fill { height: 100%; border-radius: 2px; }
+
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  /* LIVE SCANNER */
+  .scanner-card {
+    background: var(--dark); border-radius: var(--radius); padding: 1.25rem;
+    color: white; position: relative; overflow: hidden;
+  }
+  .scanner-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--success), var(--accent));
+    background-size: 200% 100%; animation: scan 2s linear infinite;
+  }
+  @keyframes scan { 0% { background-position: 200% 0; } 100% { background-position: 0 0; } }
+  .scanner-card h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 6px; }
+  .scanner-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.78rem;
+  }
+  .scanner-item:last-child { border-bottom: none; }
+  .scanner-item .src { color: rgba(255,255,255,0.5); }
+  .scanner-item .count { color: var(--success); font-weight: 600; }
+
+  /* TRENDING TOPICS */
+  .trending-card {
+    background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 1.25rem;
+  }
+  .trending-card h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--dark); }
+  .trend-item {
+    display: flex; align-items: center; gap: 10px; padding: 8px 0;
+    border-bottom: 1px solid var(--border); font-size: 0.82rem;
+  }
+  .trend-item:last-child { border-bottom: none; }
+  .trend-rank { width: 22px; height: 22px; border-radius: 6px; background: var(--accent-pale); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; flex-shrink: 0; }
+  .trend-name { flex: 1; font-weight: 500; color: var(--dark); }
+  .trend-change { font-size: 0.72rem; font-weight: 600; }
+  .trend-up { color: var(--success); }
+  .trend-down { color: var(--danger); }
+
+  /* WEEKLY INSIGHTS */
+  .insights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+  .insight-card {
+    background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 1.5rem; position: relative; overflow: hidden;
+  }
+  .insight-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .insight-card:nth-child(1)::before { background: linear-gradient(90deg, #DC2626, #F87171); }
+  .insight-card:nth-child(2)::before { background: linear-gradient(90deg, #4F46E5, #818CF8); }
+  .insight-card:nth-child(3)::before { background: linear-gradient(90deg, #D97706, #FBBF24); }
+  .insight-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; font-size: 1.2rem; }
+  .insight-card:nth-child(1) .insight-icon { background: #FEE2E2; }
+  .insight-card:nth-child(2) .insight-icon { background: #E0E7FF; }
+  .insight-card:nth-child(3) .insight-icon { background: #FEF3C7; }
+  .insight-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .insight-card p { font-size: 0.82rem; color: var(--med); }
+  .insight-stat { margin-top: 0.75rem; font-size: 0.78rem; color: var(--accent); font-weight: 600; }
+
+  /* MOOD TRACKER */
+  .mood-section { background: linear-gradient(135deg, var(--accent) 0%, #2980B9 100%); border-radius: 16px; padding: 3rem 2rem; margin: 2.5rem auto; max-width: 1200px; color: white; }
+  .mood-section h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .mood-section > p { font-size: 0.95rem; opacity: 0.85; margin-bottom: 2rem; max-width: 600px; }
+  .mood-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+  .mood-checkin {
+    background: rgba(255,255,255,0.12); backdrop-filter: blur(10px);
+    border-radius: var(--radius); padding: 1.5rem; border: 1px solid rgba(255,255,255,0.15);
+  }
+  .mood-checkin h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; }
+  .mood-q { margin-bottom: 1.25rem; }
+  .mood-q label { font-size: 0.82rem; display: block; margin-bottom: 0.5rem; opacity: 0.8; }
+  .mood-emojis { display: flex; gap: 8px; }
+  .mood-emoji {
+    width: 44px; height: 44px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; cursor: pointer; transition: all 0.2s;
+  }
+  .mood-emoji:hover, .mood-emoji.active { border-color: white; background: rgba(255,255,255,0.2); transform: scale(1.1); }
+  .mood-slider-track { width: 100%; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.2); position: relative; margin-top: 4px; }
+  .mood-slider-fill { height: 100%; border-radius: 3px; background: white; width: 60%; }
+  .mood-slider-labels { display: flex; justify-content: space-between; font-size: 0.7rem; opacity: 0.6; margin-top: 4px; }
+
+  .mood-insights {
+    background: rgba(255,255,255,0.12); backdrop-filter: blur(10px);
+    border-radius: var(--radius); padding: 1.5rem; border: 1px solid rgba(255,255,255,0.15);
+  }
+  .mood-insights h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; }
+  .mood-chart { display: flex; align-items: flex-end; gap: 6px; height: 100px; margin-bottom: 1rem; }
+  .mood-bar { flex: 1; border-radius: 4px 4px 0 0; background: rgba(255,255,255,0.25); transition: height 0.3s; position: relative; }
+  .mood-bar.today { background: white; }
+  .mood-bar-label { position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; opacity: 0.6; white-space: nowrap; }
+  .mood-insight-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 0.82rem; border-top: 1px solid rgba(255,255,255,0.1); }
+  .mood-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* JOURNAL PREVIEW */
+  .journal-preview {
+    background: rgba(255,255,255,0.08); border-radius: 8px; padding: 1rem;
+    margin-top: 1rem; border: 1px solid rgba(255,255,255,0.1);
+  }
+  .journal-preview h5 { font-size: 0.78rem; font-weight: 600; margin-bottom: 0.5rem; opacity: 0.8; }
+  .journal-prompt { font-size: 0.82rem; font-style: italic; opacity: 0.7; margin-bottom: 0.5rem; }
+  .journal-lines { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.5rem; }
+  .journal-line { height: 1px; background: rgba(255,255,255,0.08); margin: 12px 0; }
+
+  /* EMAIL SIGNUP */
+  .email-section {
+    background: var(--card); border-radius: 16px; border: 1px solid var(--border);
+    padding: 2.5rem; max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+  }
+  .email-section h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .email-section > div > p { font-size: 0.92rem; color: var(--med); margin-bottom: 1rem; }
+  .email-topics { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; }
+  .email-topic {
+    padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--border);
+    font-size: 0.78rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
+    background: white;
+  }
+  .email-topic.selected { border-color: var(--accent); background: var(--accent-pale); color: var(--accent); }
+  .email-form { display: flex; gap: 8px; }
+  .email-form input {
+    flex: 1; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 8px;
+    font-size: 0.9rem; font-family: inherit; outline: none; transition: border 0.2s;
+  }
+  .email-form input:focus { border-color: var(--accent); }
+  .email-form button {
+    padding: 12px 24px; background: var(--accent); color: white; border: none;
+    border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer;
+    font-family: inherit; transition: background 0.2s; white-space: nowrap;
+  }
+  .email-form button:hover { background: var(--accent-light); }
+  .email-preview {
+    background: var(--bg); border-radius: var(--radius); padding: 1.5rem; border: 1px solid var(--border);
+  }
+  .email-preview-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+  .email-preview-avatar { width: 36px; height: 36px; border-radius: 8px; background: var(--accent); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.85rem; }
+  .email-preview-from { font-size: 0.82rem; }
+  .email-preview-from strong { display: block; color: var(--dark); }
+  .email-preview-from span { color: var(--light); font-size: 0.75rem; }
+  .email-preview h5 { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .email-preview-item { display: flex; gap: 8px; padding: 6px 0; font-size: 0.8rem; color: var(--med); }
+  .email-preview-num { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+  /* KNOWLEDGE BASE SEARCH */
+  .kb-section {
+    max-width: 1200px; margin: 2.5rem auto; padding: 0 2rem;
+  }
+  .kb-search-box {
+    background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 1.5rem; margin-bottom: 1.5rem;
+  }
+  .kb-search-input {
+    width: 100%; padding: 14px 18px 14px 48px; border: 2px solid var(--border); border-radius: 10px;
+    font-size: 1rem; font-family: inherit; outline: none; transition: border 0.2s;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%238888A0' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") 16px center no-repeat;
+  }
+  .kb-search-input:focus { border-color: var(--accent); }
+  .kb-search-input::placeholder { color: var(--light); }
+  .kb-filters { display: flex; gap: 8px; margin-top: 0.75rem; flex-wrap: wrap; }
+  .kb-filter {
+    padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 500;
+    border: 1px solid var(--border); background: white; cursor: pointer; transition: all 0.2s;
+  }
+  .kb-filter.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .kb-results { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .kb-result {
+    background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 1.25rem; transition: box-shadow 0.2s;
+  }
+  .kb-result:hover { box-shadow: var(--shadow-lg); }
+  .kb-result h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .kb-result p { font-size: 0.8rem; color: var(--med); }
+  .kb-result-meta { display: flex; gap: 1rem; margin-top: 0.5rem; font-size: 0.72rem; color: var(--light); }
+  .kb-confidence { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+  .conf-high { background: #DCFCE7; color: #16A34A; }
+  .conf-med { background: #FEF3C7; color: #D97706; }
+
+  /* SOCIAL MEDIA PREVIEW */
+  .social-section { max-width: 1200px; margin: 2.5rem auto; padding: 0 2rem; }
+  .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .social-card {
+    background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 1.25rem; transition: box-shadow 0.2s;
+  }
+  .social-card:hover { box-shadow: var(--shadow-lg); }
+  .social-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 0.75rem; }
+  .social-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; }
+  .social-avatar svg { width: 16px; height: 16px; fill: white; }
+  .social-handle { font-size: 0.78rem; }
+  .social-handle strong { display: block; color: var(--dark); font-size: 0.82rem; }
+  .social-handle span { color: var(--light); }
+  .social-card p { font-size: 0.85rem; color: var(--dark); line-height: 1.55; }
+  .social-hashtag { color: var(--accent); font-weight: 500; }
+  .social-engagement { display: flex; gap: 1.25rem; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--light); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark); color: rgba(255,255,255,0.6); padding: 3rem 2rem;
+    margin-top: 3rem; text-align: center;
+  }
+  footer h3 { color: white; font-size: 1.1rem; margin-bottom: 0.5rem; }
+  footer p { font-size: 0.85rem; max-width: 500px; margin: 0 auto; }
+  .footer-links { display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; }
+  .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+  .footer-links a:hover { color: white; }
+  .footer-copy { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.75rem; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .today-grid, .email-section, .kb-results { grid-template-columns: 1fr; }
+    .insights-grid, .social-grid { grid-template-columns: 1fr; }
+    .mood-demo { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+    .hero-stats { flex-direction: column; gap: 1rem; }
+    .nav-links a:not(.nav-cta) { display: none; }
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5); z-index: 200; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: white; border-radius: 16px; padding: 2rem; max-width: 440px; width: 90%;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+  }
+  .modal h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+  .modal p { font-size: 0.88rem; color: var(--med); margin-bottom: 1.5rem; }
+  .modal-close { float: right; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--light); }
+  .modal input[type="email"] {
+    width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 8px;
+    font-size: 0.9rem; font-family: inherit; outline: none; margin-bottom: 0.75rem;
+  }
+  .modal button.primary {
+    width: 100%; padding: 12px; background: var(--accent); color: white; border: none;
+    border-radius: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; font-family: inherit;
+  }
+  .modal .success-msg { text-align: center; padding: 1rem 0; }
+  .modal .success-msg .checkmark { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .modal .success-msg h4 { font-size: 1.1rem; color: var(--success); margin-bottom: 0.25rem; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="14" fill="#1B5E7B" opacity="0.1"/>
+      <path d="M16 6C10.48 6 6 10.48 6 16s4.48 10 10 10 10-4.48 10-10S21.52 6 16 6zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" fill="#1B5E7B"/>
+      <path d="M10 15.5c0-1.5 1.5-2 3-1.5M22 15.5c0-1.5-1.5-2-3-1.5" stroke="#1B5E7B" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="16" cy="16" r="3" fill="#1B5E7B" opacity="0.2"/>
+    </svg>
+    <span>MindPulse AI</span>
+  </a>
+  <div class="nav-links">
+    <a href="#research">Today's Research</a>
+    <a href="#knowledge">Knowledge Base</a>
+    <a href="#tracker">Mood Tracker</a>
+    <a href="#subscribe">Newsletter</a>
+    <a href="#" class="nav-cta" onclick="openModal()">Get Daily Digest</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><div class="pulse"></div> AI Agents Active &mdash; Scanning Now</div>
+  <h1>Mental Health Research,<br><em>Powered by AI</em></h1>
+  <p>Our autonomous AI agents analyze hundreds of new studies every day on depression, anxiety, and PTSD &mdash; so breakthroughs reach you faster.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num" id="papers-count">47,832</div><div class="label">Papers Analyzed</div></div>
+    <div class="hero-stat"><div class="num">365</div><div class="label">Days of Research</div></div>
+    <div class="hero-stat"><div class="num">12,451</div><div class="label">Curated Findings</div></div>
+    <div class="hero-stat"><div class="num">2,340</div><div class="label">Newsletter Subscribers</div></div>
+  </div>
+</div>
+
+<!-- TODAY'S RESEARCH -->
+<div class="section" id="research">
+  <div class="section-header">
+    <h2>Today's Research &mdash; March 29, 2026</h2>
+    <a href="#">View full archive &rarr;</a>
+  </div>
+  <div class="today-grid">
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+      <div class="feed-card">
+        <span class="tag tag-breaking">Breaking Finding</span>
+        <h3>Psilocybin-Assisted Therapy Shows 67% Remission Rate in Treatment-Resistant PTSD Trial</h3>
+        <p>A Phase 2b randomized controlled trial (n=218) published today in The Lancet Psychiatry reports that two sessions of psilocybin-assisted therapy produced sustained PTSD symptom remission at 12-month follow-up, significantly outperforming prolonged exposure therapy alone.</p>
+        <div class="confidence-bar"><div class="confidence-fill" style="width:92%;background:var(--success);"></div></div>
+        <div class="feed-meta">
+          <span>Confidence: 92%</span>
+          <span>Source: Lancet Psychiatry</span>
+          <span>n = 218</span>
+          <span>RCT</span>
+        </div>
+      </div>
+      <div class="feed-card">
+        <span class="tag tag-depression">Depression</span>
+        <h3>Gut Microbiome Signature Predicts SSRI Response with 78% Accuracy</h3>
+        <p>Researchers at Stanford identified a 12-species gut microbiome panel that can predict whether a patient will respond to SSRIs before treatment begins. The AI-analyzed meta-study synthesized data from 4 independent cohorts (total n=1,847).</p>
+        <div class="confidence-bar"><div class="confidence-fill" style="width:85%;background:var(--success);"></div></div>
+        <div class="feed-meta">
+          <span>Confidence: 85%</span>
+          <span>Source: Nature Medicine</span>
+          <span>Meta-analysis</span>
+        </div>
+      </div>
+      <div class="feed-card">
+        <span class="tag tag-anxiety">Anxiety</span>
+        <h3>Digital CBT App Matches In-Person Therapy for Generalized Anxiety in Largest RCT to Date</h3>
+        <p>A 52-week non-inferiority trial (n=3,200) found that AI-guided cognitive behavioral therapy delivered via smartphone was non-inferior to face-to-face CBT for GAD, with significantly better adherence rates (82% vs 64%).</p>
+        <div class="confidence-bar"><div class="confidence-fill" style="width:88%;background:var(--success);"></div></div>
+        <div class="feed-meta">
+          <span>Confidence: 88%</span>
+          <span>Source: JAMA Psychiatry</span>
+          <span>n = 3,200</span>
+        </div>
+      </div>
+      <div class="feed-card">
+        <span class="tag tag-meta">Cross-Condition</span>
+        <h3>Inflammatory Marker IL-6 Linked to Comorbid Depression-Anxiety Phenotype</h3>
+        <p>Our pattern detection system flagged a convergence across 7 recent studies: elevated IL-6 levels consistently appear in patients with both depression and anxiety, suggesting a shared inflammatory mechanism that could enable targeted anti-inflammatory interventions.</p>
+        <div class="confidence-bar"><div class="confidence-fill" style="width:74%;background:var(--warning);"></div></div>
+        <div class="feed-meta">
+          <span>Confidence: 74%</span>
+          <span>AI Pattern Detection</span>
+          <span>7 studies converging</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="scanner-card">
+        <h4><div class="pulse"></div> Live Research Scanner</h4>
+        <div class="scanner-item"><span>PubMed</span><span class="count">+127 new today</span></div>
+        <div class="scanner-item"><span>bioRxiv</span><span class="count">+34 new today</span></div>
+        <div class="scanner-item"><span>PsycINFO</span><span class="count">+56 new today</span></div>
+        <div class="scanner-item"><span>ClinicalTrials.gov</span><span class="count">+8 updated</span></div>
+        <div class="scanner-item"><span>WHO ICTRP</span><span class="count">+3 new</span></div>
+        <div style="margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid rgba(255,255,255,0.1);font-size:0.75rem;">
+          <div style="display:flex;justify-content:space-between;"><span style="opacity:0.5;">Priority items flagged</span><span style="color:white;font-weight:700;">14</span></div>
+          <div style="display:flex;justify-content:space-between;margin-top:4px;"><span style="opacity:0.5;">Deep analysis complete</span><span style="color:white;font-weight:700;">9 / 14</span></div>
+        </div>
+      </div>
+
+      <div class="trending-card">
+        <h4>Trending Research Topics</h4>
+        <div class="trend-item"><span class="trend-rank">1</span><span class="trend-name">Psychedelic therapy</span><span class="trend-change trend-up">+340%</span></div>
+        <div class="trend-item"><span class="trend-rank">2</span><span class="trend-name">Gut-brain axis</span><span class="trend-change trend-up">+180%</span></div>
+        <div class="trend-item"><span class="trend-rank">3</span><span class="trend-name">Digital therapeutics</span><span class="trend-change trend-up">+95%</span></div>
+        <div class="trend-item"><span class="trend-rank">4</span><span class="trend-name">Neuroinflammation</span><span class="trend-change trend-up">+72%</span></div>
+        <div class="trend-item"><span class="trend-rank">5</span><span class="trend-name">Ketamine protocols</span><span class="trend-change trend-down">-12%</span></div>
+      </div>
+
+      <div class="trending-card">
+        <h4>Agent Status</h4>
+        <div class="trend-item">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--success);flex-shrink:0;"></span>
+          <span class="trend-name">Research Director</span>
+          <span style="font-size:0.72rem;color:var(--success);">Active</span>
+        </div>
+        <div class="trend-item">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--success);flex-shrink:0;"></span>
+          <span class="trend-name">Data Analysts (3)</span>
+          <span style="font-size:0.72rem;color:var(--success);">Active</span>
+        </div>
+        <div class="trend-item">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--warning);flex-shrink:0;"></span>
+          <span class="trend-name">Pattern Detector</span>
+          <span style="font-size:0.72rem;color:var(--warning);">Processing</span>
+        </div>
+        <div class="trend-item">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--light);flex-shrink:0;"></span>
+          <span class="trend-name">QC Agent</span>
+          <span style="font-size:0.72rem;color:var(--light);">Queued</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WEEKLY AI INSIGHTS -->
+<div class="section">
+  <div class="section-header">
+    <h2>Weekly AI Insights</h2>
+    <a href="#">View all insights &rarr;</a>
+  </div>
+  <div class="insights-grid">
+    <div class="insight-card">
+      <div class="insight-icon">&#x1F9E0;</div>
+      <h4>PTSD Research Shifting Toward Psychedelic Therapies</h4>
+      <p>34% of new PTSD studies this month involve psychedelic-assisted interventions, up from 12% one year ago. The evidence base is strengthening rapidly.</p>
+      <div class="insight-stat">Based on 142 papers analyzed this week</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-icon">&#x1F52C;</div>
+      <h4>Depression-Inflammation Link Gaining Consensus</h4>
+      <p>Cross-study analysis reveals converging evidence: 8 of 10 recent large-cohort studies support the inflammatory hypothesis of depression. Anti-inflammatory adjunct trials are accelerating.</p>
+      <div class="insight-stat">Confidence level: High (87%)</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-icon">&#x1F4F1;</div>
+      <h4>Digital Therapeutics Reaching Clinical Equivalence</h4>
+      <p>AI-guided mobile therapy apps are now showing non-inferiority to in-person CBT across 3 major anxiety disorder categories, with dramatically better access metrics.</p>
+      <div class="insight-stat">3 landmark trials published this month</div>
+    </div>
+  </div>
+</div>
+
+<!-- KNOWLEDGE BASE -->
+<div class="kb-section" id="knowledge">
+  <div class="section-header">
+    <h2>Knowledge Base</h2>
+    <a href="#">Browse all 12,451 findings &rarr;</a>
+  </div>
+  <div class="kb-search-box">
+    <input class="kb-search-input" type="text" placeholder="Search across 47,832 analyzed papers... (e.g., &quot;SSRI response prediction&quot;, &quot;PTSD veterans&quot;)">
+    <div class="kb-filters">
+      <span class="kb-filter active">All</span>
+      <span class="kb-filter">PTSD</span>
+      <span class="kb-filter">Depression</span>
+      <span class="kb-filter">Anxiety</span>
+      <span class="kb-filter">Cross-Condition</span>
+      <span class="kb-filter">2026 Only</span>
+      <span class="kb-filter">High Confidence</span>
+      <span class="kb-filter">Clinical Trials</span>
+    </div>
+  </div>
+  <div class="kb-results">
+    <div class="kb-result">
+      <h4>SSRI Response Prediction via Gut Microbiome Analysis</h4>
+      <p>12-species panel achieves 78% accuracy in predicting SSRI treatment response. Validated across 4 independent cohorts.</p>
+      <div class="kb-result-meta">
+        <span class="kb-confidence conf-high">High Confidence</span>
+        <span>14 supporting studies</span>
+        <span>Updated today</span>
+      </div>
+    </div>
+    <div class="kb-result">
+      <h4>Psilocybin for Treatment-Resistant PTSD</h4>
+      <p>67% remission rate at 12 months in Phase 2b RCT. Largest psychedelic-PTSD trial to date with active comparator.</p>
+      <div class="kb-result-meta">
+        <span class="kb-confidence conf-high">High Confidence</span>
+        <span>8 supporting studies</span>
+        <span>Updated today</span>
+      </div>
+    </div>
+    <div class="kb-result">
+      <h4>IL-6 as Shared Biomarker for Comorbid Depression-Anxiety</h4>
+      <p>Elevated IL-6 consistently observed in comorbid depression-anxiety phenotype across 7 converging studies. Potential therapeutic target.</p>
+      <div class="kb-result-meta">
+        <span class="kb-confidence conf-med">Medium Confidence</span>
+        <span>7 supporting studies</span>
+        <span>Updated today</span>
+      </div>
+    </div>
+    <div class="kb-result">
+      <h4>Digital CBT Non-Inferiority for Generalized Anxiety</h4>
+      <p>AI-guided smartphone CBT matches in-person therapy with 82% adherence rate vs 64% for traditional. 52-week data available.</p>
+      <div class="kb-result-meta">
+        <span class="kb-confidence conf-high">High Confidence</span>
+        <span>5 supporting studies</span>
+        <span>Updated today</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MOOD TRACKER + JOURNAL -->
+<div class="mood-section" id="tracker">
+  <h2>MindPulse Mood Tracker & Journal</h2>
+  <p>Track your mental health journey with daily check-ins and AI-powered insights. Your data helps advance research (always anonymous, always optional).</p>
+  <div class="mood-demo">
+    <div>
+      <div class="mood-checkin">
+        <h4>Daily Check-In</h4>
+        <div class="mood-q">
+          <label>How are you feeling today?</label>
+          <div class="mood-emojis">
+            <div class="mood-emoji">&#x1F622;</div>
+            <div class="mood-emoji">&#x1F614;</div>
+            <div class="mood-emoji active">&#x1F610;</div>
+            <div class="mood-emoji">&#x1F60A;</div>
+            <div class="mood-emoji">&#x1F604;</div>
+          </div>
+        </div>
+        <div class="mood-q">
+          <label>Anxiety level</label>
+          <div class="mood-slider-track"><div class="mood-slider-fill" style="width:35%"></div></div>
+          <div class="mood-slider-labels"><span>None</span><span>Moderate</span><span>Severe</span></div>
+        </div>
+        <div class="mood-q">
+          <label>Sleep quality last night</label>
+          <div class="mood-slider-track"><div class="mood-slider-fill" style="width:60%"></div></div>
+          <div class="mood-slider-labels"><span>Poor</span><span>Fair</span><span>Excellent</span></div>
+        </div>
+        <div class="mood-q">
+          <label>Energy level</label>
+          <div class="mood-slider-track"><div class="mood-slider-fill" style="width:50%"></div></div>
+          <div class="mood-slider-labels"><span>Low</span><span>Medium</span><span>High</span></div>
+        </div>
+      </div>
+      <div class="journal-preview">
+        <h5>Today's Journal Prompt</h5>
+        <div class="journal-prompt">"What's one small thing that brought you a moment of peace this week?"</div>
+        <div class="journal-lines">
+          <div class="journal-line"></div><div class="journal-line"></div><div class="journal-line"></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="mood-insights">
+        <h4>Your 14-Day Mood Trend</h4>
+        <div class="mood-chart">
+          <div class="mood-bar" style="height:40%"><span class="mood-bar-label">M</span></div>
+          <div class="mood-bar" style="height:55%"><span class="mood-bar-label">T</span></div>
+          <div class="mood-bar" style="height:45%"><span class="mood-bar-label">W</span></div>
+          <div class="mood-bar" style="height:60%"><span class="mood-bar-label">T</span></div>
+          <div class="mood-bar" style="height:50%"><span class="mood-bar-label">F</span></div>
+          <div class="mood-bar" style="height:70%"><span class="mood-bar-label">S</span></div>
+          <div class="mood-bar" style="height:65%"><span class="mood-bar-label">S</span></div>
+          <div class="mood-bar" style="height:55%"><span class="mood-bar-label">M</span></div>
+          <div class="mood-bar" style="height:60%"><span class="mood-bar-label">T</span></div>
+          <div class="mood-bar" style="height:75%"><span class="mood-bar-label">W</span></div>
+          <div class="mood-bar" style="height:70%"><span class="mood-bar-label">T</span></div>
+          <div class="mood-bar" style="height:65%"><span class="mood-bar-label">F</span></div>
+          <div class="mood-bar" style="height:80%"><span class="mood-bar-label">S</span></div>
+          <div class="mood-bar today" style="height:72%"><span class="mood-bar-label">S</span></div>
+        </div>
+        <div class="mood-insight-item"><div class="mood-dot" style="background:var(--success)"></div>Your mood has improved 18% over the past 2 weeks</div>
+        <div class="mood-insight-item"><div class="mood-dot" style="background:var(--accent-light)"></div>Best days tend to be weekends &mdash; sleep quality is 25% higher</div>
+        <div class="mood-insight-item"><div class="mood-dot" style="background:var(--warning)"></div>Anxiety peaks on Tuesdays &mdash; consider planning lighter workloads</div>
+        <div class="mood-insight-item"><div class="mood-dot" style="background:var(--purple)"></div>Journal entries mentioning "nature" correlate with higher mood scores</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL SIGNUP -->
+<div class="section" id="subscribe">
+  <div class="email-section">
+    <div>
+      <h2>Get the Daily Research Digest</h2>
+      <p>Every morning, our AI agents deliver the most important mental health research findings straight to your inbox. Choose your topics and never miss a breakthrough.</p>
+      <div class="email-topics">
+        <span class="email-topic selected" onclick="this.classList.toggle('selected')">PTSD</span>
+        <span class="email-topic selected" onclick="this.classList.toggle('selected')">Depression</span>
+        <span class="email-topic" onclick="this.classList.toggle('selected')">Anxiety</span>
+        <span class="email-topic" onclick="this.classList.toggle('selected')">Digital Therapeutics</span>
+        <span class="email-topic" onclick="this.classList.toggle('selected')">Psychedelics</span>
+        <span class="email-topic" onclick="this.classList.toggle('selected')">Neuroscience</span>
+        <span class="email-topic" onclick="this.classList.toggle('selected')">Clinical Trials</span>
+        <span class="email-topic" onclick="this.classList.toggle('selected')">All Topics</span>
+      </div>
+      <div class="email-form">
+        <input type="email" placeholder="your@email.com">
+        <button onclick="this.textContent='Subscribed!';this.style.background='#10B981';">Subscribe Free</button>
+      </div>
+    </div>
+    <div>
+      <div class="email-preview">
+        <div class="email-preview-header">
+          <div class="email-preview-avatar">M</div>
+          <div class="email-preview-from">
+            <strong>MindPulse AI Daily Digest</strong>
+            <span>digest@mindpulseai.org &bull; 7:00 AM</span>
+          </div>
+        </div>
+        <h5>Your Mental Health Research Brief &mdash; Mar 29, 2026</h5>
+        <div class="email-preview-item"><span class="email-preview-num">01</span> Psilocybin shows 67% PTSD remission at 12 months</div>
+        <div class="email-preview-item"><span class="email-preview-num">02</span> Gut microbiome panel predicts SSRI response (78%)</div>
+        <div class="email-preview-item"><span class="email-preview-num">03</span> Digital CBT matches in-person for anxiety (n=3,200)</div>
+        <div class="email-preview-item"><span class="email-preview-num">04</span> IL-6 emerges as comorbid depression-anxiety marker</div>
+        <div class="email-preview-item"><span class="email-preview-num">05</span> 3 new clinical trials registered for PTSD treatment</div>
+        <div style="margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--border);font-size:0.75rem;color:var(--light);">
+          + 9 more findings in your personalized digest &rarr;
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL MEDIA PREVIEW -->
+<div class="social-section">
+  <div class="section-header">
+    <h2>Follow Our Research</h2>
+    <a href="#">View all social posts &rarr;</a>
+  </div>
+  <div class="social-grid">
+    <div class="social-card">
+      <div class="social-card-header">
+        <div class="social-avatar">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </div>
+        <div class="social-handle"><strong>MindPulse AI</strong><span>@MindPulseAI</span></div>
+      </div>
+      <p>Breaking: Largest psilocybin-PTSD trial ever shows 67% remission at 12 months. Our AI agents flagged this as the most impactful mental health finding this week. <span class="social-hashtag">#PTSD #MentalHealth #Research</span></p>
+      <div class="social-engagement">
+        <span>&#x2661; 847</span>
+        <span>&#x21BB; 312</span>
+        <span>&#x1F4AC; 56</span>
+      </div>
+    </div>
+    <div class="social-card">
+      <div class="social-card-header">
+        <div class="social-avatar">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </div>
+        <div class="social-handle"><strong>MindPulse AI Research</strong><span>LinkedIn</span></div>
+      </div>
+      <p>This week our AI analyzed 142 mental health papers and surfaced a critical trend: the depression-inflammation hypothesis is reaching scientific consensus. Here's what clinicians need to know... <span class="social-hashtag">#Psychiatry</span></p>
+      <div class="social-engagement">
+        <span>&#x2661; 1,203</span>
+        <span>&#x21BB; 89</span>
+        <span>&#x1F4AC; 34</span>
+      </div>
+    </div>
+    <div class="social-card">
+      <div class="social-card-header">
+        <div class="social-avatar" style="background:linear-gradient(135deg,#833AB4,#FD1D1D,#F77737);">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="white"/></svg>
+        </div>
+        <div class="social-handle"><strong>MindPulse AI</strong><span>@mindpulseai</span></div>
+      </div>
+      <p>Did you know? Your gut bacteria might predict which antidepressant will work for you. New research shows a 78% accuracy rate. Science is incredible. <span class="social-hashtag">#MentalHealthMatters #Science</span></p>
+      <div class="social-engagement">
+        <span>&#x2661; 2,341</span>
+        <span>&#x21BB; 567</span>
+        <span>&#x1F4AC; 128</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <h3>MindPulse AI Research Foundation</h3>
+  <p>Accelerating mental health breakthroughs through autonomous AI research. A 501(c)(3) non-profit organization.</p>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">Research</a>
+    <a href="#">Knowledge Base</a>
+    <a href="#">Newsletter</a>
+    <a href="#">Donate</a>
+    <a href="#">Contact</a>
+    <a href="#">Privacy Policy</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 MindPulse AI Research Foundation. All research findings are open-access. Built in Texas.</div>
+</footer>
+
+<!-- SIGNUP MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal" id="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h3>Get the Daily Digest</h3>
+    <p>Join 2,340 researchers and clinicians getting AI-curated mental health research every morning.</p>
+    <input type="email" id="modal-email" placeholder="your@email.com">
+    <button class="primary" onclick="submitModal()">Subscribe &mdash; It's Free</button>
+  </div>
+</div>
+
+<script>
+  // Modal
+  function openModal() { document.getElementById('modal').classList.add('show'); }
+  function closeModal() { document.getElementById('modal').classList.remove('show'); }
+  function submitModal() {
+    document.getElementById('modal-content').innerHTML = '<div class="success-msg"><div class="checkmark">&#x2705;</div><h4>You\'re subscribed!</h4><p style="color:var(--med);font-size:0.88rem;">Check your inbox tomorrow at 7:00 AM for your first digest.</p><button class="primary" style="margin-top:1rem;" onclick="closeModal()">Close</button></div>';
+  }
+  document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+  // Animate paper count
+  let count = 47832;
+  setInterval(() => {
+    count += Math.floor(Math.random() * 3);
+    document.getElementById('papers-count').textContent = count.toLocaleString();
+  }, 8000);
+
+  // Topic filter interaction
+  document.querySelectorAll('.kb-filter').forEach(el => {
+    el.addEventListener('click', function() {
+      document.querySelectorAll('.kb-filter').forEach(f => f.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Mood emoji interaction
+  document.querySelectorAll('.mood-emoji').forEach(el => {
+    el.addEventListener('click', function() {
+      document.querySelectorAll('.mood-emoji').forEach(e => e.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
