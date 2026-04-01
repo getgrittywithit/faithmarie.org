@@ -33,25 +33,27 @@ export default function Navigation() {
                 </svg>
               </button>
               {researchDropdown && (
-                <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-gray-100 py-2">
-                  <Link
-                    href="/research"
-                    className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
-                  >
-                    Overview
-                  </Link>
-                  <Link
-                    href="/research/daily-digests"
-                    className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
-                  >
-                    Daily Digests
-                  </Link>
-                  <Link
-                    href="/research/topics"
-                    className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
-                  >
-                    Topics
-                  </Link>
+                <div className="absolute top-full left-0 pt-2 w-48">
+                  <div className="bg-white rounded-md shadow-lg border border-gray-100 py-2">
+                    <Link
+                      href="/research"
+                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                    >
+                      Overview
+                    </Link>
+                    <Link
+                      href="/research/daily-digests"
+                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                    >
+                      Daily Digests
+                    </Link>
+                    <Link
+                      href="/research/topics"
+                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                    >
+                      Topics
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
@@ -69,19 +71,21 @@ export default function Navigation() {
                 </svg>
               </button>
               {toolsDropdown && (
-                <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-gray-100 py-2">
-                  <Link
-                    href="/tools/chatbot"
-                    className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
-                  >
-                    AI Chatbot
-                  </Link>
-                  <Link
-                    href="/knowledge-base"
-                    className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
-                  >
-                    Knowledge Base
-                  </Link>
+                <div className="absolute top-full left-0 pt-2 w-48">
+                  <div className="bg-white rounded-md shadow-lg border border-gray-100 py-2">
+                    <Link
+                      href="/tools/chatbot"
+                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                    >
+                      AI Chatbot
+                    </Link>
+                    <Link
+                      href="/knowledge-base"
+                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                    >
+                      Knowledge Base
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
