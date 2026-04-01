@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Faith Marie | Supporting Families Through Infant Heart Conditions",
-  description: "Honoring Faith Marie's legacy by supporting families navigating infant heart conditions with resources, community, and hope.",
+  title: "Faith Marie Foundation | AI-Powered Mental Health Research",
+  description: "Advancing mental health research through AI — making the latest findings on grief, trauma, PTSD, depression, and anxiety accessible to everyone. In memory of Faith Marie.",
 };
 
 export default function RootLayout({

@@ -3,6 +3,16 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Brand Colors */
+  --brand-primary: #0D9488; /* teal-600 */
+  --brand-primary-light: #CCFBF1; /* teal-100 */
+  --brand-primary-dark: #115E59; /* teal-800 */
+  --brand-secondary: #4F46E5; /* indigo-600 */
+  --brand-secondary-light: #E0E7FF; /* indigo-100 */
+  --brand-accent: #F59E0B; /* amber-500 */
+  --brand-accent-light: #FEF3C7; /* amber-100 */
+  --brand-crisis: #DC2626; /* red-600 */
 }
 
 @theme inline {
