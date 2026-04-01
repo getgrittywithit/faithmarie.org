@@ -100,7 +100,7 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
   return (
     <>
       <Navigation />
-      <main className="min-h-screen pt-20">
+      <main className="min-h-screen pt-20 bg-white">
         {/* Hero */}
         <section className={`py-16 ${topic.bgColor}`}>
           <div className="max-w-4xl mx-auto px-4 text-center">

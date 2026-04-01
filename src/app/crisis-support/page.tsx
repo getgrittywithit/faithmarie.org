@@ -10,7 +10,7 @@ export default function CrisisSupportPage() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen pt-20">
+      <main className="min-h-screen pt-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 py-16">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-light text-gray-800 mb-6">

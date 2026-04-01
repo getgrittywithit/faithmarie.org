@@ -11,7 +11,7 @@ export default function ChatbotPage() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen pt-20">
+      <main className="min-h-screen pt-20 bg-white">
         {/* Hero */}
         <section className="py-16 bg-gradient-to-b from-indigo-50 to-white">
           <div className="max-w-4xl mx-auto px-4 text-center">
