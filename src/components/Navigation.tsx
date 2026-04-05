@@ -7,6 +7,7 @@ export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [researchDropdown, setResearchDropdown] = useState(false);
   const [toolsDropdown, setToolsDropdown] = useState(false);
+  const [aboutDropdown, setAboutDropdown] = useState(false);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
@@ -90,12 +91,37 @@ export default function Navigation() {
               )}
             </div>
 
-            <Link
-              href="/our-story"
-              className="text-gray-600 hover:text-teal-600 transition-colors"
+            {/* About Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setAboutDropdown(true)}
+              onMouseLeave={() => setAboutDropdown(false)}
             >
-              Our Story
-            </Link>
+              <button className="flex items-center text-gray-600 hover:text-teal-600 transition-colors">
+                About
+                <svg className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {aboutDropdown && (
+                <div className="absolute top-full left-0 pt-2 w-48">
+                  <div className="bg-white rounded-md shadow-lg border border-gray-100 py-2">
+                    <Link
+                      href="/our-story"
+                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                    >
+                      Our Story
+                    </Link>
+                    <Link
+                      href="/about/ai-transparency"
+                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                    >
+                      AI Transparency
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
             <Link
               href="/get-involved"
               className="text-gray-600 hover:text-teal-600 transition-colors"
@@ -156,9 +182,16 @@ export default function Navigation() {
                 </Link>
               </div>
 
-              <Link href="/our-story" className="text-gray-600 hover:text-teal-600 transition-colors">
-                Our Story
-              </Link>
+              {/* About Section */}
+              <div className="space-y-2">
+                <span className="text-sm font-medium text-teal-700 uppercase tracking-wide">About</span>
+                <Link href="/our-story" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
+                  Our Story
+                </Link>
+                <Link href="/about/ai-transparency" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
+                  AI Transparency
+                </Link>
+              </div>
               <Link href="/get-involved" className="text-gray-600 hover:text-teal-600 transition-colors">
                 Get Involved
               </Link>

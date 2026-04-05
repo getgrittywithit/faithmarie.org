@@ -65,6 +65,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/about/ai-transparency" className="text-gray-600 hover:text-teal-700 transition-colors">
+                  AI Transparency
+                </Link>
+              </li>
+              <li>
                 <Link href="/get-involved" className="text-gray-600 hover:text-teal-700 transition-colors">
                   Get Involved
                 </Link>
