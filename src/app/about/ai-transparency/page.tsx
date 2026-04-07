@@ -50,8 +50,8 @@ export default function AITransparencyPage() {
                   <p className="text-sm text-gray-600">Founder</p>
                 </div>
                 <div className="bg-white rounded-md p-4 border border-teal-100">
-                  <p className="font-medium text-gray-800">Bob Teel</p>
-                  <p className="text-sm text-gray-600">Financial Director</p>
+                  <p className="font-medium text-gray-800">Financial Director</p>
+                  <p className="text-sm text-gray-600">TBD</p>
                 </div>
                 <div className="bg-white rounded-md p-4 border border-teal-100">
                   <p className="font-medium text-gray-800">Medical Advisor</p>
