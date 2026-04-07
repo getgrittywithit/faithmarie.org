@@ -1,10 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+type Topic = 'depression' | 'anxiety' | 'ptsd' | 'grief';
+
+const TOPIC_LABELS: Record<Topic, string> = {
+  depression: 'Depression',
+  anxiety: 'Anxiety',
+  ptsd: 'PTSD',
+  grief: 'Grief',
+};
+
 export async function POST(request: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   try {
-    const { email, firstName } = await request.json();
+    const { email, firstName, topics } = await request.json() as {
+      email: string;
+      firstName?: string;
+      topics?: Topic[];
+    };
 
     if (!email || !email.includes('@')) {
       return NextResponse.json(
@@ -31,6 +44,16 @@ export async function POST(request: NextRequest) {
       audienceId,
     });
 
+    // Format topics for email
+    const topicLabels = topics && topics.length > 0
+      ? topics.map(t => TOPIC_LABELS[t]).join(', ')
+      : null;
+
+    // Build what to expect content based on topics
+    const topicContent = topicLabels
+      ? `<p>You've selected to receive updates about: <strong>${topicLabels}</strong></p>`
+      : '';
+
     // Send welcome email to subscriber
     await resend.emails.send({
       from: 'Faith Marie Foundation <noreply@faithmarie.org>',
@@ -40,11 +63,11 @@ export async function POST(request: NextRequest) {
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
           <h1 style="color: #0D9488;">Welcome to Faith Marie Foundation</h1>
           <p>Thank you for subscribing to our newsletter${firstName ? `, ${firstName}` : ''}!</p>
-          <p>You'll be the first to know when we:</p>
+          ${topicContent}
+          <p>Here's what to expect:</p>
           <ul>
-            <li>Publish new research digests</li>
-            <li>Launch new tools and features</li>
-            <li>Share updates on our mission</li>
+            <li><strong>Tuesday:</strong> Research Roundup - the latest findings and practical takeaways</li>
+            <li><strong>Friday:</strong> Weekend Read - a featured deep-dive plus helpful resources</li>
           </ul>
           <p>We're working to make mental health research accessible to everyone through AI. Your support means the world to us.</p>
           <p style="margin-top: 30px;">
@@ -67,6 +90,7 @@ export async function POST(request: NextRequest) {
         <h2>New Newsletter Subscriber</h2>
         <p><strong>Email:</strong> ${email}</p>
         ${firstName ? `<p><strong>Name:</strong> ${firstName}</p>` : ''}
+        ${topicLabels ? `<p><strong>Topics:</strong> ${topicLabels}</p>` : '<p><strong>Topics:</strong> All topics</p>'}
         <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
       `,
     });

@@ -1,11 +1,14 @@
+'use client';
+
 import Link from 'next/link';
+import NewsletterForm from './NewsletterForm';
 
 export default function Footer() {
   return (
     <footer className="bg-teal-50 border-t border-teal-100">
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid md:grid-cols-4 gap-12">
-          {/* Brand */}
+          {/* Brand & Newsletter */}
           <div className="space-y-4">
             <h3 className="text-xl font-light text-gray-800">Faith Marie Foundation</h3>
             <p className="text-sm leading-relaxed text-gray-600">
@@ -14,6 +17,10 @@ export default function Footer() {
             <p className="text-sm text-teal-700 font-medium">
               In memory of Faith Marie Moses
             </p>
+            <div className="pt-2">
+              <p className="text-sm font-medium text-gray-700 mb-2">Stay updated:</p>
+              <NewsletterForm variant="compact" />
+            </div>
           </div>
 
           {/* Research Links */}

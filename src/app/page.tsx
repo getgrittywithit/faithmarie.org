@@ -2,6 +2,7 @@
 
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import NewsletterForm from '@/components/NewsletterForm';
 import Link from 'next/link';
 
 export default function Home() {
@@ -233,6 +234,19 @@ export default function Home() {
             >
               Read Our Full Story
             </Link>
+          </div>
+        </section>
+
+        {/* Newsletter Section */}
+        <section className="py-24 bg-white">
+          <div className="max-w-2xl mx-auto px-4 text-center">
+            <h2 className="text-3xl font-light text-gray-800 mb-4">Stay Updated</h2>
+            <p className="text-gray-600 mb-8">
+              Get research insights delivered twice weekly. Choose the topics that matter most to you.
+            </p>
+            <div className="bg-gray-50 rounded-lg p-8">
+              <NewsletterForm variant="full" />
+            </div>
           </div>
         </section>
 

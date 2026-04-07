@@ -1,5 +1,6 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import NewsletterForm from '@/components/NewsletterForm';
 import Link from 'next/link';
 
 export const metadata = {
@@ -85,13 +86,9 @@ export default function DailyDigestsPage() {
                 </ul>
               </div>
 
-              <div className="mt-12">
-                <Link
-                  href="/get-involved"
-                  className="inline-block bg-teal-600 text-white px-8 py-4 rounded-md text-lg hover:bg-teal-700 transition-colors"
-                >
-                  Get Notified When We Launch
-                </Link>
+              <div className="mt-12 max-w-md mx-auto">
+                <p className="text-gray-700 font-medium mb-4">Get notified when we launch:</p>
+                <NewsletterForm variant="full" />
               </div>
             </div>
           </div>

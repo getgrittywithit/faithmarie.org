@@ -1,5 +1,6 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import NewsletterForm from '@/components/NewsletterForm';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -166,20 +167,19 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
               Our {topic.title} AI research team is being trained and calibrated. Soon, daily digests
               and in-depth reports will be available here.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/get-involved"
-                className={`bg-${topic.color}-600 text-white px-8 py-4 rounded-md text-lg hover:bg-${topic.color}-700 transition-colors`}
-              >
-                Get Notified
-              </Link>
-              <Link
-                href="/research/topics"
-                className="bg-white text-gray-700 px-8 py-4 rounded-md text-lg hover:bg-gray-50 transition-colors"
-              >
-                View All Topics
-              </Link>
+            <div className="max-w-md mx-auto mb-8">
+              <p className="text-gray-700 font-medium mb-4">Get {topic.title} research updates:</p>
+              <NewsletterForm
+                variant="full"
+                preselectedTopic={slug as 'depression' | 'anxiety' | 'ptsd' | 'grief'}
+              />
             </div>
+            <Link
+              href="/research/topics"
+              className="inline-block bg-white text-gray-700 px-8 py-4 rounded-md text-lg hover:bg-gray-50 transition-colors"
+            >
+              View All Topics
+            </Link>
           </div>
         </section>
       </main>
