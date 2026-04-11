@@ -1,10 +1,12 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import ChatInterface from '@/components/ChatInterface';
 import Link from 'next/link';
+import { AlertTriangle, BookOpen, Shield, MessageCircle } from 'lucide-react';
 
 export const metadata = {
-  title: "AI Chatbot | Faith Marie Foundation",
-  description: "An empathetic AI chatbot for real-time mental health support, coping strategies, and curated resources.",
+  title: "Research Assistant | Faith Marie Foundation",
+  description: "An AI assistant that helps you understand mental health research published by the Faith Marie Foundation.",
 };
 
 export default function ChatbotPage() {
@@ -13,167 +15,179 @@ export default function ChatbotPage() {
       <Navigation />
       <main className="min-h-screen pt-20 bg-white">
         {/* Hero */}
-        <section className="py-16 bg-gradient-to-b from-indigo-50 to-white">
+        <section className="py-12 bg-gradient-to-b from-teal-50 to-white">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-              </svg>
+            <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-medium mb-6">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-600"></span>
+              </span>
+              Beta
             </div>
             <h1 className="text-4xl md:text-5xl font-light text-gray-800 mb-6">
-              AI Support Chatbot
+              Research Assistant
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              An empathetic conversational AI that provides real-time support, coping strategies,
-              and curated resources when you need them most.
+              Ask questions about mental health research. Get plain-language explanations
+              based on our published digests.
             </p>
           </div>
         </section>
 
-        {/* Coming Soon State */}
-        <section className="py-16 bg-white">
+        {/* Important Disclaimer */}
+        <section className="py-4 bg-amber-50 border-y border-amber-200">
           <div className="max-w-4xl mx-auto px-4">
-            {/* Placeholder Chat UI */}
-            <div className="bg-gray-50 rounded-2xl p-8 mb-12">
-              <div className="max-w-2xl mx-auto">
-                {/* Chat Messages Placeholder */}
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-start">
-                    <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0 mr-3">
-                      <svg className="w-4 h-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <div className="bg-white rounded-lg px-4 py-3 shadow-sm">
-                      <p className="text-gray-700">
-                        Hello. I&apos;m here to listen and help. You can talk to me about what you&apos;re
-                        going through, and I&apos;ll do my best to provide support and resources.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Input Placeholder */}
-                <div className="flex items-center gap-3">
-                  <div className="flex-1 bg-white rounded-lg border border-gray-200 px-4 py-3 text-gray-400">
-                    Coming soon: Type your message here...
-                  </div>
-                  <button disabled className="bg-indigo-300 text-white px-6 py-3 rounded-lg cursor-not-allowed">
-                    Send
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Coming Soon Notice */}
-            <div className="text-center">
-              <div className="inline-block bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                Coming Soon
-              </div>
-              <h2 className="text-2xl font-medium text-gray-800 mb-4">We&apos;re Building Something Special</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto mb-8">
-                Our AI chatbot is being carefully designed to provide empathetic, helpful support.
-                We&apos;re training it on the latest mental health research to ensure it can offer
-                accurate information and appropriate resources.
+            <div className="flex items-center gap-3 text-amber-800">
+              <AlertTriangle className="h-5 w-5 flex-shrink-0" />
+              <p className="text-sm">
+                <strong>Important:</strong> This is an AI research assistant, not a therapist or medical professional.
+                For personal mental health support, please consult a licensed provider.{' '}
+                <Link href="/crisis-support" className="underline font-medium">
+                  Crisis resources available here.
+                </Link>
               </p>
             </div>
           </div>
         </section>
 
-        {/* What to Expect */}
+        {/* Chat Interface */}
+        <section className="py-12 bg-white">
+          <div className="max-w-3xl mx-auto px-4">
+            <ChatInterface />
+          </div>
+        </section>
+
+        {/* What This Assistant Does */}
         <section className="py-16 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-medium text-center text-gray-800 mb-12">What the Chatbot Will Offer</h2>
+            <h2 className="text-2xl font-medium text-center text-gray-800 mb-12">
+              How This Assistant Works
+            </h2>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-5 h-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <BookOpen className="h-6 w-6 text-teal-600" />
                 </div>
-                <h3 className="font-medium text-gray-800 mb-2">Empathetic Listening</h3>
+                <h3 className="font-medium text-gray-800 mb-2">Grounded in Research</h3>
                 <p className="text-gray-600 text-sm">
-                  A judgment-free space to express what you&apos;re going through, with responses designed
-                  to make you feel heard and understood.
+                  Responses are based only on research digests we&apos;ve published and reviewed,
+                  not general internet knowledge.
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-5 h-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <Shield className="h-6 w-6 text-teal-600" />
                 </div>
-                <h3 className="font-medium text-gray-800 mb-2">Evidence-Based Strategies</h3>
+                <h3 className="font-medium text-gray-800 mb-2">Safety First</h3>
                 <p className="text-gray-600 text-sm">
-                  Coping techniques and strategies backed by the latest mental health research,
-                  tailored to your situation.
+                  Crisis detection automatically connects you with professional
+                  support resources when needed.
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-5 h-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <MessageCircle className="h-6 w-6 text-teal-600" />
                 </div>
-                <h3 className="font-medium text-gray-800 mb-2">Curated Resources</h3>
+                <h3 className="font-medium text-gray-800 mb-2">Plain Language</h3>
                 <p className="text-gray-600 text-sm">
-                  Access to our knowledge base with research summaries, guides, and practical
-                  information relevant to your needs.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-5 h-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                </div>
-                <h3 className="font-medium text-gray-800 mb-2">Professional Referrals</h3>
-                <p className="text-gray-600 text-sm">
-                  When appropriate, guidance on finding therapists, support groups, and professional
-                  help in your area.
+                  Complex research findings explained in everyday language
+                  that anyone can understand.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Important Notice */}
+        {/* What It Can & Can't Do */}
         <section className="py-16 bg-white">
           <div className="max-w-4xl mx-auto px-4">
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-8">
-              <h3 className="font-medium text-amber-800 mb-4">Important: Not a Replacement for Professional Care</h3>
-              <p className="text-amber-700 text-sm mb-4">
-                Our AI chatbot is designed to be a first point of contact and ongoing companion, not a
-                replacement for professional therapy or medical care. If you&apos;re in crisis or need
-                professional help, please reach out to a qualified mental health provider.
-              </p>
-              <Link
-                href="/crisis-support"
-                className="inline-block bg-red-600 text-white px-6 py-3 rounded-md text-sm font-medium hover:bg-red-700 transition-colors"
-              >
-                If You&apos;re in Crisis, Get Help Now
-              </Link>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-teal-50 rounded-xl p-6">
+                <h3 className="font-medium text-teal-800 mb-4 flex items-center gap-2">
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  What It Can Do
+                </h3>
+                <ul className="space-y-2 text-sm text-teal-700">
+                  <li>• Explain research on grief, PTSD, depression, and anxiety</li>
+                  <li>• Help you find relevant research digests</li>
+                  <li>• Answer questions about specific studies we&apos;ve covered</li>
+                  <li>• Provide links to full articles and original sources</li>
+                  <li>• Point you toward professional resources</li>
+                </ul>
+              </div>
+
+              <div className="bg-red-50 rounded-xl p-6">
+                <h3 className="font-medium text-red-800 mb-4 flex items-center gap-2">
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  What It Cannot Do
+                </h3>
+                <ul className="space-y-2 text-sm text-red-700">
+                  <li>• Provide therapy, counseling, or emotional support</li>
+                  <li>• Diagnose mental health conditions</li>
+                  <li>• Recommend specific treatments or medications</li>
+                  <li>• Replace professional mental health care</li>
+                  <li>• Provide crisis intervention (we route to 988)</li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="py-16 bg-indigo-50">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-2xl font-medium text-gray-800 mb-4">Get Notified When We Launch</h2>
-            <p className="text-gray-600 mb-8">
-              Be the first to know when our AI chatbot is ready to help.
-            </p>
-            <Link
-              href="/get-involved"
-              className="inline-block bg-indigo-600 text-white px-8 py-4 rounded-md text-lg hover:bg-indigo-700 transition-colors"
-            >
-              Join the Waitlist
-            </Link>
+        {/* Example Questions */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-2xl font-medium text-center text-gray-800 mb-8">
+              Try Asking...
+            </h2>
+            <div className="flex flex-wrap justify-center gap-3">
+              {[
+                "Why does grief come in waves?",
+                "How does EMDR work?",
+                "Does exercise help with depression?",
+                "What is the dual process model?",
+                "How much exercise is enough for mental health?",
+              ].map((question) => (
+                <span
+                  key={question}
+                  className="bg-white border border-gray-200 px-4 py-2 rounded-full text-sm text-gray-600"
+                >
+                  &ldquo;{question}&rdquo;
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Crisis Support */}
+        <section className="py-12 bg-white">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="bg-red-50 border border-red-200 rounded-xl p-8 text-center">
+              <h3 className="font-medium text-red-800 text-lg mb-4">Need Immediate Support?</h3>
+              <p className="text-red-700 text-sm mb-6">
+                If you&apos;re in crisis or need to talk to someone right now, please reach out to a crisis service.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="tel:988"
+                  className="inline-flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors"
+                >
+                  📞 Call 988
+                </a>
+                <Link
+                  href="/crisis-support"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-red-700 border border-red-300 px-6 py-3 rounded-lg font-medium hover:bg-red-50 transition-colors"
+                >
+                  View All Crisis Resources
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
       </main>
