@@ -113,10 +113,22 @@ export default function Navigation() {
                       Our Story
                     </Link>
                     <Link
+                      href="/about/team"
+                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                    >
+                      Our Team
+                    </Link>
+                    <Link
                       href="/about/ai-transparency"
                       className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
                     >
                       AI Transparency
+                    </Link>
+                    <Link
+                      href="/about/impact"
+                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                    >
+                      Impact & Roadmap
                     </Link>
                   </div>
                 </div>
@@ -188,8 +200,14 @@ export default function Navigation() {
                 <Link href="/our-story" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
                   Our Story
                 </Link>
+                <Link href="/about/team" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
+                  Our Team
+                </Link>
                 <Link href="/about/ai-transparency" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
                   AI Transparency
+                </Link>
+                <Link href="/about/impact" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
+                  Impact & Roadmap
                 </Link>
               </div>
               <Link href="/get-involved" className="text-gray-600 hover:text-teal-600 transition-colors">
