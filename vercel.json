@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/grief-series/send-daily",
+      "schedule": "0 14 * * *"
+    }
+  ]
+}
