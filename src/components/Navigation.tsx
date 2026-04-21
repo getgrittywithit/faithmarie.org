@@ -21,6 +21,14 @@ export default function Navigation() {
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
+            {/* Learn Link */}
+            <Link
+              href="/learn"
+              className="text-gray-600 hover:text-teal-600 transition-colors"
+            >
+              Learn
+            </Link>
+
             {/* Research Dropdown */}
             <div
               className="relative"
@@ -169,6 +177,11 @@ export default function Navigation() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-100 bg-white">
             <div className="flex flex-col space-y-4">
+              {/* Learn Link */}
+              <Link href="/learn" className="text-gray-600 hover:text-teal-600 transition-colors font-medium">
+                Learn
+              </Link>
+
               {/* Research Section */}
               <div className="space-y-2">
                 <span className="text-sm font-medium text-teal-700 uppercase tracking-wide">Research</span>

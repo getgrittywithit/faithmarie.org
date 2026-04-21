@@ -45,10 +45,15 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Tools Links */}
+          {/* Tools & Resources Links */}
           <div className="space-y-4">
-            <h4 className="text-sm font-medium text-gray-800 uppercase tracking-wide">Tools</h4>
+            <h4 className="text-sm font-medium text-gray-800 uppercase tracking-wide">Resources</h4>
             <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/learn" className="text-gray-600 hover:text-teal-700 transition-colors">
+                  Learn About Mental Health
+                </Link>
+              </li>
               <li>
                 <Link href="/tools/chatbot" className="text-gray-600 hover:text-teal-700 transition-colors">
                   AI Chatbot

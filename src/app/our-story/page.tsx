@@ -13,16 +13,105 @@ export default function OurStoryPage() {
     <>
       <Navigation />
       <main className="min-h-screen pt-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 py-16">
-          <h1 className="text-4xl md:text-6xl font-light text-center text-gray-800 mb-16">
-            Our Story
-          </h1>
-
-          <div className="prose prose-lg mx-auto text-gray-700 space-y-8">
-            <p className="text-xl leading-relaxed font-light text-center text-gray-600 mb-12">
-              A story of profound love, unwavering hope, and an enduring mission to help others heal.
+        {/* Hero Section */}
+        <section className="bg-gradient-to-b from-teal-50 to-white py-16">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <p className="text-teal-600 font-medium mb-4">In Loving Memory</p>
+            <h1 className="text-4xl md:text-6xl font-light text-gray-800 mb-6">
+              Faith Marie Moses
+            </h1>
+            <p className="text-xl text-gray-600 mb-2">
+              June 25, 2019 — July 16, 2019
             </p>
+            <p className="text-lg text-gray-500 italic">
+              21 days that changed everything
+            </p>
+          </div>
+        </section>
 
+        {/* Timeline Section */}
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-2xl font-medium text-center text-gray-800 mb-12">Our Journey</h2>
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-teal-200 transform md:-translate-x-1/2" />
+
+              {/* Timeline items */}
+              <div className="space-y-12">
+                <div className="relative flex items-start md:justify-center">
+                  <div className="flex items-start w-full md:w-1/2 md:pr-8 md:text-right pl-12 md:pl-0">
+                    <div className="absolute left-0 md:left-1/2 w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center transform md:-translate-x-1/2">
+                      <div className="w-3 h-3 bg-white rounded-full" />
+                    </div>
+                    <div className="md:ml-0">
+                      <span className="text-teal-600 font-medium">June 25, 2019</span>
+                      <h3 className="text-lg font-semibold text-gray-800">Faith Marie is Born</h3>
+                      <p className="text-gray-600 text-sm mt-1">Born with a complicated heart condition, Faith Marie entered the world as the 7th child of the Moses family.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="relative flex items-start md:justify-center">
+                  <div className="flex items-start w-full md:w-1/2 md:pl-8 md:ml-auto pl-12">
+                    <div className="absolute left-0 md:left-1/2 w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center transform md:-translate-x-1/2">
+                      <div className="w-3 h-3 bg-white rounded-full" />
+                    </div>
+                    <div>
+                      <span className="text-teal-600 font-medium">July 16, 2019</span>
+                      <h3 className="text-lg font-semibold text-gray-800">21 Days of Love</h3>
+                      <p className="text-gray-600 text-sm mt-1">In her 21 precious days, Faith Marie taught her family more about strength, hope, and unconditional love than they could have ever imagined.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="relative flex items-start md:justify-center">
+                  <div className="flex items-start w-full md:w-1/2 md:pr-8 md:text-right pl-12 md:pl-0">
+                    <div className="absolute left-0 md:left-1/2 w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center transform md:-translate-x-1/2">
+                      <div className="w-3 h-3 bg-white rounded-full" />
+                    </div>
+                    <div className="md:ml-0">
+                      <span className="text-teal-600 font-medium">2019-2025</span>
+                      <h3 className="text-lg font-semibold text-gray-800">Navigating Grief</h3>
+                      <p className="text-gray-600 text-sm mt-1">The family searched for resources and support, finding mental health research fragmented, locked behind paywalls, and inaccessible.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="relative flex items-start md:justify-center">
+                  <div className="flex items-start w-full md:w-1/2 md:pl-8 md:ml-auto pl-12">
+                    <div className="absolute left-0 md:left-1/2 w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center transform md:-translate-x-1/2">
+                      <div className="w-3 h-3 bg-white rounded-full" />
+                    </div>
+                    <div>
+                      <span className="text-teal-600 font-medium">2026</span>
+                      <h3 className="text-lg font-semibold text-gray-800">Foundation Launch</h3>
+                      <p className="text-gray-600 text-sm mt-1">The Faith Marie Foundation is born — using AI to make mental health research accessible to everyone who needs it.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Quote Section */}
+        <section className="py-16 bg-teal-600">
+          <div className="max-w-3xl mx-auto px-4 text-center">
+            <svg className="w-12 h-12 text-teal-300 mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+            <p className="text-2xl md:text-3xl font-light text-white mb-6 leading-relaxed">
+              No family should navigate grief, trauma, or mental health struggles without accessible, modern support.
+            </p>
+            <p className="text-teal-200">
+              In Faith Marie&apos;s name, we&apos;re making sure they don&apos;t have to.
+            </p>
+          </div>
+        </section>
+
+        <div className="max-w-4xl mx-auto px-4 py-16">
+          <div className="prose prose-lg mx-auto text-gray-700">
             <div className="space-y-8">
               <section>
                 <h2 className="text-2xl font-medium text-gray-800 mb-4">Faith Marie</h2>

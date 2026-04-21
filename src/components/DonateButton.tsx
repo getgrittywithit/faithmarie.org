@@ -3,10 +3,10 @@
 import { useState } from 'react';
 
 const PRESET_AMOUNTS = [
-  { value: 2500, label: '$25' },
-  { value: 5000, label: '$50' },
-  { value: 10000, label: '$100' },
-  { value: 25000, label: '$250' },
+  { value: 2500, label: '$25', impact: 'Covers 1 day of AI research operations' },
+  { value: 5000, label: '$50', impact: 'Powers 2-3 days of database scanning' },
+  { value: 10000, label: '$100', impact: 'Funds 1 week of research infrastructure' },
+  { value: 25000, label: '$250', impact: 'Supports 2 weeks of research & publishing' },
 ];
 
 export default function DonateButton() {
@@ -77,20 +77,29 @@ export default function DonateButton() {
             </p>
 
             <div className="grid grid-cols-2 gap-3 mb-4">
-              {PRESET_AMOUNTS.map(({ value, label }) => (
+              {PRESET_AMOUNTS.map(({ value, label, impact }) => (
                 <button
                   key={value}
                   onClick={() => {
                     setSelectedAmount(value);
                     setCustomAmount('');
                   }}
-                  className={`py-3 px-4 rounded-md border-2 font-medium transition-colors ${
+                  className={`py-3 px-4 rounded-md border-2 transition-colors text-left ${
                     selectedAmount === value
-                      ? 'border-teal-600 bg-teal-50 text-teal-700'
-                      : 'border-gray-200 hover:border-gray-300 text-gray-700'
+                      ? 'border-teal-600 bg-teal-50'
+                      : 'border-gray-200 hover:border-gray-300'
                   }`}
                 >
-                  {label}
+                  <span className={`font-semibold text-lg block ${
+                    selectedAmount === value ? 'text-teal-700' : 'text-gray-800'
+                  }`}>
+                    {label}
+                  </span>
+                  <span className={`text-xs leading-tight block mt-1 ${
+                    selectedAmount === value ? 'text-teal-600' : 'text-gray-500'
+                  }`}>
+                    {impact}
+                  </span>
                 </button>
               ))}
             </div>
