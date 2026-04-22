@@ -18,14 +18,13 @@ export default function Home() {
                 Faith Marie Foundation
               </h1>
               <p className="text-xl md:text-2xl text-gray-600 font-light">
-                AI-powered mental health research, made accessible to everyone
+                Helping every family navigating grief and mental health find the resources and guidance they need
               </p>
             </div>
 
             <div className="space-y-6">
               <p className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
-                Our autonomous AI teams scan thousands of research papers daily, translating complex findings
-                into actionable insights for anyone navigating grief, trauma, PTSD, depression, or anxiety.
+                After losing our daughter Faith Marie, we found that the help families need most is often the hardest to find. The Faith Marie Foundation exists to change that — helping every family find the trusted resources, practical tools, and plain-language guidance they need, when they need it.
               </p>
 
               <div className="grid md:grid-cols-2 gap-6 mt-12">

@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Faith Marie Foundation | AI-Powered Mental Health Research",
-  description: "Advancing mental health research through AI — making the latest findings on grief, trauma, PTSD, depression, and anxiety accessible to everyone. In memory of Faith Marie.",
+  title: "Faith Marie Foundation | Grief & Mental Health Resources",
+  description: "Helping every family navigating grief and mental health find the resources and guidance they need. In memory of Faith Marie.",
 };
 
 export default function RootLayout({

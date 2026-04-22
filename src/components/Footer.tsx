@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-xl font-light text-gray-800">Faith Marie Foundation</h3>
             <p className="text-sm leading-relaxed text-gray-600">
-              Advancing mental health research through AI — making the latest findings accessible to everyone.
+              Helping every family navigating grief and mental health find the resources and guidance they need.
             </p>
             <p className="text-sm text-teal-700 font-medium">
               In memory of Faith Marie Moses
