@@ -15,9 +15,9 @@ const founders = [
     image: "/images/team/levi-placeholder.jpg",
     bio: `Levi Moses is a technologist and mental health advocate whose life was forever changed by the loss of his daughter, Faith Marie, in 2019. In the years following her passing, Levi navigated the overwhelming landscape of grief, depression, and trauma — and discovered firsthand how inaccessible mental health research was to those who needed it most.
 
-Drawing on his background in software development and AI systems, Levi envisioned a new approach: using autonomous AI agents to bridge the gap between academic research and everyday understanding. What began as a personal search for answers became a mission to ensure no one else has to struggle alone in the dark.
+Drawing on his background in software development, Levi envisioned a new approach: translating the flood of academic research into plain-language guidance that families could actually use. What began as a personal search for answers became a mission to ensure no one else has to struggle alone in the dark.
 
-Levi leads the Foundation's technology strategy and AI research operations, working to build systems that can scan thousands of papers daily and translate complex findings into accessible insights.`,
+Levi leads the Foundation's technology and content strategy, working to build tools and resources that help families find the support they need.`,
     focus: "Technology & AI Operations",
   },
   {
@@ -187,10 +187,10 @@ export default function TeamPage() {
               our community at heart.
             </p>
             <Link
-              href="/about/ai-transparency"
+              href="/about"
               className="inline-block mt-6 text-teal-600 hover:text-teal-700 underline"
             >
-              Learn more about our transparency practices
+              Learn more about how we work
             </Link>
           </div>
         </section>

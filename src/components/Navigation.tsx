@@ -54,7 +54,7 @@ export default function Navigation() {
                       href="/research/daily-digests"
                       className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
                     >
-                      Daily Digests
+                      Research Summaries
                     </Link>
                     <Link
                       href="/research/topics"
@@ -86,7 +86,7 @@ export default function Navigation() {
                       href="/tools/chatbot"
                       className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
                     >
-                      AI Chatbot
+                      Resource Guide
                     </Link>
                     <Link
                       href="/knowledge-base"
@@ -115,6 +115,12 @@ export default function Navigation() {
                 <div className="absolute top-full left-0 pt-2 w-48">
                   <div className="bg-white rounded-md shadow-lg border border-gray-100 py-2">
                     <Link
+                      href="/about"
+                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                    >
+                      About Us
+                    </Link>
+                    <Link
                       href="/our-story"
                       className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
                     >
@@ -125,12 +131,6 @@ export default function Navigation() {
                       className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
                     >
                       Our Team
-                    </Link>
-                    <Link
-                      href="/about/ai-transparency"
-                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
-                    >
-                      AI Transparency
                     </Link>
                     <Link
                       href="/about/impact"
@@ -189,7 +189,7 @@ export default function Navigation() {
                   Overview
                 </Link>
                 <Link href="/research/daily-digests" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
-                  Daily Digests
+                  Research Summaries
                 </Link>
                 <Link href="/research/topics" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
                   Topics
@@ -200,7 +200,7 @@ export default function Navigation() {
               <div className="space-y-2">
                 <span className="text-sm font-medium text-teal-700 uppercase tracking-wide">Tools</span>
                 <Link href="/tools/chatbot" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
-                  AI Chatbot
+                  Resource Guide
                 </Link>
                 <Link href="/knowledge-base" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
                   Knowledge Base
@@ -210,14 +210,14 @@ export default function Navigation() {
               {/* About Section */}
               <div className="space-y-2">
                 <span className="text-sm font-medium text-teal-700 uppercase tracking-wide">About</span>
+                <Link href="/about" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
+                  About Us
+                </Link>
                 <Link href="/our-story" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
                   Our Story
                 </Link>
                 <Link href="/about/team" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
                   Our Team
-                </Link>
-                <Link href="/about/ai-transparency" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
-                  AI Transparency
                 </Link>
                 <Link href="/about/impact" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
                   Impact & Roadmap

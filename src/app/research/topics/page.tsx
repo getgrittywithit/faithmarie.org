@@ -3,8 +3,8 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 
 export const metadata = {
-  title: "Research Topics | Faith Marie Foundation",
-  description: "Explore our AI research teams focused on grief, PTSD, depression, and anxiety. Each topic has dedicated resources and findings.",
+  title: "Topics | Faith Marie Foundation",
+  description: "Explore mental health topics including grief, PTSD, depression, and anxiety. Find research summaries and resources for each area.",
 };
 
 const topics = [
@@ -12,7 +12,7 @@ const topics = [
     slug: 'grief',
     title: 'Grief & Loss',
     emoji: '💔',
-    description: 'Research on child loss, complicated grief, bereavement, and the grieving process.',
+    description: 'Research and resources on child loss, complicated grief, bereavement, and the grieving process.',
     color: 'amber',
     areas: ['Child loss', 'Complicated grief', 'Bereavement', 'Prolonged grief disorder'],
   },
@@ -20,7 +20,7 @@ const topics = [
     slug: 'ptsd',
     title: 'PTSD & Trauma',
     emoji: '🛡️',
-    description: 'Research on post-traumatic stress, medical trauma, childhood trauma, and CPTSD.',
+    description: 'Research and resources on post-traumatic stress, medical trauma, childhood trauma, and CPTSD.',
     color: 'red',
     areas: ['Medical trauma', 'Combat PTSD', 'Childhood trauma', 'Complex PTSD (CPTSD)'],
   },
@@ -28,7 +28,7 @@ const topics = [
     slug: 'depression',
     title: 'Depression',
     emoji: '🌧️',
-    description: 'Research on clinical depression, treatment-resistant depression, and seasonal affective disorder.',
+    description: 'Research and resources on clinical depression, treatment-resistant depression, and seasonal affective disorder.',
     color: 'blue',
     areas: ['Clinical depression', 'Treatment-resistant depression', 'Seasonal affective disorder', 'Postpartum depression'],
   },
@@ -36,7 +36,7 @@ const topics = [
     slug: 'anxiety',
     title: 'Anxiety',
     emoji: '⚡',
-    description: 'Research on generalized anxiety, social anxiety, panic disorder, and related conditions.',
+    description: 'Research and resources on generalized anxiety, social anxiety, panic disorder, and related conditions.',
     color: 'purple',
     areas: ['Generalized anxiety disorder', 'Social anxiety', 'Panic disorder', 'Health anxiety'],
   },
@@ -51,11 +51,11 @@ export default function TopicsPage() {
         <section className="py-16 bg-gradient-to-b from-indigo-50 to-white">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-light text-gray-800 mb-6">
-              Research Topics
+              Topics
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Each topic has a dedicated AI research team running the full pipeline — scanning, analyzing,
-              synthesizing, and publishing findings.
+              Explore research and resources organized by mental health topic. Find the information
+              you need on grief, trauma, depression, or anxiety.
             </p>
           </div>
         </section>
@@ -81,7 +81,7 @@ export default function TopicsPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <p className="text-sm font-medium text-gray-700">Research areas:</p>
+                    <p className="text-sm font-medium text-gray-700">Topics covered:</p>
                     <div className="flex flex-wrap gap-2">
                       {topic.areas.map((area) => (
                         <span
@@ -95,7 +95,7 @@ export default function TopicsPage() {
                   </div>
 
                   <div className={`mt-6 text-${topic.color}-600 font-medium group-hover:text-${topic.color}-700`}>
-                    Explore Research →
+                    Explore Resources →
                   </div>
                 </Link>
               ))}
@@ -103,14 +103,14 @@ export default function TopicsPage() {
           </div>
         </section>
 
-        {/* How Teams Work */}
+        {/* How We Work */}
         <section className="py-16 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-3xl font-light text-center text-gray-800 mb-12">How Each Team Works</h2>
+            <h2 className="text-3xl font-light text-center text-gray-800 mb-12">How We Curate Research</h2>
 
             <div className="bg-white rounded-lg p-8 shadow-sm">
               <p className="text-gray-700 mb-6">
-                Each topic team is an autonomous AI agent pipeline that runs daily:
+                For each topic, we follow a careful process to bring you reliable, accessible information:
               </p>
 
               <div className="space-y-4">
@@ -119,8 +119,8 @@ export default function TopicsPage() {
                     <span className="text-teal-700 text-sm font-medium">1</span>
                   </div>
                   <div>
-                    <h3 className="font-medium text-gray-800">Scan</h3>
-                    <p className="text-sm text-gray-600">Monitor academic databases, preprint servers, and publications for new content</p>
+                    <h3 className="font-medium text-gray-800">Find</h3>
+                    <p className="text-sm text-gray-600">Monitor academic databases and publications for new research</p>
                   </div>
                 </div>
 
@@ -129,8 +129,8 @@ export default function TopicsPage() {
                     <span className="text-teal-700 text-sm font-medium">2</span>
                   </div>
                   <div>
-                    <h3 className="font-medium text-gray-800">Analyze</h3>
-                    <p className="text-sm text-gray-600">Read, evaluate, and extract key findings from relevant papers</p>
+                    <h3 className="font-medium text-gray-800">Review</h3>
+                    <p className="text-sm text-gray-600">Evaluate study quality and extract key findings</p>
                   </div>
                 </div>
 
@@ -139,8 +139,8 @@ export default function TopicsPage() {
                     <span className="text-teal-700 text-sm font-medium">3</span>
                   </div>
                   <div>
-                    <h3 className="font-medium text-gray-800">Synthesize</h3>
-                    <p className="text-sm text-gray-600">Translate academic language into accessible summaries with practical implications</p>
+                    <h3 className="font-medium text-gray-800">Translate</h3>
+                    <p className="text-sm text-gray-600">Convert academic language into plain-language summaries</p>
                   </div>
                 </div>
 
@@ -149,8 +149,8 @@ export default function TopicsPage() {
                     <span className="text-teal-700 text-sm font-medium">4</span>
                   </div>
                   <div>
-                    <h3 className="font-medium text-gray-800">Publish</h3>
-                    <p className="text-sm text-gray-600">Produce daily digests and contribute to the knowledge base</p>
+                    <h3 className="font-medium text-gray-800">Verify</h3>
+                    <p className="text-sm text-gray-600">Check accuracy before adding to our library</p>
                   </div>
                 </div>
 
@@ -159,8 +159,8 @@ export default function TopicsPage() {
                     <span className="text-teal-700 text-sm font-medium">5</span>
                   </div>
                   <div>
-                    <h3 className="font-medium text-gray-800">Report</h3>
-                    <p className="text-sm text-gray-600">Compile deeper analysis pieces on a weekly or monthly cadence</p>
+                    <h3 className="font-medium text-gray-800">Publish</h3>
+                    <p className="text-sm text-gray-600">Share summaries and organize by topic for easy access</p>
                   </div>
                 </div>
               </div>

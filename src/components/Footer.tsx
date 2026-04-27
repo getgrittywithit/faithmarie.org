@@ -34,7 +34,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/research/daily-digests" className="text-gray-600 hover:text-teal-700 transition-colors">
-                  Daily Digests
+                  Research Summaries
                 </Link>
               </li>
               <li>
@@ -56,7 +56,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/tools/chatbot" className="text-gray-600 hover:text-teal-700 transition-colors">
-                  AI Chatbot
+                  Resource Guide
                 </Link>
               </li>
               <li>
@@ -82,8 +82,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/about/ai-transparency" className="text-gray-600 hover:text-teal-700 transition-colors">
-                  AI Transparency
+                <Link href="/about" className="text-gray-600 hover:text-teal-700 transition-colors">
+                  About Us
                 </Link>
               </li>
               <li>

@@ -86,7 +86,7 @@ export default function OurStoryPage() {
                     <div>
                       <span className="text-teal-600 font-medium">2026</span>
                       <h3 className="text-lg font-semibold text-gray-800">Foundation Launch</h3>
-                      <p className="text-gray-600 text-sm mt-1">The Faith Marie Foundation is born — using AI to make mental health research accessible to everyone who needs it.</p>
+                      <p className="text-gray-600 text-sm mt-1">The Faith Marie Foundation launches — helping families find the mental health resources and guidance they need.</p>
                     </div>
                   </div>
                 </div>
@@ -151,20 +151,19 @@ export default function OurStoryPage() {
                   findings as researchers themselves?
                 </p>
                 <p className="leading-relaxed">
-                  The Faith Marie Foundation was born from this vision. Using autonomous AI agent teams, we
-                  now continuously scan academic papers, synthesize findings, and publish accessible daily
-                  digests and in-depth reports. We&apos;re building the tools and knowledge that help people
-                  find their way through darkness.
+                  The Faith Marie Foundation was born from this vision. We read the research so families
+                  don&apos;t have to — translating complex academic findings into plain-language guidance,
+                  practical tools, and curated resources. We&apos;re building what we wished existed when
+                  we needed it most.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-medium text-gray-800 mb-4">Why AI?</h2>
+                <h2 className="text-2xl font-medium text-gray-800 mb-4">How We Work</h2>
                 <p className="leading-relaxed">
-                  Every day, thousands of research papers are published on mental health topics. No human
-                  could possibly read them all. But AI can. Our autonomous research teams scan, analyze,
-                  and synthesize this flood of information, translating complex academic language into
-                  insights that anyone can understand and apply.
+                  Every day, thousands of research papers are published on mental health topics. We stay
+                  on top of this flood of information, reviewing studies and translating academic language
+                  into insights that anyone can understand and apply.
                 </p>
                 <p className="leading-relaxed">
                   This isn&apos;t about replacing human connection or professional care. It&apos;s about

@@ -3,8 +3,8 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 
 export const metadata = {
-  title: "Research | Faith Marie Foundation",
-  description: "AI-powered mental health research made accessible. Daily digests, deep dives, and a searchable knowledge base on grief, PTSD, depression, and anxiety.",
+  title: "Research Library | Faith Marie Foundation",
+  description: "Mental health research made accessible. Research summaries, guides, and a curated library on grief, PTSD, depression, and anxiety.",
 };
 
 export default function ResearchPage() {
@@ -16,11 +16,11 @@ export default function ResearchPage() {
         <section className="py-16 bg-gradient-to-b from-teal-50 to-white">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-6xl font-light text-gray-800 mb-6">
-              AI-Powered Research
+              Research Library
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Our autonomous AI teams scan thousands of research papers daily, translating complex findings
-              into actionable insights for everyone.
+              We read the research so you don&apos;t have to — translating complex findings
+              into plain-language summaries anyone can understand.
             </p>
           </div>
         </section>
@@ -28,7 +28,7 @@ export default function ResearchPage() {
         {/* How It Works */}
         <section className="py-16 bg-white">
           <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-3xl font-light text-center text-gray-800 mb-12">How Our AI Research Works</h2>
+            <h2 className="text-3xl font-light text-center text-gray-800 mb-12">How We Create Our Research Library</h2>
 
             <div className="grid md:grid-cols-5 gap-4">
               <div className="text-center p-6">
@@ -51,24 +51,24 @@ export default function ResearchPage() {
                 <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-teal-700 font-medium">3</span>
                 </div>
-                <h3 className="font-medium text-gray-800 mb-2">Synthesize</h3>
-                <p className="text-sm text-gray-600">Translate academic language into accessible summaries</p>
+                <h3 className="font-medium text-gray-800 mb-2">Translate</h3>
+                <p className="text-sm text-gray-600">Convert academic language into accessible summaries</p>
               </div>
 
               <div className="text-center p-6">
                 <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-teal-700 font-medium">4</span>
                 </div>
-                <h3 className="font-medium text-gray-800 mb-2">Publish</h3>
-                <p className="text-sm text-gray-600">Release daily digests and contribute to the knowledge base</p>
+                <h3 className="font-medium text-gray-800 mb-2">Review</h3>
+                <p className="text-sm text-gray-600">Verify accuracy and ensure quality before publishing</p>
               </div>
 
               <div className="text-center p-6">
                 <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-teal-700 font-medium">5</span>
                 </div>
-                <h3 className="font-medium text-gray-800 mb-2">Report</h3>
-                <p className="text-sm text-gray-600">Compile deeper analysis on emerging trends</p>
+                <h3 className="font-medium text-gray-800 mb-2">Publish</h3>
+                <p className="text-sm text-gray-600">Share summaries and add to our searchable library</p>
               </div>
             </div>
           </div>
@@ -78,7 +78,7 @@ export default function ResearchPage() {
         <section className="py-16 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Daily Digests */}
+              {/* Research Summaries */}
               <Link
                 href="/research/daily-digests"
                 className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-md hover:border-teal-200 transition-all group"
@@ -89,13 +89,13 @@ export default function ResearchPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-medium text-gray-800 group-hover:text-teal-700 transition-colors">Daily Digests</h3>
+                  <h3 className="text-xl font-medium text-gray-800 group-hover:text-teal-700 transition-colors">Research Summaries</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  Fresh research summaries published every day. Stay up-to-date with the latest findings
+                  Fresh research summaries published regularly. Stay up-to-date with the latest findings
                   in mental health research, translated into plain language.
                 </p>
-                <span className="text-teal-600 font-medium group-hover:text-teal-700">View Digests →</span>
+                <span className="text-teal-600 font-medium group-hover:text-teal-700">View Summaries →</span>
               </Link>
 
               {/* Topics */}
@@ -109,11 +109,11 @@ export default function ResearchPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-medium text-gray-800 group-hover:text-indigo-700 transition-colors">Research Topics</h3>
+                  <h3 className="text-xl font-medium text-gray-800 group-hover:text-indigo-700 transition-colors">Browse by Topic</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  Deep dives into specific mental health areas. Each topic has its own AI research team
-                  focused on grief, PTSD, depression, or anxiety.
+                  Explore research organized by topic. Find resources focused specifically on
+                  grief, PTSD, depression, or anxiety.
                 </p>
                 <span className="text-indigo-600 font-medium group-hover:text-indigo-700">Explore Topics →</span>
               </Link>
@@ -121,11 +121,11 @@ export default function ResearchPage() {
           </div>
         </section>
 
-        {/* Topic Teams */}
+        {/* Topic Areas */}
         <section className="py-16 bg-white">
           <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-3xl font-light text-center text-gray-800 mb-4">Our Research Teams</h2>
-            <p className="text-center text-gray-600 mb-12">Each topic has a dedicated AI team running the full research pipeline</p>
+            <h2 className="text-3xl font-light text-center text-gray-800 mb-4">Topics We Cover</h2>
+            <p className="text-center text-gray-600 mb-12">Focused resources for each area of mental health</p>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Link
@@ -135,7 +135,7 @@ export default function ResearchPage() {
                 <div className="text-3xl mb-4">💔</div>
                 <h3 className="font-medium text-gray-800 group-hover:text-amber-700 transition-colors">Grief & Loss</h3>
                 <p className="text-sm text-gray-600 mt-2">Child loss, complicated grief, bereavement</p>
-                <p className="text-xs text-amber-600 mt-4 font-medium">Explore Research →</p>
+                <p className="text-xs text-amber-600 mt-4 font-medium">Explore Resources →</p>
               </Link>
 
               <Link
@@ -145,7 +145,7 @@ export default function ResearchPage() {
                 <div className="text-3xl mb-4">🛡️</div>
                 <h3 className="font-medium text-gray-800 group-hover:text-red-700 transition-colors">PTSD & Trauma</h3>
                 <p className="text-sm text-gray-600 mt-2">Medical trauma, CPTSD, childhood trauma</p>
-                <p className="text-xs text-red-600 mt-4 font-medium">Explore Research →</p>
+                <p className="text-xs text-red-600 mt-4 font-medium">Explore Resources →</p>
               </Link>
 
               <Link
@@ -155,7 +155,7 @@ export default function ResearchPage() {
                 <div className="text-3xl mb-4">🌧️</div>
                 <h3 className="font-medium text-gray-800 group-hover:text-blue-700 transition-colors">Depression</h3>
                 <p className="text-sm text-gray-600 mt-2">Clinical depression, treatment-resistant, SAD</p>
-                <p className="text-xs text-blue-600 mt-4 font-medium">Explore Research →</p>
+                <p className="text-xs text-blue-600 mt-4 font-medium">Explore Resources →</p>
               </Link>
 
               <Link
@@ -165,7 +165,7 @@ export default function ResearchPage() {
                 <div className="text-3xl mb-4">⚡</div>
                 <h3 className="font-medium text-gray-800 group-hover:text-purple-700 transition-colors">Anxiety</h3>
                 <p className="text-sm text-gray-600 mt-2">Generalized anxiety, social anxiety, panic</p>
-                <p className="text-xs text-purple-600 mt-4 font-medium">Explore Research →</p>
+                <p className="text-xs text-purple-600 mt-4 font-medium">Explore Resources →</p>
               </Link>
             </div>
           </div>
@@ -175,18 +175,18 @@ export default function ResearchPage() {
         <section className="py-16 bg-teal-50">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <div className="inline-block bg-teal-100 text-teal-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              Coming Soon
+              Growing Library
             </div>
-            <h2 className="text-3xl font-light text-gray-800 mb-4">We&apos;re Building Something Special</h2>
+            <h2 className="text-3xl font-light text-gray-800 mb-4">We&apos;re Building Our Library</h2>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-              Our AI research teams are being trained and calibrated. Soon, you&apos;ll have access to daily
-              digests, searchable research archives, and deep dives on the latest mental health findings.
+              We&apos;re continuously adding new research summaries, guides, and resources.
+              Sign up to be notified when new content is published.
             </p>
             <Link
               href="/get-involved"
               className="inline-block bg-teal-600 text-white px-8 py-4 rounded-md text-lg hover:bg-teal-700 transition-colors"
             >
-              Get Notified When We Launch
+              Get Notified of Updates
             </Link>
           </div>
         </section>

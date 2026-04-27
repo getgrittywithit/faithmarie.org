@@ -2,7 +2,9 @@
 ## AI Language & Architecture Rewrite — Decisions Locked In
 
 *Created: April 2026*
-*Status: NOT YET EXECUTED — context for next session*
+*Status: EXECUTED — April 2026*
+
+> **Execution Summary:** All phases completed. AI-forward language removed from site, chatbot repositioned as "Resource Guide", /about/ai-transparency folded into /about with 301 redirect, homepage reframed to utility-first with "What do you need right now?" chooser, research section updated to remove AI teams language.
 
 ---
 

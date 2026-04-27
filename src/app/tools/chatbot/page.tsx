@@ -2,11 +2,11 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ChatInterface from '@/components/ChatInterface';
 import Link from 'next/link';
-import { AlertTriangle, BookOpen, Shield, MessageCircle } from 'lucide-react';
+import { AlertTriangle, BookOpen, Shield, MessageCircle, Search } from 'lucide-react';
 
 export const metadata = {
-  title: "Research Assistant | Faith Marie Foundation",
-  description: "An AI assistant that helps you understand mental health research published by the Faith Marie Foundation.",
+  title: "Resource Guide | Faith Marie Foundation",
+  description: "Tell us what you're going through and we'll help you find trusted mental health resources, research summaries, and practical tools.",
 };
 
 export default function ChatbotPage() {
@@ -25,11 +25,11 @@ export default function ChatbotPage() {
               Beta
             </div>
             <h1 className="text-4xl md:text-5xl font-light text-gray-800 mb-6">
-              Research Assistant
+              Resource Guide
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Ask questions about mental health research. Get plain-language explanations
-              based on our published digests.
+              Tell us what you&apos;re going through and we&apos;ll help you find
+              trusted resources, research summaries, and practical tools.
             </p>
           </div>
         </section>
@@ -40,7 +40,7 @@ export default function ChatbotPage() {
             <div className="flex items-center gap-3 text-amber-800">
               <AlertTriangle className="h-5 w-5 flex-shrink-0" />
               <p className="text-sm">
-                <strong>Important:</strong> This is an AI research assistant, not a therapist or medical professional.
+                <strong>Important:</strong> This is a resource finder, not a therapist or medical professional.
                 For personal mental health support, please consult a licensed provider.{' '}
                 <Link href="/crisis-support" className="underline font-medium">
                   Crisis resources available here.
@@ -57,22 +57,33 @@ export default function ChatbotPage() {
           </div>
         </section>
 
-        {/* What This Assistant Does */}
+        {/* What This Guide Does */}
         <section className="py-16 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4">
             <h2 className="text-2xl font-medium text-center text-gray-800 mb-12">
-              How This Assistant Works
+              How This Guide Works
             </h2>
 
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <Search className="h-6 w-6 text-teal-600" />
+                </div>
+                <h3 className="font-medium text-gray-800 mb-2">Finds Relevant Resources</h3>
+                <p className="text-gray-600 text-sm">
+                  Describe your situation and get matched with research summaries,
+                  guides, and tools that can help.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <BookOpen className="h-6 w-6 text-teal-600" />
                 </div>
-                <h3 className="font-medium text-gray-800 mb-2">Grounded in Research</h3>
+                <h3 className="font-medium text-gray-800 mb-2">Curated Information</h3>
                 <p className="text-gray-600 text-sm">
-                  Responses are based only on research digests we&apos;ve published and reviewed,
-                  not general internet knowledge.
+                  Responses are based on resources we&apos;ve reviewed and published,
+                  not general internet content.
                 </p>
               </div>
 
@@ -84,17 +95,6 @@ export default function ChatbotPage() {
                 <p className="text-gray-600 text-sm">
                   Crisis detection automatically connects you with professional
                   support resources when needed.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <MessageCircle className="h-6 w-6 text-teal-600" />
-                </div>
-                <h3 className="font-medium text-gray-800 mb-2">Plain Language</h3>
-                <p className="text-gray-600 text-sm">
-                  Complex research findings explained in everyday language
-                  that anyone can understand.
                 </p>
               </div>
             </div>
@@ -113,11 +113,11 @@ export default function ChatbotPage() {
                   What It Can Do
                 </h3>
                 <ul className="space-y-2 text-sm text-teal-700">
-                  <li>• Explain research on grief, PTSD, depression, and anxiety</li>
-                  <li>• Help you find relevant research digests</li>
-                  <li>• Answer questions about specific studies we&apos;ve covered</li>
-                  <li>• Provide links to full articles and original sources</li>
-                  <li>• Point you toward professional resources</li>
+                  <li>• Help you find resources for grief, PTSD, depression, and anxiety</li>
+                  <li>• Point you to relevant research summaries</li>
+                  <li>• Suggest practical tools and guides</li>
+                  <li>• Connect you with professional resources</li>
+                  <li>• Answer questions about topics we&apos;ve covered</li>
                 </ul>
               </div>
 
@@ -148,11 +148,11 @@ export default function ChatbotPage() {
             </h2>
             <div className="flex flex-wrap justify-center gap-3">
               {[
-                "Why does grief come in waves?",
-                "How does EMDR work?",
-                "Does exercise help with depression?",
-                "What is the dual process model?",
-                "How much exercise is enough for mental health?",
+                "I'm struggling with grief after losing someone",
+                "How can I support a friend with depression?",
+                "What resources do you have on anxiety?",
+                "I want to understand PTSD better",
+                "Looking for coping strategies for stress",
               ].map((question) => (
                 <span
                   key={question}
@@ -178,7 +178,7 @@ export default function ChatbotPage() {
                   href="tel:988"
                   className="inline-flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors"
                 >
-                  📞 Call 988
+                  Call 988
                 </a>
                 <Link
                   href="/crisis-support"

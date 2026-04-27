@@ -3,10 +3,10 @@
 import { useState } from 'react';
 
 const PRESET_AMOUNTS = [
-  { value: 2500, label: '$25', impact: 'Covers 1 day of AI research operations' },
-  { value: 5000, label: '$50', impact: 'Powers 2-3 days of database scanning' },
-  { value: 10000, label: '$100', impact: 'Funds 1 week of research infrastructure' },
-  { value: 25000, label: '$250', impact: 'Supports 2 weeks of research & publishing' },
+  { value: 2500, label: '$25', impact: 'Helps translate research into guidance' },
+  { value: 5000, label: '$50', impact: 'Supports one week of content creation' },
+  { value: 10000, label: '$100', impact: 'Funds new tools and resources' },
+  { value: 25000, label: '$250', impact: 'Powers two weeks of full operations' },
 ];
 
 export default function DonateButton() {
@@ -73,7 +73,7 @@ export default function DonateButton() {
             </div>
 
             <p className="text-gray-600 mb-6">
-              Your donation powers our AI research teams and helps make mental health support accessible to everyone.
+              Your donation helps us translate trusted research into guidance families can actually use.
             </p>
 
             <div className="grid grid-cols-2 gap-3 mb-4">

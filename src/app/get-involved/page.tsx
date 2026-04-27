@@ -23,8 +23,8 @@ export default function GetInvolvedPage() {
               Get Involved
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Help us make mental health research accessible to everyone. Your support directly powers
-              our AI research teams and the tools that help people heal.
+              Help us make mental health resources accessible to every family. Your support directly powers
+              the research, tools, and guidance that help people heal.
             </p>
           </div>
 
@@ -37,7 +37,7 @@ export default function GetInvolvedPage() {
               </div>
               <h2 className="text-xl font-semibold text-gray-800 mb-4">Donate</h2>
               <p className="text-gray-600 mb-6">
-                Your donation powers our AI infrastructure, research operations, and the development
+                Your donation powers our research operations, content creation, and the development
                 of tools that make mental health support accessible to everyone who needs it.
               </p>
               <DonateButton />
@@ -102,10 +102,10 @@ export default function GetInvolvedPage() {
             <h2 className="text-2xl font-medium text-gray-800 mb-6 text-center">How Your Support Is Used</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <h3 className="font-medium text-gray-800 mb-4">AI Infrastructure & Research</h3>
+                <h3 className="font-medium text-gray-800 mb-4">Research & Content</h3>
                 <p className="text-gray-600 text-sm mb-4">
-                  Computing resources, API costs, and tools that power our AI research teams scanning
-                  thousands of papers daily.
+                  Reviewing studies, translating findings into plain language, and creating guides
+                  families can actually use.
                 </p>
               </div>
               <div>
