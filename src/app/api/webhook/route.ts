@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
               <p>Thank you for your donation of <strong>$${amount}</strong> to Faith Marie Foundation.</p>
               <p>Your support helps us:</p>
               <ul>
-                <li>Power AI research teams scanning thousands of papers daily</li>
+                <li>Translate research into plain-language guidance families can use</li>
                 <li>Build tools that make mental health support accessible</li>
                 <li>Keep our resources free for everyone who needs them</li>
               </ul>

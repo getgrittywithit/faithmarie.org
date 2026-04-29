@@ -17,7 +17,7 @@ const topicData: Record<string, {
   grief: {
     title: 'Grief & Loss',
     emoji: '💔',
-    description: 'Research on child loss, complicated grief, bereavement, and the grieving process. Our AI team scans the latest studies to help you understand grief better.',
+    description: 'Research on child loss, complicated grief, bereavement, and the grieving process. We review the latest studies to help you understand grief better.',
     color: 'amber',
     bgColor: 'bg-amber-50',
     textColor: 'text-amber-700',
@@ -137,7 +137,7 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
           <div className="max-w-4xl mx-auto px-4">
             <h2 className="text-2xl font-medium text-gray-800 mb-8">Example Research Findings</h2>
             <p className="text-gray-600 mb-8">
-              When our AI research team is fully operational, findings like these will be published daily:
+              As we build our research library, findings like these will be published regularly:
             </p>
             <div className="space-y-4">
               {topic.exampleFindings.map((finding, index) => (
@@ -162,9 +162,9 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
             <div className={`inline-block bg-white/70 ${topic.textColor} px-4 py-2 rounded-full text-sm font-medium mb-6`}>
               Coming Soon
             </div>
-            <h2 className="text-3xl font-light text-gray-800 mb-4">Research Team Launching Soon</h2>
+            <h2 className="text-3xl font-light text-gray-800 mb-4">More Research Coming Soon</h2>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-              Our {topic.title} AI research team is being trained and calibrated. Soon, daily digests
+              We&apos;re building our {topic.title} research library. Soon, regular summaries
               and in-depth reports will be available here.
             </p>
             <div className="max-w-md mx-auto mb-8">

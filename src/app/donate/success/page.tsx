@@ -32,9 +32,9 @@ export default function DonateSuccessPage() {
           <div className="bg-teal-50 rounded-lg p-6 mb-8">
             <h2 className="text-lg font-medium text-gray-800 mb-2">What Your Donation Supports</h2>
             <ul className="text-gray-600 text-sm space-y-2">
-              <li>AI research teams scanning thousands of papers daily</li>
-              <li>The development of our AI support chatbot</li>
-              <li>Building a searchable knowledge base of mental health resources</li>
+              <li>Reviewing research and translating it into plain-language guidance</li>
+              <li>Building tools like our resource guide and knowledge base</li>
+              <li>Creating a searchable library of mental health resources</li>
               <li>Keeping all our tools free and accessible</li>
             </ul>
           </div>

@@ -104,8 +104,8 @@ export default function KnowledgeBasePage() {
             </div>
             <h2 className="text-3xl font-light text-gray-800 mb-4">Knowledge Base Coming Soon</h2>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-              As our AI research teams produce daily digests and reports, we&apos;re building a comprehensive,
-              searchable library of synthesized research. Soon you&apos;ll be able to find answers to your
+              As we publish research summaries and guides, we&apos;re building a comprehensive,
+              searchable library of curated research. Soon you&apos;ll be able to find answers to your
               specific questions, explore topics in depth, and access practical guidance backed by science.
             </p>
 

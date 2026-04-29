@@ -111,8 +111,8 @@ export default function GetInvolvedPage() {
               <div>
                 <h3 className="font-medium text-gray-800 mb-4">Platform Development</h3>
                 <p className="text-gray-600 text-sm mb-4">
-                  Building and maintaining faithmarie.org, the AI chatbot, knowledge base, and
-                  resource finder tools.
+                  Building and maintaining faithmarie.org, the resource guide, knowledge base, and
+                  other tools that help families find support.
                 </p>
               </div>
               <div>

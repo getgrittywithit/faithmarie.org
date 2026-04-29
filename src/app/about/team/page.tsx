@@ -18,7 +18,7 @@ const founders = [
 Drawing on his background in software development, Levi envisioned a new approach: translating the flood of academic research into plain-language guidance that families could actually use. What began as a personal search for answers became a mission to ensure no one else has to struggle alone in the dark.
 
 Levi leads the Foundation's technology and content strategy, working to build tools and resources that help families find the support they need.`,
-    focus: "Technology & AI Operations",
+    focus: "Technology & Content Strategy",
   },
   {
     name: "Lola Moses",
