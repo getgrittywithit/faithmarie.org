@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { Resend } from 'resend';
+import { createAdminClient } from '@/lib/supabase/admin';
 
 export async function POST(request: NextRequest) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -90,6 +91,23 @@ export async function POST(request: NextRequest) {
       });
     } catch (emailError) {
       console.error('Failed to send donation notification:', emailError);
+    }
+
+    // Save donation to database
+    try {
+      const supabase = createAdminClient();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { error: dbError } = await (supabase as any).from('donations').insert({
+        stripe_session_id: session.id,
+        amount_cents: session.amount_total ?? 0,
+        donor_email: customerEmail ?? null,
+        donor_name: customerName ?? null,
+      });
+      if (dbError) {
+        console.error('Failed to save donation to database:', dbError);
+      }
+    } catch (dbError) {
+      console.error('Failed to save donation to database:', dbError);
     }
   }
 
