@@ -1,11 +1,11 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import { ClipboardCheck, AlertTriangle, Phone } from 'lucide-react';
+import { ClipboardCheck, AlertTriangle, Phone, Heart } from 'lucide-react';
 
 export const metadata = {
   title: "Mental Health Self-Assessments | Faith Marie Foundation",
-  description: "Free, anonymous mental health screening tools to help you understand your symptoms. These validated assessments are educational resources, not diagnoses.",
+  description: "Free, anonymous mental health screening tools including grief, depression, and anxiety assessments. Understand your symptoms and learn about treatment options.",
 };
 
 const assessments = [
@@ -79,11 +79,49 @@ export default function AssessmentsPage() {
           </div>
         </section>
 
-        {/* Assessments Grid */}
-        <section className="py-16">
+        {/* Featured: Grief Assessment */}
+        <section className="py-12">
+          <div className="max-w-4xl mx-auto px-4">
+            <Link
+              href="/assessments/grief"
+              className="block p-8 rounded-xl border-2 bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200 hover:border-amber-400 hover:shadow-lg transition-all"
+            >
+              <div className="flex items-start gap-6">
+                <div className="p-4 bg-white rounded-xl text-amber-600 shadow-sm">
+                  <Heart className="w-8 h-8" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="text-xl font-semibold text-gray-800">
+                      Grief Assessment (PG-13)
+                    </h3>
+                    <span className="text-xs font-medium bg-amber-200 text-amber-800 px-2 py-1 rounded-full">
+                      Featured
+                    </span>
+                  </div>
+                  <p className="text-gray-600 mb-4">
+                    Understand the difference between typical grief and prolonged grief disorder.
+                    This assessment helps you know whether your grief response might benefit from
+                    specialized support — and why grief is <strong>not the same as depression</strong>.
+                  </p>
+                  <div className="flex items-center gap-4 text-sm">
+                    <span className="text-amber-700">13 questions</span>
+                    <span className="text-gray-400">•</span>
+                    <span className="text-amber-700">~5 minutes</span>
+                    <span className="text-gray-400">•</span>
+                    <span className="text-amber-700">Anonymous</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </section>
+
+        {/* Other Assessments */}
+        <section className="py-12 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4">
             <h2 className="text-2xl font-medium text-gray-800 mb-8 text-center">
-              Choose an Assessment
+              Other Assessments
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -111,9 +149,9 @@ export default function AssessmentsPage() {
             </div>
 
             {/* Coming Soon */}
-            <div className="mt-8 p-6 bg-gray-50 rounded-xl border border-gray-200 text-center">
+            <div className="mt-8 p-6 bg-white rounded-xl border border-gray-200 text-center">
               <p className="text-gray-600">
-                <strong>Coming soon:</strong> PTSD screening (PCL-5) and Prolonged Grief assessment (PG-13)
+                <strong>Coming soon:</strong> PTSD screening (PCL-5)
               </p>
             </div>
           </div>
@@ -130,7 +168,7 @@ export default function AssessmentsPage() {
               <div className="bg-white p-6 rounded-lg border border-gray-200">
                 <h3 className="font-semibold text-gray-800 mb-3">Validated & Research-Based</h3>
                 <p className="text-gray-600 text-sm">
-                  The PHQ-9 and GAD-7 are clinically validated screening tools developed by
+                  The PG-13, PHQ-9, and GAD-7 are clinically validated screening tools developed by
                   researchers and used by healthcare providers worldwide. They&apos;ve been tested
                   in numerous studies for accuracy and reliability.
                 </p>
