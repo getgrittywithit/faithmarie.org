@@ -8,9 +8,9 @@ export const metadata = {
 };
 
 const relatedTopics = [
-  { title: 'Understanding Grief vs. Depression', href: '/research/topics/grief' },
-  { title: 'What Doctors Prescribe for Grief (And What Actually Helps)', href: '/learn#medications' },
-  { title: 'Complicated Grief Treatment: What It Is', href: '/learn#therapy' },
+  { title: 'Understanding Grief vs. Depression', href: '/learn?section=grief' },
+  { title: 'What Doctors Prescribe for Grief (And What Actually Helps)', href: '/learn?section=grief-treatment' },
+  { title: 'Complicated Grief Treatment: What It Is', href: '/learn?section=therapy-types' },
   { title: 'Support Groups for Bereaved Parents', href: '/find-help' },
 ];
 

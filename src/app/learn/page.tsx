@@ -6,7 +6,8 @@
  * treatments, and paths to healing.
  */
 
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
@@ -23,6 +24,7 @@ const NAV: NavItem[] = [
     id: 'conditions',
     label: 'Understanding Conditions',
     children: [
+      { id: 'grief', label: 'Grief & Loss' },
       { id: 'depression', label: 'Depression' },
       { id: 'anxiety', label: 'Anxiety Disorders' },
       { id: 'ptsd', label: 'PTSD' },
@@ -35,6 +37,7 @@ const NAV: NavItem[] = [
     id: 'medications',
     label: 'Medications Explained',
     children: [
+      { id: 'grief-treatment', label: 'After Loss: What Helps?' },
       { id: 'ssris', label: 'SSRIs' },
       { id: 'snris', label: 'SNRIs' },
       { id: 'atypical-antidep', label: 'Atypical Antidepressants' },
@@ -65,9 +68,19 @@ const NAV: NavItem[] = [
   { id: 'crisis', label: 'Crisis & Immediate Help' },
 ];
 
-export default function LearnPage() {
+// Component that handles search params (needs Suspense)
+function LearnPageContent() {
+  const searchParams = useSearchParams();
   const [activeId, setActiveId] = useState<string>('overview');
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Handle URL section parameter for deep linking
+  useEffect(() => {
+    const section = searchParams.get('section');
+    if (section && isValidSection(section)) {
+      setActiveId(section);
+    }
+  }, [searchParams]);
 
   const handleSelect = (id: string) => {
     setActiveId(id);
@@ -195,7 +208,41 @@ export default function LearnPage() {
   );
 }
 
+// Wrapper component with Suspense for useSearchParams
+export default function LearnPage() {
+  return (
+    <Suspense fallback={<LearnPageLoading />}>
+      <LearnPageContent />
+    </Suspense>
+  );
+}
+
+function LearnPageLoading() {
+  return (
+    <>
+      <Navigation />
+      <main className="min-h-screen bg-gray-50 pt-16">
+        <div className="max-w-7xl mx-auto px-6 py-10 md:py-14 text-center">
+          <p className="text-gray-500">Loading...</p>
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
+}
+
 // Helper functions
+function isValidSection(id: string): boolean {
+  const validIds = [
+    'overview', 'conditions', 'grief', 'depression', 'anxiety', 'ptsd', 'bipolar', 'ocd', 'adhd',
+    'medications', 'grief-treatment', 'ssris', 'snris', 'atypical-antidep', 'tricyclics',
+    'mood-stabilizers', 'antipsychotics', 'benzos', 'stimulants', 'med-safety',
+    'natural', 'exercise', 'sleep', 'nutrition', 'sunlight', 'digital-detox',
+    'connection', 'faith', 'therapy-types', 'family', 'careers', 'crisis'
+  ];
+  return validIds.includes(id);
+}
+
 function findLabel(id: string): string | undefined {
   for (const item of NAV) {
     if (item.id === id) return item.label;
@@ -240,6 +287,7 @@ function renderSection(id: string) {
   switch (id) {
     case 'overview': return <Overview />;
     case 'conditions': return <ConditionsIntro />;
+    case 'grief': return <Grief />;
     case 'depression': return <Depression />;
     case 'anxiety': return <Anxiety />;
     case 'ptsd': return <PTSD />;
@@ -247,6 +295,7 @@ function renderSection(id: string) {
     case 'ocd': return <OCD />;
     case 'adhd': return <ADHD />;
     case 'medications': return <MedicationsIntro />;
+    case 'grief-treatment': return <GriefTreatment />;
     case 'ssris': return <SSRIs />;
     case 'snris': return <SNRIs />;
     case 'atypical-antidep': return <AtypicalAntidep />;
@@ -331,6 +380,7 @@ function ConditionsIntro() {
       </p>
       <div className="not-prose grid gap-3 sm:grid-cols-2 mt-6">
         {[
+          ['grief', 'Grief & Loss', 'The natural response to losing someone you love. Not the same as depression.'],
           ['depression', 'Depression', 'Persistent low mood, loss of interest, exhaustion.'],
           ['anxiety', 'Anxiety Disorders', 'Ongoing worry, panic, tension that doesn\'t let up.'],
           ['ptsd', 'PTSD', 'A nervous system stuck in the aftermath of trauma.'],
@@ -688,6 +738,150 @@ function ADHD() {
   );
 }
 
+function Grief() {
+  return (
+    <>
+      <h2>Grief &amp; Loss</h2>
+      <p>
+        Grief is the natural, necessary response to losing someone you love. It is not a disorder.
+        It is not something to be fixed or medicated away. It is the price we pay for having loved
+        deeply, and while it hurts in ways that can feel unbearable, grief itself is not a mental
+        illness.
+      </p>
+      <p>
+        <strong>This matters because grief is often misdiagnosed as depression.</strong> The symptoms
+        can look similar on the surface — sadness, tears, trouble sleeping, loss of appetite, difficulty
+        concentrating. But the underlying experience is different, and the treatments that help
+        depression don&apos;t reliably help grief.
+      </p>
+
+      <h3>Grief vs. Depression: Key Differences</h3>
+      <MedTable
+        headers={['Grief', 'Depression']}
+        rows={[
+          ['Sadness comes in waves, often triggered by reminders of the person lost', 'Persistent low mood, most of the day, nearly every day'],
+          ['Can still experience joy when something good happens — then feel guilty about it', 'Loss of ability to feel pleasure (anhedonia) that doesn\'t lift'],
+          ['Self-esteem usually intact; guilt is about the relationship ("I wish I\'d said...")', 'Global sense of worthlessness; guilt about being a burden to everyone'],
+          ['Thoughts are focused on the deceased; yearning for them', 'Thoughts focused on self; pervasive hopelessness'],
+          ['Intensity tends to lessen over time, though it never fully disappears', 'Without treatment, symptoms stay constant or worsen'],
+          ['Suicidal thoughts, if present, are usually about joining the deceased', 'Suicidal thoughts arise from hopelessness and self-loathing'],
+        ]}
+      />
+
+      <h3>When Grief Becomes Complicated</h3>
+      <p>
+        Most people — even through devastating losses — will find their way forward without
+        professional treatment. Grief will always be with them, but it will stop dominating
+        every moment. This process takes longer than our culture acknowledges. One year is
+        often a <em>beginning</em>, not an end.
+      </p>
+      <p>
+        However, for roughly 7–10% of bereaved people, grief gets stuck. This is now recognized
+        as <strong>Prolonged Grief Disorder</strong> (added to the DSM-5-TR in 2022). It&apos;s marked by:
+      </p>
+      <ul>
+        <li>Intense yearning or longing for the deceased, daily, for more than a year</li>
+        <li>Feeling like part of yourself died along with them</li>
+        <li>Difficulty accepting that they&apos;re really gone</li>
+        <li>Avoiding reminders — or seeking them compulsively</li>
+        <li>Feeling that life has no meaning or purpose without them</li>
+        <li>Difficulty moving forward — planning, trusting, engaging with life</li>
+        <li>Significant impairment in daily functioning</li>
+      </ul>
+      <p>
+        Prolonged grief is more common after sudden or traumatic deaths, after the death of a
+        child, when the relationship was particularly close or conflicted, and when social
+        support is lacking.
+      </p>
+
+      <h3>Who Is Most at Risk</h3>
+      <p>
+        Certain losses carry higher risk of prolonged or complicated grief:
+      </p>
+      <ul>
+        <li><strong>Parents who lose a child</strong> — the research consistently shows this is the hardest loss to bear</li>
+        <li><strong>Sudden, violent, or traumatic deaths</strong> — accident, suicide, homicide, overdose</li>
+        <li><strong>Deaths involving stigma</strong> — where the bereaved feel unable to grieve openly</li>
+        <li><strong>Multiple losses in a short period</strong></li>
+        <li><strong>Loss of a primary relationship</strong> — spouse, only child, closest friend</li>
+        <li><strong>Limited social support</strong></li>
+      </ul>
+
+      <h3>What Actually Helps</h3>
+      <p>
+        The most important message: <strong>you don&apos;t have to &ldquo;fix&rdquo; your grief.</strong>
+        You need to live with it, integrate it, and let it change over time. That said, there are
+        things that genuinely help:
+      </p>
+      <ul>
+        <li>
+          <strong>Social support</strong> — people who let you talk about the person you lost without
+          trying to fix you or rush you
+        </li>
+        <li>
+          <strong>Grief-specific support groups</strong> — being with others who understand,
+          especially those who&apos;ve had similar losses (e.g., bereaved parents, suicide loss survivors)
+        </li>
+        <li>
+          <strong>Grief rituals</strong> — memorials, anniversaries, visiting places that mattered,
+          keeping meaningful objects
+        </li>
+        <li>
+          <strong>Time</strong> — not &ldquo;time heals all wounds,&rdquo; but time does allow
+          integration. The acute phase lessens over months to years.
+        </li>
+        <li>
+          <strong>Physical care</strong> — sleep, movement, nutrition. Grief is exhausting; the
+          body needs extra care.
+        </li>
+        <li>
+          <strong>Complicated Grief Treatment (CGT)</strong> — if grief is stuck, this is a specific
+          therapy developed for prolonged grief, with strong research evidence. It&apos;s different
+          from standard depression therapy.
+        </li>
+      </ul>
+
+      <div className="not-prose bg-amber-50 border-l-4 border-amber-400 p-4 rounded my-6">
+        <strong>For bereaved parents:</strong> The loss of a child is unlike any other loss. The
+        grief is often more intense, more prolonged, and less understood by those around you.
+        <strong> The Compassionate Friends</strong> is an organization specifically for parents
+        (and siblings and grandparents) who have lost a child. You are not alone in this.
+      </div>
+
+      <h3>What About Medication?</h3>
+      <p>
+        Here&apos;s what the research shows, and what many bereaved people learn the hard way:
+        <strong> antidepressants don&apos;t reliably help grief.</strong> This isn&apos;t because
+        grief is &ldquo;less real&rdquo; — it&apos;s because grief operates differently in the brain
+        than depression does.
+      </p>
+      <p>
+        If a doctor prescribes an SSRI shortly after a loss, ask why. Is there true major depression
+        <em> in addition to</em> grief? Is there a history of depression that makes the current
+        episode more concerning? Or is this reflexive — prescribing because there&apos;s distress
+        and the doctor wants to do <em>something</em>?
+      </p>
+      <p>
+        See <a href="#grief-treatment">After Loss: What Helps?</a> in our medications section for
+        more on this.
+      </p>
+
+      <h3>Finding Help</h3>
+      <ul>
+        <li><strong>The Compassionate Friends</strong> — for bereaved parents, siblings, grandparents</li>
+        <li><strong>GriefShare</strong> — faith-based grief support groups meeting in churches nationwide</li>
+        <li><strong>What&apos;s Your Grief</strong> — online grief education and courses</li>
+        <li><strong>The Dinner Party</strong> — community for grieving 20-40 somethings</li>
+        <li><strong>Therapists trained in Complicated Grief Treatment (CGT)</strong> — ask specifically about this credential</li>
+      </ul>
+
+      <blockquote>
+        &ldquo;Grief is not a problem to be solved. It is an experience to be carried.&rdquo;
+      </blockquote>
+    </>
+  );
+}
+
 /* ── Medications ──────────────────────────────────────────────────────────── */
 
 function MedicationsIntro() {
@@ -728,6 +922,204 @@ function MedicationsIntro() {
           <strong>Never combine psychiatric meds with alcohol, street drugs, or St. John&apos;s
           Wort</strong> without telling your prescriber.
         </li>
+      </ul>
+    </>
+  );
+}
+
+function GriefTreatment() {
+  return (
+    <>
+      <h2>After Loss: What Helps?</h2>
+      <p>
+        This section exists because of a pattern we see repeatedly: someone loses a loved one,
+        visits their doctor, and leaves with a prescription for an antidepressant. The doctor
+        means well. The patient is suffering. Medication feels like doing <em>something</em>.
+      </p>
+      <p>
+        But here&apos;s what the research shows: <strong>antidepressants do not reliably help
+        grief.</strong> Not because grief isn&apos;t painful — it is, unbearably so — but because
+        grief is a different process than depression, and it responds to different things.
+      </p>
+
+      <div className="not-prose bg-amber-50 border-l-4 border-amber-400 p-4 rounded my-6">
+        <strong>Important:</strong> This section is about grief — the natural response to loss.
+        Some people experience true major depression <em>in addition to</em> grief, and that
+        depression may warrant medication. The question is: are you being treated for depression
+        that exists, or for grief that&apos;s been mislabeled as depression?
+      </div>
+
+      <h3>What Doctors Commonly Prescribe After a Loss</h3>
+      <p>
+        Here&apos;s a list of what bereaved people are often given, what the evidence actually says,
+        and what to consider:
+      </p>
+
+      <MedTable
+        headers={['Medication', 'What doctors hope it does', 'What the evidence says']}
+        rows={[
+          ['SSRIs (Zoloft, Lexapro, etc.)', 'Lift mood, reduce distress', 'May help if true major depression is present. Does NOT speed grief recovery or reduce yearning. May blunt emotions in ways that interfere with grief processing.'],
+          ['Benzodiazepines (Xanax, Ativan)', 'Reduce acute anxiety, help with sleep', 'Can provide short-term relief but carry dependence risk. May delay grief processing by numbing emotions. Generally not recommended beyond a few weeks.'],
+          ['Sleep aids (Ambien, trazodone)', 'Help with insomnia', 'Sleep is genuinely disrupted in grief. Short-term use may be reasonable. Long-term use has downsides.'],
+          ['Antipsychotics (Seroquel low-dose)', 'Help with sleep, reduce agitation', 'Sometimes prescribed off-label. Significant side effect burden for a problem (grief) that doesn\'t require them.'],
+        ]}
+      />
+
+      <h3>The Problem with Medicating Grief</h3>
+      <ol>
+        <li>
+          <strong>Grief is not a chemical imbalance.</strong> Depression involves dysregulation
+          of neurotransmitter systems. Grief is a psychological response to loss — the brain is
+          functioning as designed, processing a catastrophic event. Medications that target
+          neurotransmitter levels don&apos;t address the actual problem.
+        </li>
+        <li>
+          <strong>Numbing emotions can delay healing.</strong> The painful emotions of grief —
+          yearning, anger, guilt, sadness — are part of the processing. Blunting them doesn&apos;t
+          make the grief go away; it may just postpone it.
+        </li>
+        <li>
+          <strong>There&apos;s no shortcut.</strong> Research on antidepressants in bereavement
+          shows they may reduce some symptoms of depression if present, but they don&apos;t
+          speed up grief recovery or reduce the core experience of loss.
+        </li>
+        <li>
+          <strong>Side effects add burden.</strong> SSRIs have real side effects — sexual
+          dysfunction, emotional blunting, weight changes, discontinuation syndrome. Adding
+          these to someone already struggling with loss can make things harder, not easier.
+        </li>
+      </ol>
+
+      <h3>When Medication Might Actually Help</h3>
+      <p>
+        There are legitimate reasons to consider medication after a loss:
+      </p>
+      <ul>
+        <li>
+          <strong>Pre-existing depression or anxiety</strong> that has worsened or relapsed
+          after the loss
+        </li>
+        <li>
+          <strong>True major depressive episode</strong> that has developed in addition to
+          grief — persistent hopelessness, suicidal ideation, complete inability to function
+        </li>
+        <li>
+          <strong>Severe insomnia</strong> after weeks of poor sleep that&apos;s impairing
+          functioning (short-term sleep aids may be reasonable)
+        </li>
+        <li>
+          <strong>PTSD symptoms</strong> if the death was traumatic (different treatment
+          approach)
+        </li>
+        <li>
+          <strong>Panic disorder</strong> that has emerged or worsened (may respond to SSRIs)
+        </li>
+      </ul>
+
+      <h3>What Actually Helps Grief</h3>
+      <p>
+        The research is clearer on what <em>does</em> help:
+      </p>
+      <ul>
+        <li>
+          <strong>Time.</strong> Grief naturally integrates over months to years. The acute
+          intensity does lessen, though the loss never disappears.
+        </li>
+        <li>
+          <strong>Social support.</strong> Being with people who can tolerate your pain, who
+          don&apos;t try to fix you or rush you, who let you talk about the person you lost.
+        </li>
+        <li>
+          <strong>Grief-specific support groups.</strong> Especially groups for similar losses
+          (bereaved parents, suicide loss survivors, etc.). The research on these is positive.
+        </li>
+        <li>
+          <strong>Complicated Grief Treatment (CGT)</strong> — if grief is stuck after 6–12
+          months, this specific therapy protocol has strong research evidence. It&apos;s
+          <em>different</em> from standard CBT or antidepressant treatment.
+        </li>
+        <li>
+          <strong>Physical care.</strong> Sleep, movement, eating. Grief is exhausting; the
+          body needs extra support.
+        </li>
+        <li>
+          <strong>Ritual and meaning-making.</strong> Funerals, memorials, anniversaries,
+          visiting graves, keeping objects, telling stories about the deceased.
+        </li>
+      </ul>
+
+      <h3>Questions to Ask Your Doctor</h3>
+      <p>
+        If a doctor prescribes medication after a loss, consider asking:
+      </p>
+      <ul>
+        <li>
+          &ldquo;Are you treating depression specifically, or grief in general? What&apos;s the
+          difference in how you see them?&rdquo;
+        </li>
+        <li>
+          &ldquo;What&apos;s the evidence that this medication helps with grief?&rdquo;
+        </li>
+        <li>
+          &ldquo;What&apos;s the plan for how long I&apos;d be on this?&rdquo;
+        </li>
+        <li>
+          &ldquo;What non-medication options might help? Are there grief-specific therapies or
+          support groups you&apos;d recommend?&rdquo;
+        </li>
+        <li>
+          &ldquo;If I do have depression in addition to grief, would therapy be effective, or
+          do I specifically need medication?&rdquo;
+        </li>
+      </ul>
+
+      <h3>Grief After Losing a Child</h3>
+      <p>
+        The loss of a child is widely recognized as the most devastating loss a person can
+        experience. Research shows bereaved parents have higher rates of:
+      </p>
+      <ul>
+        <li>Prolonged grief disorder</li>
+        <li>Major depression</li>
+        <li>PTSD (especially after sudden or traumatic deaths)</li>
+        <li>Physical health problems</li>
+        <li>Relationship strain</li>
+      </ul>
+      <p>
+        Even so, medication is not automatically the answer. What bereaved parents consistently
+        report as most helpful:
+      </p>
+      <ul>
+        <li>
+          <strong>Connection with other bereaved parents.</strong> The Compassionate Friends,
+          online communities, local support groups.
+        </li>
+        <li>
+          <strong>Having the child&apos;s life acknowledged.</strong> People saying their name,
+          asking about them, remembering anniversaries.
+        </li>
+        <li>
+          <strong>Time — often measured in years.</strong> The first two years are often the
+          hardest. Integration is slow.
+        </li>
+        <li>
+          <strong>Finding meaning</strong> — through memorial work, advocacy, helping others —
+          when and if it feels right.
+        </li>
+      </ul>
+
+      <div className="not-prose bg-teal-50 border-l-4 border-teal-500 p-4 rounded my-6">
+        <strong>The Faith Marie Foundation exists because of this.</strong> Our founder&apos;s
+        daughter Faith Marie was lost to SIDS. In the aftermath, like many bereaved parents, she
+        was given medications that didn&apos;t help — because she wasn&apos;t depressed. She was
+        grieving. The distinction matters.
+      </div>
+
+      <h3>Further Reading</h3>
+      <ul>
+        <li><a href="#grief">Grief &amp; Loss</a> — understanding grief as distinct from depression</li>
+        <li><a href="#ssris">SSRIs</a> — what they actually do and don&apos;t do</li>
+        <li><a href="#therapy-types">Types of Therapy</a> — including grief-specific approaches</li>
       </ul>
     </>
   );
