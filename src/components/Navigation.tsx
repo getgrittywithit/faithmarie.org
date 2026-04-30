@@ -83,6 +83,12 @@ export default function Navigation() {
                 <div className="absolute top-full left-0 pt-2 w-48">
                   <div className="bg-white rounded-md shadow-lg border border-gray-100 py-2">
                     <Link
+                      href="/assessments"
+                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                    >
+                      Self-Assessments
+                    </Link>
+                    <Link
                       href="/tools/chatbot"
                       className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
                     >
@@ -150,7 +156,13 @@ export default function Navigation() {
             </Link>
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3">
+            <Link
+              href="/find-help"
+              className="bg-teal-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-teal-700 transition-colors"
+            >
+              Find Help
+            </Link>
             <Link
               href="/crisis-support"
               className="bg-red-100 text-red-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-red-200 transition-colors"
@@ -199,6 +211,9 @@ export default function Navigation() {
               {/* Tools Section */}
               <div className="space-y-2">
                 <span className="text-sm font-medium text-teal-700 uppercase tracking-wide">Tools</span>
+                <Link href="/assessments" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
+                  Self-Assessments
+                </Link>
                 <Link href="/tools/chatbot" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
                   Resource Guide
                 </Link>
@@ -226,12 +241,20 @@ export default function Navigation() {
               <Link href="/get-involved" className="text-gray-600 hover:text-teal-600 transition-colors">
                 Get Involved
               </Link>
-              <Link
-                href="/crisis-support"
-                className="bg-red-100 text-red-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-red-200 transition-colors w-fit"
-              >
-                Crisis Support
-              </Link>
+              <div className="flex flex-col gap-2 pt-2">
+                <Link
+                  href="/find-help"
+                  className="bg-teal-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-teal-700 transition-colors w-fit"
+                >
+                  Find Help
+                </Link>
+                <Link
+                  href="/crisis-support"
+                  className="bg-red-100 text-red-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-red-200 transition-colors w-fit"
+                >
+                  Crisis Support
+                </Link>
+              </div>
             </div>
           </div>
         )}
