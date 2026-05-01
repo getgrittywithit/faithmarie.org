@@ -25,6 +25,14 @@ const assessments = [
     color: 'bg-purple-50 border-purple-200 hover:border-purple-300',
     iconColor: 'text-purple-600',
   },
+  {
+    id: 'ptsd',
+    name: 'PTSD Screening (PCL-5)',
+    description: 'A 20-question tool that screens for symptoms of post-traumatic stress disorder. Takes about 5 minutes.',
+    href: '/assessments/ptsd',
+    color: 'bg-rose-50 border-rose-200 hover:border-rose-300',
+    iconColor: 'text-rose-600',
+  },
 ];
 
 export default function AssessmentsPage() {
@@ -148,12 +156,6 @@ export default function AssessmentsPage() {
               ))}
             </div>
 
-            {/* Coming Soon */}
-            <div className="mt-8 p-6 bg-white rounded-xl border border-gray-200 text-center">
-              <p className="text-gray-600">
-                <strong>Coming soon:</strong> PTSD screening (PCL-5)
-              </p>
-            </div>
           </div>
         </section>
 
