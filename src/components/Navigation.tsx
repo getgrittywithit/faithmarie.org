@@ -154,6 +154,12 @@ export default function Navigation() {
             >
               Get Involved
             </Link>
+            <Link
+              href="/memorials/create"
+              className="text-gray-600 hover:text-teal-600 transition-colors"
+            >
+              In Memory
+            </Link>
           </div>
 
           <div className="hidden md:flex items-center gap-3">
@@ -240,6 +246,9 @@ export default function Navigation() {
               </div>
               <Link href="/get-involved" className="text-gray-600 hover:text-teal-600 transition-colors">
                 Get Involved
+              </Link>
+              <Link href="/memorials/create" className="text-gray-600 hover:text-teal-600 transition-colors">
+                In Memory
               </Link>
               <div className="flex flex-col gap-2 pt-2">
                 <Link
