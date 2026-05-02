@@ -24,15 +24,16 @@ async function getMemorial(slug: string) {
 
   const { data: memorial, error } = await supabase
     .from('memorials')
-    .select(`
-      *,
-      creator:memorial_users!creator_id(full_name),
-      hero_photo:memorial_photos!hero_photo_id(storage_path)
-    `)
+    .select('*')
     .eq('slug', slug)
     .single();
 
-  if (error || !memorial) {
+  if (error) {
+    console.error('Error fetching memorial:', error);
+    return null;
+  }
+
+  if (!memorial) {
     return null;
   }
 
