@@ -20,6 +20,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-cormorant);
+
+  /* Memorial page colors */
+  --color-memorial-bg: #FAF7F2;
+  --color-memorial-bg-alt: #F5F0E8;
 }
 
 body {

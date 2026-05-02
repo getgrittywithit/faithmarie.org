@@ -1,8 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { Heart, Send, Loader2, CheckCircle } from 'lucide-react';
+import { Heart, Send, Loader2, CheckCircle, Flame, Flower2, Bird } from 'lucide-react';
 import type { Tribute } from '@/lib/supabase/types';
+
+const ICON_OPTIONS = [
+  { id: 'none', label: 'None', icon: null },
+  { id: 'candle', label: 'Candle', icon: Flame },
+  { id: 'flower', label: 'Flower', icon: Flower2 },
+  { id: 'dove', label: 'Dove', icon: Bird },
+] as const;
+
+type IconId = typeof ICON_OPTIONS[number]['id'];
 
 interface MemorialTributesProps {
   memorialId: string;
@@ -20,6 +29,7 @@ export default function MemorialTributes({
   const [email, setEmail] = useState('');
   const [relationship, setRelationship] = useState('');
   const [message, setMessage] = useState('');
+  const [selectedIcon, setSelectedIcon] = useState<IconId>('none');
   const [honeypot, setHoneypot] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -51,6 +61,7 @@ export default function MemorialTributes({
           email,
           relationship,
           message,
+          icon: selectedIcon !== 'none' ? selectedIcon : undefined,
         }),
       });
 
@@ -60,6 +71,7 @@ export default function MemorialTributes({
         setEmail('');
         setRelationship('');
         setMessage('');
+        setSelectedIcon('none');
       } else {
         const data = await response.json();
         setError(data.error || 'Failed to submit tribute');
@@ -80,40 +92,54 @@ export default function MemorialTributes({
     });
   };
 
+  // Helper to get icon component for a tribute
+  const getIconForTribute = (iconId: string | undefined) => {
+    const option = ICON_OPTIONS.find(o => o.id === iconId);
+    return option?.icon || null;
+  };
+
   return (
-    <section className="py-12 md:py-16 bg-white">
+    <section className="py-12 md:py-16 bg-memorial-bg">
       <div className="max-w-3xl mx-auto px-4">
-        <h2 className="text-2xl font-light text-gray-800 mb-8 text-center">
+        <h2 className="font-serif text-3xl text-gray-800 mb-8 text-center">
           Tributes & Memories
         </h2>
 
         {/* Tribute list */}
         {tributes.length > 0 ? (
           <div className="space-y-6 mb-8">
-            {tributes.map((tribute) => (
-              <div
-                key={tribute.id}
-                className="bg-gray-50 rounded-lg p-5 border border-gray-100"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <h3 className="font-medium text-gray-800">{tribute.visitor_name}</h3>
-                    {tribute.visitor_relationship && (
-                      <p className="text-sm text-gray-500">{tribute.visitor_relationship}</p>
-                    )}
+            {tributes.map((tribute) => {
+              const TributeIcon = getIconForTribute((tribute as { icon?: string }).icon);
+              return (
+                <div
+                  key={tribute.id}
+                  className="bg-white rounded-lg p-5 border border-gray-200/50 shadow-sm"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      {TributeIcon && (
+                        <TributeIcon className="w-4 h-4 text-teal-500" />
+                      )}
+                      <div>
+                        <h3 className="font-medium text-gray-800">{tribute.visitor_name}</h3>
+                        {tribute.visitor_relationship && (
+                          <p className="text-sm text-gray-500">{tribute.visitor_relationship}</p>
+                        )}
+                      </div>
+                    </div>
+                    <span className="text-sm text-gray-400">
+                      {formatDate(tribute.submitted_at)}
+                    </span>
                   </div>
-                  <span className="text-sm text-gray-400">
-                    {formatDate(tribute.submitted_at)}
-                  </span>
+                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                    {tribute.message}
+                  </p>
                 </div>
-                <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                  {tribute.message}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
-          <div className="text-center py-8 bg-gray-50 rounded-lg mb-8">
+          <div className="text-center py-8 bg-white rounded-lg mb-8 border border-gray-200/50">
             <Heart className="w-10 h-10 text-gray-300 mx-auto mb-3" />
             <p className="text-gray-500">No tributes yet</p>
             <p className="text-sm text-gray-400">Be the first to share a memory</p>
@@ -144,8 +170,8 @@ export default function MemorialTributes({
         )}
 
         {isFormOpen && !isSubmitted && (
-          <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-6 space-y-4">
-            <h3 className="font-medium text-gray-800 mb-4">
+          <form onSubmit={handleSubmit} className="bg-white rounded-lg p-6 space-y-4 border border-gray-200/50 shadow-sm">
+            <h3 className="font-serif text-xl text-gray-800 mb-4">
               Share a memory of {deceasedName}
             </h3>
 
@@ -159,7 +185,7 @@ export default function MemorialTributes({
                   id="tributeName"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 bg-memorial-bg"
                   required
                 />
               </div>
@@ -172,7 +198,7 @@ export default function MemorialTributes({
                   id="tributeEmail"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 bg-memorial-bg"
                   required
                 />
                 <p className="text-xs text-gray-500 mt-1">Not displayed publicly</p>
@@ -188,7 +214,7 @@ export default function MemorialTributes({
                 id="tributeRelationship"
                 value={relationship}
                 onChange={(e) => setRelationship(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 bg-memorial-bg"
                 placeholder="e.g., Friend, Coworker, Neighbor"
               />
             </div>
@@ -202,10 +228,34 @@ export default function MemorialTributes({
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={4}
-                className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 resize-none"
+                className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 resize-none bg-memorial-bg"
                 placeholder="Share a memory, kind words, or message of support..."
                 required
               />
+            </div>
+
+            {/* Icon selector */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Add a symbol <span className="text-gray-400">(optional)</span>
+              </label>
+              <div className="flex gap-2">
+                {ICON_OPTIONS.map((option) => (
+                  <button
+                    key={option.id}
+                    type="button"
+                    onClick={() => setSelectedIcon(option.id)}
+                    className={`flex items-center gap-1.5 px-3 py-2 rounded-md border transition-colors ${
+                      selectedIcon === option.id
+                        ? 'border-teal-500 bg-teal-50 text-teal-700'
+                        : 'border-gray-200 bg-memorial-bg text-gray-600 hover:border-gray-300'
+                    }`}
+                  >
+                    {option.icon && <option.icon className="w-4 h-4" />}
+                    <span className="text-sm">{option.label}</span>
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Honeypot */}

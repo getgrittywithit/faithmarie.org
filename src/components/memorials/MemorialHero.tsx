@@ -53,7 +53,7 @@ export default function MemorialHero({
         )}
 
         {/* Name */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-light mb-4">
+        <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium mb-4 tracking-wide">
           {name}
         </h1>
 
@@ -71,7 +71,7 @@ export default function MemorialHero({
       </div>
 
       {/* Decorative bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-memorial-bg to-transparent" />
     </section>
   );
 }

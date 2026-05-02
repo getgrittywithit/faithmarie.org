@@ -37,9 +37,9 @@ export default function MemorialPhotos({ photos }: MemorialPhotosProps) {
   };
 
   return (
-    <section className="py-12 md:py-16">
+    <section className="py-12 md:py-16 bg-memorial-bg">
       <div className="max-w-5xl mx-auto px-4">
-        <h2 className="text-2xl font-light text-gray-800 mb-8 text-center">
+        <h2 className="font-serif text-3xl text-gray-800 mb-8 text-center">
           Photos
         </h2>
 

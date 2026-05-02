@@ -21,9 +21,9 @@ export default function MemorialTimeline({ events, accent }: MemorialTimelinePro
   };
 
   return (
-    <section className="py-12 md:py-16 bg-gray-50">
+    <section className="py-12 md:py-16 bg-memorial-bg-alt">
       <div className="max-w-3xl mx-auto px-4">
-        <h2 className="text-2xl font-light text-gray-800 mb-8 text-center">
+        <h2 className="font-serif text-3xl text-gray-800 mb-8 text-center">
           Life Story
         </h2>
 
@@ -42,7 +42,7 @@ export default function MemorialTimeline({ events, accent }: MemorialTimelinePro
               >
                 {/* Dot */}
                 <div className="absolute left-4 md:left-1/2 -translate-x-1/2 mt-1.5">
-                  <div className={`w-3 h-3 rounded-full ${colors.dot} ring-4 ring-white`} />
+                  <div className={`w-3 h-3 rounded-full ${colors.dot} ring-4 ring-memorial-bg-alt`} />
                 </div>
 
                 {/* Content */}

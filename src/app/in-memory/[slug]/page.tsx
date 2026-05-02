@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { createAdminClient } from '@/lib/supabase/admin';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
+import MemorialNavigation from '@/components/memorials/MemorialNavigation';
 import MemorialHero from '@/components/memorials/MemorialHero';
 import MemorialObituary from '@/components/memorials/MemorialObituary';
 import MemorialTimeline from '@/components/memorials/MemorialTimeline';
@@ -116,11 +115,10 @@ export default async function MemorialPage({ params, searchParams }: PageProps) 
     if (!passwordVerified) {
       return (
         <>
-          <Navigation />
-          <main className="min-h-screen pt-20 bg-white">
+          <MemorialNavigation memorialName={memorial.deceased_full_name} />
+          <main className="min-h-screen pt-14 bg-memorial-bg">
             <PasswordGate slug={slug} memorialName={memorial.deceased_full_name} />
           </main>
-          <Footer />
         </>
       );
     }
@@ -147,8 +145,8 @@ export default async function MemorialPage({ params, searchParams }: PageProps) 
 
   return (
     <>
-      <Navigation />
-      <main className="min-h-screen pt-20 bg-white">
+      <MemorialNavigation memorialName={memorial.deceased_full_name} />
+      <main className="min-h-screen pt-14 bg-memorial-bg">
         {/* Hero Section */}
         <MemorialHero
           name={memorial.deceased_full_name}
@@ -189,12 +187,16 @@ export default async function MemorialPage({ params, searchParams }: PageProps) 
         />
 
         {/* Footer */}
-        <section className="py-8 border-t border-gray-100 bg-gray-50">
+        <section className="py-8 border-t border-gray-200/50 bg-memorial-bg-alt">
           <div className="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
             <p>
               Hosted with love by{' '}
               <Link href="/" className="text-teal-600 hover:text-teal-700">
                 Faith Marie Foundation
+              </Link>
+              {' · '}
+              <Link href="/donate" className="text-teal-600 hover:text-teal-700">
+                Support our mission
               </Link>
             </p>
             <Link
@@ -209,12 +211,11 @@ export default async function MemorialPage({ params, searchParams }: PageProps) 
 
         {/* Sponsor credit if applicable */}
         {memorial.sponsor_show_credit && memorial.sponsor_display_name && (
-          <div className="py-4 text-center text-sm text-gray-500 bg-gray-50 border-t border-gray-100">
+          <div className="py-4 text-center text-sm text-gray-500 bg-memorial-bg-alt border-t border-gray-200/50">
             Sponsored by {memorial.sponsor_display_name}
           </div>
         )}
       </main>
-      <Footer />
     </>
   );
 }

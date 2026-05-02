@@ -51,16 +51,16 @@ export default function PasswordGate({ slug, memorialName }: PasswordGateProps) 
   return (
     <div className="min-h-[60vh] flex items-center justify-center">
       <div className="max-w-md w-full mx-auto px-4">
-        <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <div className="bg-white rounded-xl border border-gray-200/50 shadow-sm p-8 text-center">
+          <div className="w-16 h-16 bg-memorial-bg-alt rounded-full flex items-center justify-center mx-auto mb-6">
             <Lock className="w-8 h-8 text-gray-400" />
           </div>
 
-          <h1 className="text-2xl font-semibold text-gray-800 mb-2">
+          <h1 className="font-serif text-2xl text-gray-800 mb-2">
             Private Memorial
           </h1>
           <p className="text-gray-600 mb-6">
-            The memorial for <strong>{memorialName}</strong> is password protected.
+            The memorial for <span className="font-serif italic">{memorialName}</span> is password protected.
             Please enter the password to view.
           </p>
 
@@ -70,7 +70,7 @@ export default function PasswordGate({ slug, memorialName }: PasswordGateProps) 
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 text-center border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full px-4 py-3 text-center border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 bg-memorial-bg"
                 placeholder="Enter password"
                 autoFocus
               />
