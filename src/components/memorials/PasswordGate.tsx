@@ -1,0 +1,109 @@
+'use client';
+
+import { useState } from 'react';
+import { Lock, Loader2, AlertCircle } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
+interface PasswordGateProps {
+  slug: string;
+  memorialName: string;
+}
+
+export default function PasswordGate({ slug, memorialName }: PasswordGateProps) {
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!password) {
+      setError('Please enter the password');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch(`/api/memorials/verify-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        // Redirect with verification token
+        router.push(`/in-memory/${slug}?verified=true`);
+      } else {
+        setError('Incorrect password');
+      }
+    } catch {
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center">
+      <div className="max-w-md w-full mx-auto px-4">
+        <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
+          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Lock className="w-8 h-8 text-gray-400" />
+          </div>
+
+          <h1 className="text-2xl font-semibold text-gray-800 mb-2">
+            Private Memorial
+          </h1>
+          <p className="text-gray-600 mb-6">
+            The memorial for <strong>{memorialName}</strong> is password protected.
+            Please enter the password to view.
+          </p>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 text-center border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                placeholder="Enter password"
+                autoFocus
+              />
+            </div>
+
+            {error && (
+              <div className="flex items-center justify-center gap-2 text-red-600 text-sm">
+                <AlertCircle className="w-4 h-4" />
+                {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isLoading || !password}
+              className="w-full bg-teal-600 text-white py-3 rounded-md hover:bg-teal-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Verifying...
+                </>
+              ) : (
+                'View Memorial'
+              )}
+            </button>
+          </form>
+
+          <p className="text-sm text-gray-500 mt-6">
+            Don&apos;t have the password? Contact the memorial creator.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
