@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ArrowLeft, ArrowRight, CheckCircle, Loader2 } from 'lucide-react';
 import Step1Account from './wizard/Step1Account';
 import Step2DeceasedInfo from './wizard/Step2DeceasedInfo';
@@ -88,15 +88,6 @@ export default function MemorialWizard() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [memorialSlug, setMemorialSlug] = useState('');
-  const [availableCredits, setAvailableCredits] = useState(0);
-
-  // Fetch available pay-it-forward credits on mount
-  useEffect(() => {
-    fetch('/api/memorials/credits')
-      .then((res) => res.json())
-      .then((data) => setAvailableCredits(data.count ?? 0))
-      .catch(() => setAvailableCredits(0));
-  }, []);
 
   const updateData = (updates: Partial<WizardData>) => {
     setData((prev) => ({ ...prev, ...updates }));
@@ -198,15 +189,6 @@ export default function MemorialWizard() {
         </div>
       </div>
 
-      {/* Pay-it-forward counter - now more subtle */}
-      {availableCredits > 0 && currentStep === 'donation' && (
-        <div className="px-6 py-3 bg-soft-aqua/20 border-b border-soft-aqua/50">
-          <p className="text-sm text-deep-teal text-center">
-            Community support available for hardship requests
-          </p>
-        </div>
-      )}
-
       {/* Step content */}
       <div className="p-6">
         {currentStep === 'account' && (
@@ -222,11 +204,7 @@ export default function MemorialWizard() {
           <Step4Attestation data={data} updateData={updateData} />
         )}
         {currentStep === 'donation' && (
-          <Step5Donation
-            data={data}
-            updateData={updateData}
-            availableCredits={availableCredits}
-          />
+          <Step5Donation data={data} updateData={updateData} />
         )}
         {currentStep === 'review' && (
           <Step6Review data={data} />

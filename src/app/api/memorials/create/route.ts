@@ -148,23 +148,22 @@ export async function POST(request: NextRequest) {
     // Generate unique slug
     const slug = generateSlug(body.deceasedFullName);
 
-    // Determine funding type
+    // Determine funding type and hosting duration
     let fundedBy: FundingType | null = null;
-    if (body.isHardship) {
-      // Check for available pay-it-forward credits
-      const { data: credits } = await adminSupabase
-        .from('pay_it_forward_credits')
-        .select('id')
-        .is('consumed_by_memorial_id', null)
-        .limit(1);
+    let hostingPaidUntil: string | null = null;
 
-      if (credits && credits.length > 0) {
-        fundedBy = 'pay_it_forward';
-      } else {
-        fundedBy = 'hardship';
-      }
-    } else if (body.donationAmount >= 20) {
+    if (body.isHardship) {
+      fundedBy = 'hardship';
+      // Hardship waivers get 10 years hosting
+      hostingPaidUntil = new Date(Date.now() + 10 * 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    } else if (body.donationAmount === 99) {
+      // Founder tier: lifetime hosting (25 years as practical limit)
       fundedBy = 'paid';
+      hostingPaidUntil = new Date(Date.now() + 25 * 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    } else if (body.donationAmount >= 20) {
+      // Standard tier: 10 years hosting
+      fundedBy = 'paid';
+      hostingPaidUntil = new Date(Date.now() + 10 * 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
     }
 
     // Create the memorial
@@ -182,9 +181,7 @@ export async function POST(request: NextRequest) {
         status: 'pending_moderation',
         privacy: 'public',
         funded_by: fundedBy,
-        hosting_paid_until: fundedBy === 'paid' || fundedBy === 'pay_it_forward'
-          ? new Date(Date.now() + 10 * 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-          : null,
+        hosting_paid_until: hostingPaidUntil,
       })
       .select('id, slug')
       .single();
@@ -232,26 +229,6 @@ export async function POST(request: NextRequest) {
       ip_address: body.attestationIp || request.headers.get('x-forwarded-for') || 'unknown',
       user_agent: request.headers.get('user-agent'),
     });
-
-    // If using pay-it-forward, consume a credit
-    if (fundedBy === 'pay_it_forward') {
-      const { data: availableCredit } = await adminSupabase
-        .from('pay_it_forward_credits')
-        .select('id')
-        .is('consumed_by_memorial_id', null)
-        .limit(1)
-        .single();
-
-      if (availableCredit) {
-        await adminSupabase
-          .from('pay_it_forward_credits')
-          .update({
-            consumed_by_memorial_id: memorial.id,
-            consumed_at: new Date().toISOString(),
-          })
-          .eq('id', availableCredit.id);
-      }
-    }
 
     // Create audit log entry
     await adminSupabase.from('memorial_audit_log').insert({

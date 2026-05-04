@@ -89,28 +89,28 @@ export default function MemorialDonateModal({
         onClick={onClose}
       />
       <div className="relative bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-gray-800">
-            Donate in Memory
+        <div className="sticky top-0 bg-white border-b border-stone-200 px-6 py-4 flex items-center justify-between">
+          <h2 className="font-serif text-xl text-stone-900">
+            Donate in memory
           </h2>
           <button
             onClick={onClose}
-            className="p-1 text-gray-400 hover:text-gray-600"
+            className="p-1 text-stone-400 hover:text-stone-600"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          <p className="text-gray-600">
+          <p className="text-stone-600">
             Honor {deceasedName}&apos;s memory with a donation to Faith Marie Foundation.
-            Your gift supports grieving families and funds free memorial sites.
+            Your gift supports grieving families and mental health research accessibility.
           </p>
 
           {/* Amount Selection */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Donation Amount
+            <label className="block text-sm font-medium text-stone-700 mb-2">
+              Donation amount
             </label>
             <div className="grid grid-cols-4 gap-2 mb-3">
               {suggestedAmounts.map((value) => (
@@ -120,8 +120,8 @@ export default function MemorialDonateModal({
                   onClick={() => handleAmountSelect(value)}
                   className={`py-3 rounded-md border transition-colors ${
                     amount === value
-                      ? 'bg-teal-600 text-white border-teal-600'
-                      : 'border-gray-200 text-gray-700 hover:border-teal-500'
+                      ? 'bg-deep-teal text-white border-deep-teal'
+                      : 'border-stone-200 text-stone-700 hover:border-deep-teal'
                   }`}
                 >
                   ${value}
@@ -129,7 +129,7 @@ export default function MemorialDonateModal({
               ))}
             </div>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400">
                 $
               </span>
               <input
@@ -137,8 +137,8 @@ export default function MemorialDonateModal({
                 value={customAmount}
                 onChange={handleCustomAmountChange}
                 placeholder="Custom amount"
-                className={`w-full pl-7 pr-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 ${
-                  customAmount ? 'border-teal-500' : 'border-gray-200'
+                className={`w-full pl-7 pr-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-deep-teal ${
+                  customAmount ? 'border-deep-teal' : 'border-stone-200'
                 }`}
               />
             </div>
@@ -147,31 +147,31 @@ export default function MemorialDonateModal({
           {/* Donor Info */}
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Your Name (optional)
+              <label className="block text-sm font-medium text-stone-700 mb-1">
+                Your name (optional)
               </label>
               <input
                 type="text"
                 value={donorName}
                 onChange={(e) => setDonorName(e.target.value)}
                 placeholder="Your name"
-                className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full px-4 py-2 border border-stone-200 rounded-md focus:outline-none focus:ring-2 focus:ring-deep-teal"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Your Email (for receipt)
+              <label className="block text-sm font-medium text-stone-700 mb-1">
+                Your email (for receipt)
               </label>
               <input
                 type="email"
                 value={donorEmail}
                 onChange={(e) => setDonorEmail(e.target.value)}
                 placeholder="your@email.com"
-                className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full px-4 py-2 border border-stone-200 rounded-md focus:outline-none focus:ring-2 focus:ring-deep-teal"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-stone-700 mb-1">
                 Message (optional)
               </label>
               <textarea
@@ -179,24 +179,16 @@ export default function MemorialDonateModal({
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Share a memory or message of support..."
                 rows={3}
-                className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 resize-none"
+                className="w-full px-4 py-2 border border-stone-200 rounded-md focus:outline-none focus:ring-2 focus:ring-deep-teal resize-none"
               />
             </div>
-          </div>
-
-          {/* Pay-it-Forward Note */}
-          <div className="bg-teal-50 border border-teal-100 rounded-lg p-4">
-            <p className="text-sm text-teal-800">
-              <strong>Pay it Forward:</strong> Donations of $20 or more help fund free
-              memorial sites for families experiencing financial hardship.
-            </p>
           </div>
 
           {/* Submit */}
           <button
             type="submit"
             disabled={isSubmitting || getFinalAmount() < 100}
-            className="w-full flex items-center justify-center gap-2 py-3 bg-teal-600 text-white rounded-md hover:bg-teal-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            className="w-full flex items-center justify-center gap-2 py-3 bg-deep-teal text-white rounded-md hover:bg-forest-teal disabled:bg-stone-300 disabled:cursor-not-allowed transition-colors"
           >
             {isSubmitting ? (
               <>
@@ -211,7 +203,7 @@ export default function MemorialDonateModal({
             )}
           </button>
 
-          <p className="text-xs text-gray-500 text-center">
+          <p className="text-xs text-stone-500 text-center">
             Faith Marie Foundation is a pending 501(c)(3) nonprofit.
             Secure payment via Stripe.
           </p>

@@ -34,13 +34,10 @@ export async function POST(request: NextRequest) {
     const customerEmail = session.customer_details?.email;
     const customerName = session.customer_details?.name;
     const amount = session.amount_total ? (session.amount_total / 100).toFixed(2) : '0.00';
-    const amountCents = session.amount_total || 0;
     const notificationEmail = process.env.NOTIFICATION_EMAIL || 'info@faithmarie.org';
 
     // Check if this is a memorial donation
     const memorialId = session.metadata?.memorial_id;
-    const donationType = session.metadata?.donation_type;
-    const isMemorialDonation = donationType === 'in_memory' && memorialId;
 
     // Send thank you email to donor
     if (customerEmail) {
@@ -111,25 +108,10 @@ export async function POST(request: NextRequest) {
         amount_cents: session.amount_total ?? 0,
         donor_email: customerEmail ?? null,
         donor_name: customerName ?? null,
+        memorial_id: memorialId ?? null,
       });
       if (dbError) {
         console.error('Failed to save donation to database:', dbError);
-      }
-
-      // For memorial donations, create pay-it-forward credit if $20+
-      if (isMemorialDonation && amountCents >= 2000) {
-        // Create one pay-it-forward credit per $20
-        const creditsToCreate = Math.floor(amountCents / 2000);
-
-        for (let i = 0; i < creditsToCreate; i++) {
-          await supabaseAny.from('pay_it_forward_credits').insert({
-            source_donation_session_id: session.id,
-            amount_cents: 2000,
-            expires_at: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year
-          });
-        }
-
-        console.log(`Created ${creditsToCreate} pay-it-forward credit(s) from memorial donation`);
       }
     } catch (dbError) {
       console.error('Failed to save donation to database:', dbError);

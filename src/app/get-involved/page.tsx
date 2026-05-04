@@ -88,6 +88,32 @@ export default function GetInvolvedPage() {
             </div>
           </div>
 
+          {/* Sponsor a Memorial */}
+          <div className="bg-white p-8 rounded-lg border border-stone-200 mb-12">
+            <div className="md:flex md:items-center md:gap-8">
+              <div className="flex-shrink-0 mb-6 md:mb-0">
+                <div className="w-16 h-16 bg-light-champagne/50 rounded-full flex items-center justify-center mx-auto md:mx-0">
+                  <svg className="w-8 h-8 text-champagne-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <h2 className="font-serif text-2xl text-stone-900 mb-3">Sponsor a memorial</h2>
+                <p className="text-stone-600 mb-4">
+                  Help a grieving family create a lasting tribute when cost is a barrier. Your $20 donation
+                  covers the full cost of a memorial site for a family experiencing hardship.
+                </p>
+                <Link
+                  href="/donate?purpose=memorial-sponsorship"
+                  className="inline-block bg-deep-teal text-white px-6 py-3 rounded-lg hover:bg-forest-teal transition-colors"
+                >
+                  Sponsor a family
+                </Link>
+              </div>
+            </div>
+          </div>
+
           <div className="bg-soft-aqua/30 p-8 rounded-lg text-center mb-12">
             <h2 className="font-serif text-2xl text-stone-900 mb-4">Spread the word</h2>
             <p className="text-stone-600 mb-6 max-w-2xl mx-auto">

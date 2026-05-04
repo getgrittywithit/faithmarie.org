@@ -6,12 +6,11 @@ import type { WizardData } from '../MemorialWizard';
 interface Step5DonationProps {
   data: WizardData;
   updateData: (updates: Partial<WizardData>) => void;
-  availableCredits: number;
 }
 
 type PlanTier = 'standard' | 'founder' | 'hardship';
 
-export default function Step5Donation({ data, updateData, availableCredits }: Step5DonationProps) {
+export default function Step5Donation({ data, updateData }: Step5DonationProps) {
   const currentTier: PlanTier = data.isHardship ? 'hardship' : (data.donationAmount === 99 ? 'founder' : 'standard');
 
   const handleTierSelect = (tier: PlanTier) => {
@@ -134,12 +133,6 @@ export default function Step5Donation({ data, updateData, availableCredits }: St
             className="w-full px-4 py-3 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-deep-teal resize-none bg-warm-cream"
             placeholder="This is optional and confidential"
           />
-
-          {availableCredits > 0 && (
-            <p className="mt-2 text-sm text-deep-teal">
-              Your request can be processed quickly — community support is available.
-            </p>
-          )}
         </div>
       )}
 
