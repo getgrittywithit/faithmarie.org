@@ -10,21 +10,21 @@ export default function Navigation() {
   const [aboutDropdown, setAboutDropdown] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-warm-cream/95 backdrop-blur-sm border-b border-stone-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link
             href="/"
-            className="text-xl font-light text-gray-800 hover:text-teal-600 transition-colors"
+            className="font-serif text-xl text-stone-900 hover:text-deep-teal transition-colors"
           >
-            Faith Marie Foundation
+            FaithMarie.org
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
             {/* Learn Link */}
             <Link
               href="/learn"
-              className="text-gray-600 hover:text-teal-600 transition-colors"
+              className="text-stone-700 hover:text-deep-teal transition-colors"
             >
               Learn
             </Link>
@@ -35,7 +35,7 @@ export default function Navigation() {
               onMouseEnter={() => setResearchDropdown(true)}
               onMouseLeave={() => setResearchDropdown(false)}
             >
-              <button className="flex items-center text-gray-600 hover:text-teal-600 transition-colors">
+              <button className="flex items-center text-stone-700 hover:text-deep-teal transition-colors">
                 Research
                 <svg className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -43,22 +43,22 @@ export default function Navigation() {
               </button>
               {researchDropdown && (
                 <div className="absolute top-full left-0 pt-2 w-48">
-                  <div className="bg-white rounded-md shadow-lg border border-gray-100 py-2">
+                  <div className="bg-white rounded-lg shadow-lg border border-stone-200 py-2">
                     <Link
                       href="/research"
-                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                      className="block px-4 py-2 text-stone-700 hover:bg-soft-aqua/20 hover:text-deep-teal"
                     >
                       Overview
                     </Link>
                     <Link
                       href="/research/daily-digests"
-                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                      className="block px-4 py-2 text-stone-700 hover:bg-soft-aqua/20 hover:text-deep-teal"
                     >
-                      Research Summaries
+                      Research summaries
                     </Link>
                     <Link
                       href="/research/topics"
-                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                      className="block px-4 py-2 text-stone-700 hover:bg-soft-aqua/20 hover:text-deep-teal"
                     >
                       Topics
                     </Link>
@@ -73,7 +73,7 @@ export default function Navigation() {
               onMouseEnter={() => setToolsDropdown(true)}
               onMouseLeave={() => setToolsDropdown(false)}
             >
-              <button className="flex items-center text-gray-600 hover:text-teal-600 transition-colors">
+              <button className="flex items-center text-stone-700 hover:text-deep-teal transition-colors">
                 Tools
                 <svg className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -81,24 +81,24 @@ export default function Navigation() {
               </button>
               {toolsDropdown && (
                 <div className="absolute top-full left-0 pt-2 w-48">
-                  <div className="bg-white rounded-md shadow-lg border border-gray-100 py-2">
+                  <div className="bg-white rounded-lg shadow-lg border border-stone-200 py-2">
                     <Link
                       href="/assessments"
-                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                      className="block px-4 py-2 text-stone-700 hover:bg-soft-aqua/20 hover:text-deep-teal"
                     >
-                      Self-Assessments
+                      Self-assessments
                     </Link>
                     <Link
                       href="/tools/chatbot"
-                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                      className="block px-4 py-2 text-stone-700 hover:bg-soft-aqua/20 hover:text-deep-teal"
                     >
-                      Resource Guide
+                      Resource guide
                     </Link>
                     <Link
                       href="/knowledge-base"
-                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                      className="block px-4 py-2 text-stone-700 hover:bg-soft-aqua/20 hover:text-deep-teal"
                     >
-                      Knowledge Base
+                      Knowledge base
                     </Link>
                   </div>
                 </div>
@@ -111,7 +111,7 @@ export default function Navigation() {
               onMouseEnter={() => setAboutDropdown(true)}
               onMouseLeave={() => setAboutDropdown(false)}
             >
-              <button className="flex items-center text-gray-600 hover:text-teal-600 transition-colors">
+              <button className="flex items-center text-stone-700 hover:text-deep-teal transition-colors">
                 About
                 <svg className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -119,30 +119,30 @@ export default function Navigation() {
               </button>
               {aboutDropdown && (
                 <div className="absolute top-full left-0 pt-2 w-48">
-                  <div className="bg-white rounded-md shadow-lg border border-gray-100 py-2">
+                  <div className="bg-white rounded-lg shadow-lg border border-stone-200 py-2">
                     <Link
                       href="/about"
-                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                      className="block px-4 py-2 text-stone-700 hover:bg-soft-aqua/20 hover:text-deep-teal"
                     >
-                      About Us
+                      About us
                     </Link>
                     <Link
                       href="/our-story"
-                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                      className="block px-4 py-2 text-stone-700 hover:bg-soft-aqua/20 hover:text-deep-teal"
                     >
-                      Our Story
+                      Our story
                     </Link>
                     <Link
                       href="/about/team"
-                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                      className="block px-4 py-2 text-stone-700 hover:bg-soft-aqua/20 hover:text-deep-teal"
                     >
-                      Our Team
+                      Our team
                     </Link>
                     <Link
                       href="/about/impact"
-                      className="block px-4 py-2 text-gray-600 hover:bg-teal-50 hover:text-teal-700"
+                      className="block px-4 py-2 text-stone-700 hover:bg-soft-aqua/20 hover:text-deep-teal"
                     >
-                      Impact & Roadmap
+                      Impact & roadmap
                     </Link>
                   </div>
                 </div>
@@ -150,35 +150,35 @@ export default function Navigation() {
             </div>
             <Link
               href="/get-involved"
-              className="text-gray-600 hover:text-teal-600 transition-colors"
+              className="text-stone-700 hover:text-deep-teal transition-colors"
             >
-              Get Involved
+              Get involved
             </Link>
             <Link
               href="/memorials/create"
-              className="text-gray-600 hover:text-teal-600 transition-colors"
+              className="text-stone-700 hover:text-deep-teal transition-colors"
             >
-              In Memory
+              In memory
             </Link>
           </div>
 
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/find-help"
-              className="bg-teal-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-teal-700 transition-colors"
+              className="bg-deep-teal text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-forest-teal transition-colors"
             >
-              Find Help
+              Find help
             </Link>
             <Link
               href="/crisis-support"
-              className="bg-red-100 text-red-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-red-200 transition-colors"
+              className="bg-rose-50 text-rose-900 px-4 py-2 rounded-lg text-sm font-medium hover:bg-rose-100 transition-colors"
             >
-              Crisis Support
+              Crisis support
             </Link>
           </div>
 
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 text-stone-700"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -193,75 +193,75 @@ export default function Navigation() {
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-100 bg-white">
+          <div className="md:hidden py-4 border-t border-stone-200 bg-warm-cream">
             <div className="flex flex-col space-y-4">
               {/* Learn Link */}
-              <Link href="/learn" className="text-gray-600 hover:text-teal-600 transition-colors font-medium">
+              <Link href="/learn" className="text-stone-700 hover:text-deep-teal transition-colors font-medium">
                 Learn
               </Link>
 
               {/* Research Section */}
               <div className="space-y-2">
-                <span className="text-sm font-medium text-teal-700 uppercase tracking-wide">Research</span>
-                <Link href="/research" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
+                <span className="text-xs font-semibold text-deep-teal uppercase tracking-wide">Research</span>
+                <Link href="/research" className="block pl-4 text-stone-700 hover:text-deep-teal transition-colors">
                   Overview
                 </Link>
-                <Link href="/research/daily-digests" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
-                  Research Summaries
+                <Link href="/research/daily-digests" className="block pl-4 text-stone-700 hover:text-deep-teal transition-colors">
+                  Research summaries
                 </Link>
-                <Link href="/research/topics" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
+                <Link href="/research/topics" className="block pl-4 text-stone-700 hover:text-deep-teal transition-colors">
                   Topics
                 </Link>
               </div>
 
               {/* Tools Section */}
               <div className="space-y-2">
-                <span className="text-sm font-medium text-teal-700 uppercase tracking-wide">Tools</span>
-                <Link href="/assessments" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
-                  Self-Assessments
+                <span className="text-xs font-semibold text-deep-teal uppercase tracking-wide">Tools</span>
+                <Link href="/assessments" className="block pl-4 text-stone-700 hover:text-deep-teal transition-colors">
+                  Self-assessments
                 </Link>
-                <Link href="/tools/chatbot" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
-                  Resource Guide
+                <Link href="/tools/chatbot" className="block pl-4 text-stone-700 hover:text-deep-teal transition-colors">
+                  Resource guide
                 </Link>
-                <Link href="/knowledge-base" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
-                  Knowledge Base
+                <Link href="/knowledge-base" className="block pl-4 text-stone-700 hover:text-deep-teal transition-colors">
+                  Knowledge base
                 </Link>
               </div>
 
               {/* About Section */}
               <div className="space-y-2">
-                <span className="text-sm font-medium text-teal-700 uppercase tracking-wide">About</span>
-                <Link href="/about" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
-                  About Us
+                <span className="text-xs font-semibold text-deep-teal uppercase tracking-wide">About</span>
+                <Link href="/about" className="block pl-4 text-stone-700 hover:text-deep-teal transition-colors">
+                  About us
                 </Link>
-                <Link href="/our-story" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
-                  Our Story
+                <Link href="/our-story" className="block pl-4 text-stone-700 hover:text-deep-teal transition-colors">
+                  Our story
                 </Link>
-                <Link href="/about/team" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
-                  Our Team
+                <Link href="/about/team" className="block pl-4 text-stone-700 hover:text-deep-teal transition-colors">
+                  Our team
                 </Link>
-                <Link href="/about/impact" className="block pl-4 text-gray-600 hover:text-teal-600 transition-colors">
-                  Impact & Roadmap
+                <Link href="/about/impact" className="block pl-4 text-stone-700 hover:text-deep-teal transition-colors">
+                  Impact & roadmap
                 </Link>
               </div>
-              <Link href="/get-involved" className="text-gray-600 hover:text-teal-600 transition-colors">
-                Get Involved
+              <Link href="/get-involved" className="text-stone-700 hover:text-deep-teal transition-colors">
+                Get involved
               </Link>
-              <Link href="/memorials/create" className="text-gray-600 hover:text-teal-600 transition-colors">
-                In Memory
+              <Link href="/memorials/create" className="text-stone-700 hover:text-deep-teal transition-colors">
+                In memory
               </Link>
               <div className="flex flex-col gap-2 pt-2">
                 <Link
                   href="/find-help"
-                  className="bg-teal-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-teal-700 transition-colors w-fit"
+                  className="bg-deep-teal text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-forest-teal transition-colors w-fit"
                 >
-                  Find Help
+                  Find help
                 </Link>
                 <Link
                   href="/crisis-support"
-                  className="bg-red-100 text-red-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-red-200 transition-colors w-fit"
+                  className="bg-rose-50 text-rose-900 px-4 py-2 rounded-lg text-sm font-medium hover:bg-rose-100 transition-colors w-fit"
                 >
-                  Crisis Support
+                  Crisis support
                 </Link>
               </div>
             </div>

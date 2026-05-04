@@ -37,9 +37,9 @@ export default function MemorialPhotos({ photos }: MemorialPhotosProps) {
   };
 
   return (
-    <section className="py-12 md:py-16 bg-memorial-bg">
+    <section className="py-12 md:py-16 bg-warm-cream">
       <div className="max-w-5xl mx-auto px-4">
-        <h2 className="font-serif text-3xl text-gray-800 mb-8 text-center">
+        <h2 className="font-serif text-3xl text-stone-900 mb-8 text-center">
           Photos
         </h2>
 
@@ -49,7 +49,7 @@ export default function MemorialPhotos({ photos }: MemorialPhotosProps) {
             <button
               key={photo.id}
               onClick={() => openLightbox(index)}
-              className="aspect-square overflow-hidden rounded-lg bg-gray-100 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="aspect-square overflow-hidden rounded-lg bg-stone-100 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-deep-teal"
             >
               <img
                 src={getPhotoUrl(photo.storage_path)}

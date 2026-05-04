@@ -15,8 +15,8 @@ const crisisResources = [
     action: 'Call or text 988',
     href: 'tel:988',
     icon: Phone,
-    color: 'bg-red-50 border-red-200',
-    iconColor: 'text-red-600',
+    color: 'bg-rose-50 border-rose-200',
+    iconColor: 'text-rose-900',
     urgent: true,
   },
   {
@@ -25,8 +25,8 @@ const crisisResources = [
     action: 'Text HOME to 741741',
     href: 'sms:741741&body=HOME',
     icon: MessageCircle,
-    color: 'bg-red-50 border-red-200',
-    iconColor: 'text-red-600',
+    color: 'bg-rose-50 border-rose-200',
+    iconColor: 'text-rose-900',
     urgent: true,
   },
   {
@@ -35,8 +35,8 @@ const crisisResources = [
     action: 'Find your country',
     href: 'https://www.iasp.info/resources/Crisis_Centres/',
     icon: Globe,
-    color: 'bg-orange-50 border-orange-200',
-    iconColor: 'text-orange-600',
+    color: 'bg-light-champagne/50 border-champagne-gold/30',
+    iconColor: 'text-deep-champagne',
     urgent: false,
   },
 ];
@@ -116,14 +116,14 @@ export default function FindHelpPage() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen pt-20 bg-white">
+      <main className="min-h-screen pt-20 bg-warm-cream">
         {/* Hero */}
-        <section className="py-12 bg-gradient-to-b from-teal-50 to-white">
+        <section className="py-12 bg-gradient-to-b from-soft-aqua/30 to-warm-cream">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-light text-gray-800 mb-6">
-              Find Help
+            <h1 className="font-serif text-4xl md:text-5xl text-stone-900 mb-6">
+              Find help
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-stone-600 max-w-2xl mx-auto">
               Curated resources for crisis support, finding a therapist, and affordable care.
               We don&apos;t maintain a directory — we link to trusted resources that do.
             </p>
@@ -131,13 +131,13 @@ export default function FindHelpPage() {
         </section>
 
         {/* Crisis Resources - Most prominent */}
-        <section className="py-12 bg-red-50 border-y border-red-200">
+        <section className="py-12 bg-rose-50 border-y border-rose-200">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-center gap-3 mb-6">
-              <Phone className="w-6 h-6 text-red-600" />
-              <h2 className="text-2xl font-semibold text-gray-800">Crisis Support</h2>
+              <Phone className="w-6 h-6 text-rose-900" />
+              <h2 className="font-serif text-2xl text-stone-900">Crisis support</h2>
             </div>
-            <p className="text-gray-600 mb-8">
+            <p className="text-stone-600 mb-8">
               If you&apos;re in crisis or having thoughts of suicide, please reach out. Help is available 24/7.
             </p>
 
@@ -155,13 +155,13 @@ export default function FindHelpPage() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <h3 className="font-semibold text-gray-800">{resource.name}</h3>
+                      <h3 className="font-semibold text-stone-900">{resource.name}</h3>
                       {resource.href.startsWith('http') && (
-                        <ExternalLink className="w-4 h-4 text-gray-400" />
+                        <ExternalLink className="w-4 h-4 text-stone-400" />
                       )}
                     </div>
-                    <p className="text-gray-600 text-sm mt-1">{resource.description}</p>
-                    <p className="text-lg font-semibold text-red-700 mt-2">{resource.action}</p>
+                    <p className="text-stone-600 text-sm mt-1">{resource.description}</p>
+                    <p className="text-lg font-semibold text-rose-900 mt-2">{resource.action}</p>
                   </div>
                 </a>
               ))}
@@ -173,10 +173,10 @@ export default function FindHelpPage() {
         <section className="py-12">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-center gap-3 mb-6">
-              <Search className="w-6 h-6 text-teal-600" />
-              <h2 className="text-2xl font-semibold text-gray-800">Find a Therapist</h2>
+              <Search className="w-6 h-6 text-deep-teal" />
+              <h2 className="font-serif text-2xl text-stone-900">Find a therapist</h2>
             </div>
-            <p className="text-gray-600 mb-8">
+            <p className="text-stone-600 mb-8">
               These directories help you search for therapists by location, specialty, insurance, and more.
             </p>
 
@@ -187,15 +187,15 @@ export default function FindHelpPage() {
                   href={directory.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start justify-between p-5 bg-white rounded-xl border border-gray-200 hover:border-teal-300 hover:shadow-md transition-all"
+                  className="flex items-start justify-between p-5 bg-white rounded-xl border border-stone-200 hover:border-deep-teal hover:shadow-md transition-all"
                 >
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="font-semibold text-gray-800">{directory.name}</h3>
-                      <ExternalLink className="w-4 h-4 text-gray-400" />
+                      <h3 className="font-semibold text-stone-900">{directory.name}</h3>
+                      <ExternalLink className="w-4 h-4 text-stone-400" />
                     </div>
-                    <p className="text-gray-600 text-sm mt-1">{directory.description}</p>
-                    <span className="inline-block text-xs text-teal-700 bg-teal-50 px-2 py-1 rounded mt-2">
+                    <p className="text-stone-600 text-sm mt-1">{directory.description}</p>
+                    <span className="inline-block text-xs text-deep-teal bg-soft-aqua/30 px-2 py-1 rounded mt-2">
                       {directory.note}
                     </span>
                   </div>
@@ -206,13 +206,13 @@ export default function FindHelpPage() {
         </section>
 
         {/* Affordable Options */}
-        <section className="py-12 bg-gray-50">
+        <section className="py-12 bg-stone-50">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-center gap-3 mb-6">
-              <DollarSign className="w-6 h-6 text-green-600" />
-              <h2 className="text-2xl font-semibold text-gray-800">Affordable Care Options</h2>
+              <DollarSign className="w-6 h-6 text-vibrant-teal" />
+              <h2 className="font-serif text-2xl text-stone-900">Affordable care options</h2>
             </div>
-            <p className="text-gray-600 mb-8">
+            <p className="text-stone-600 mb-8">
               Mental health care shouldn&apos;t break the bank. These resources offer reduced-cost or free options.
             </p>
 
@@ -223,14 +223,14 @@ export default function FindHelpPage() {
                   href={option.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col p-5 bg-white rounded-xl border border-gray-200 hover:border-green-300 hover:shadow-md transition-all"
+                  className="flex flex-col p-5 bg-white rounded-xl border border-stone-200 hover:border-vibrant-teal hover:shadow-md transition-all"
                 >
                   <div className="flex items-center gap-2 mb-2">
-                    <h3 className="font-semibold text-gray-800">{option.name}</h3>
-                    <ExternalLink className="w-4 h-4 text-gray-400" />
+                    <h3 className="font-semibold text-stone-900">{option.name}</h3>
+                    <ExternalLink className="w-4 h-4 text-stone-400" />
                   </div>
-                  <p className="text-gray-600 text-sm flex-1">{option.description}</p>
-                  <span className="inline-block text-sm font-medium text-green-700 mt-3">
+                  <p className="text-stone-600 text-sm flex-1">{option.description}</p>
+                  <span className="inline-block text-sm font-medium text-vibrant-teal mt-3">
                     {option.price}
                   </span>
                 </a>
@@ -243,10 +243,10 @@ export default function FindHelpPage() {
         <section className="py-12">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-center gap-3 mb-6">
-              <Heart className="w-6 h-6 text-amber-600" />
-              <h2 className="text-2xl font-semibold text-gray-800">Grief-Specific Support</h2>
+              <Heart className="w-6 h-6 text-champagne-gold" />
+              <h2 className="font-serif text-2xl text-stone-900">Grief-specific support</h2>
             </div>
-            <p className="text-gray-600 mb-8">
+            <p className="text-stone-600 mb-8">
               Organizations focused specifically on grief, loss, and bereavement support.
             </p>
 
@@ -257,13 +257,13 @@ export default function FindHelpPage() {
                   href={resource.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col p-5 bg-white rounded-xl border border-gray-200 hover:border-amber-300 hover:shadow-md transition-all"
+                  className="flex flex-col p-5 bg-white rounded-xl border border-stone-200 hover:border-champagne-gold hover:shadow-md transition-all"
                 >
                   <div className="flex items-center gap-2 mb-2">
-                    <h3 className="font-semibold text-gray-800">{resource.name}</h3>
-                    <ExternalLink className="w-4 h-4 text-gray-400" />
+                    <h3 className="font-semibold text-stone-900">{resource.name}</h3>
+                    <ExternalLink className="w-4 h-4 text-stone-400" />
                   </div>
-                  <p className="text-gray-600 text-sm">{resource.description}</p>
+                  <p className="text-stone-600 text-sm">{resource.description}</p>
                 </a>
               ))}
             </div>
@@ -271,44 +271,44 @@ export default function FindHelpPage() {
         </section>
 
         {/* What to Expect */}
-        <section className="py-12 bg-teal-50">
+        <section className="py-12 bg-soft-aqua/30">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-center gap-3 mb-6">
-              <Users className="w-6 h-6 text-teal-600" />
-              <h2 className="text-2xl font-semibold text-gray-800">Not Sure Where to Start?</h2>
+              <Users className="w-6 h-6 text-deep-teal" />
+              <h2 className="font-serif text-2xl text-stone-900">Not sure where to start?</h2>
             </div>
 
-            <div className="bg-white rounded-xl p-6 border border-teal-200">
-              <p className="text-gray-600 mb-4">
+            <div className="bg-white rounded-xl p-6 border border-soft-aqua">
+              <p className="text-stone-600 mb-4">
                 Finding the right help can feel overwhelming. Here&apos;s a simple path:
               </p>
               <ol className="space-y-4">
                 <li className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center text-teal-700 font-semibold">1</span>
+                  <span className="flex-shrink-0 w-8 h-8 bg-soft-aqua/50 rounded-full flex items-center justify-center text-deep-teal font-semibold">1</span>
                   <div>
-                    <p className="font-medium text-gray-800">If you&apos;re in crisis</p>
-                    <p className="text-sm text-gray-600">Call or text 988 right now. They&apos;re trained to help.</p>
+                    <p className="font-medium text-stone-900">If you&apos;re in crisis</p>
+                    <p className="text-sm text-stone-600">Call or text 988 right now. They&apos;re trained to help.</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center text-teal-700 font-semibold">2</span>
+                  <span className="flex-shrink-0 w-8 h-8 bg-soft-aqua/50 rounded-full flex items-center justify-center text-deep-teal font-semibold">2</span>
                   <div>
-                    <p className="font-medium text-gray-800">If you want to understand your symptoms</p>
-                    <p className="text-sm text-gray-600">Take one of our <Link href="/assessments" className="text-teal-600 underline">self-assessments</Link> to learn more about what you&apos;re experiencing.</p>
+                    <p className="font-medium text-stone-900">If you want to understand your symptoms</p>
+                    <p className="text-sm text-stone-600">Take one of our <Link href="/assessments" className="text-deep-teal underline">self-assessments</Link> to learn more about what you&apos;re experiencing.</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center text-teal-700 font-semibold">3</span>
+                  <span className="flex-shrink-0 w-8 h-8 bg-soft-aqua/50 rounded-full flex items-center justify-center text-deep-teal font-semibold">3</span>
                   <div>
-                    <p className="font-medium text-gray-800">If you&apos;re ready to find a therapist</p>
-                    <p className="text-sm text-gray-600">Use Psychology Today&apos;s directory — filter by your insurance, location, and what you&apos;re dealing with.</p>
+                    <p className="font-medium text-stone-900">If you&apos;re ready to find a therapist</p>
+                    <p className="text-sm text-stone-600">Use Psychology Today&apos;s directory — filter by your insurance, location, and what you&apos;re dealing with.</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center text-teal-700 font-semibold">4</span>
+                  <span className="flex-shrink-0 w-8 h-8 bg-soft-aqua/50 rounded-full flex items-center justify-center text-deep-teal font-semibold">4</span>
                   <div>
-                    <p className="font-medium text-gray-800">If cost is a barrier</p>
-                    <p className="text-sm text-gray-600">Open Path Collective offers sessions at $30-$80. Community health centers use sliding scales.</p>
+                    <p className="font-medium text-stone-900">If cost is a barrier</p>
+                    <p className="text-sm text-stone-600">Open Path Collective offers sessions at $30-$80. Community health centers use sliding scales.</p>
                   </div>
                 </li>
               </ol>
@@ -319,21 +319,21 @@ export default function FindHelpPage() {
         {/* Back to resources */}
         <section className="py-12">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <p className="text-gray-600 mb-6">
+            <p className="text-stone-600 mb-6">
               Want to understand more about treatments before seeking help?
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/learn"
-                className="bg-teal-600 text-white px-8 py-3 rounded-lg hover:bg-teal-700 transition-colors"
+                className="bg-deep-teal text-white px-8 py-3 rounded-lg hover:bg-forest-teal transition-colors"
               >
-                Learn About Treatments
+                Learn about treatments
               </Link>
               <Link
                 href="/assessments"
-                className="bg-white text-gray-700 px-8 py-3 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors"
+                className="bg-white text-stone-700 px-8 py-3 rounded-lg border border-stone-200 hover:border-stone-300 transition-colors"
               >
-                Take a Self-Assessment
+                Take a self-assessment
               </Link>
             </div>
           </div>

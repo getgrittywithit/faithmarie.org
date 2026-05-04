@@ -94,9 +94,9 @@ function LearnPageContent() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-gray-50 pt-16">
+      <main className="min-h-screen bg-warm-cream pt-16">
         {/* Top crisis banner */}
-        <div className="bg-red-700 text-red-50 text-sm">
+        <div className="bg-rose-900 text-rose-50 text-sm">
           <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-3 flex-wrap text-center">
             <span className="font-semibold">In crisis or thinking about suicide?</span>
             <a href="tel:988" className="underline underline-offset-2 hover:text-white">
@@ -110,15 +110,15 @@ function LearnPageContent() {
         </div>
 
         {/* Page header */}
-        <header className="bg-gradient-to-b from-teal-50 to-gray-50 border-b border-gray-200">
+        <header className="bg-gradient-to-b from-soft-aqua/30 to-warm-cream border-b border-stone-200">
           <div className="max-w-7xl mx-auto px-6 py-10 md:py-14">
-            <p className="uppercase tracking-widest text-xs text-teal-700 font-semibold mb-3">
-              Educational Resource
+            <p className="uppercase tracking-widest text-xs text-deep-teal font-semibold mb-3">
+              Educational resource
             </p>
-            <h1 className="text-3xl md:text-5xl font-light text-gray-900 leading-tight">
-              Mental Health, Explained with Care
+            <h1 className="font-serif text-3xl md:text-5xl text-stone-900 leading-tight">
+              Mental health, explained with care
             </h1>
-            <p className="mt-4 text-lg text-gray-700 max-w-3xl">
+            <p className="mt-4 text-lg text-stone-700 max-w-3xl">
               A place to learn about mental health conditions, treatments, and the many paths toward
               healing — whether you&apos;re walking this road yourself or walking beside someone you love.
               You are not alone, and there is hope.
@@ -127,13 +127,13 @@ function LearnPageContent() {
         </header>
 
         {/* Mobile nav toggle */}
-        <div className="md:hidden sticky top-16 z-20 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
-          <span className="font-medium text-gray-700 text-sm">
+        <div className="md:hidden sticky top-16 z-20 bg-white border-b border-stone-200 px-4 py-3 flex items-center justify-between">
+          <span className="font-medium text-stone-700 text-sm">
             {findLabel(activeId) ?? 'Menu'}
           </span>
           <button
             onClick={() => setMobileOpen((o) => !o)}
-            className="text-sm font-medium text-teal-700 underline"
+            className="text-sm font-medium text-deep-teal underline"
           >
             {mobileOpen ? 'Close menu' : 'Browse topics'}
           </button>
@@ -147,7 +147,7 @@ function LearnPageContent() {
               mobileOpen ? 'block' : 'hidden'
             } md:block md:sticky md:top-24 md:self-start`}
           >
-            <nav className="bg-white rounded-lg border border-gray-200 p-3 shadow-sm">
+            <nav className="bg-white rounded-lg border border-stone-200 p-3 shadow-sm">
               <ul className="space-y-0.5">
                 {NAV.map((item) => (
                   <li key={item.id}>
@@ -158,7 +158,7 @@ function LearnPageContent() {
                       bold
                     />
                     {item.children && (
-                      <ul className="ml-3 border-l border-gray-200 mt-1 mb-2">
+                      <ul className="ml-3 border-l border-stone-200 mt-1 mb-2">
                         {item.children.map((c) => (
                           <li key={c.id}>
                             <NavButton
@@ -176,9 +176,9 @@ function LearnPageContent() {
               </ul>
             </nav>
 
-            <div className="mt-4 bg-teal-50 border border-teal-200 rounded-lg p-4 text-sm text-teal-900">
+            <div className="mt-4 bg-soft-aqua/30 border border-soft-aqua rounded-lg p-4 text-sm text-stone-900">
               <p className="font-semibold">A gentle reminder</p>
-              <p className="mt-1 leading-relaxed">
+              <p className="mt-1 leading-relaxed text-stone-700">
                 This page is for learning. It does not replace a conversation with a doctor,
                 counselor, or pastor who knows you.
               </p>
@@ -187,12 +187,12 @@ function LearnPageContent() {
 
           {/* Main content */}
           <div id="content-top" className="min-w-0">
-            <article className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 md:p-10 prose prose-gray max-w-none prose-headings:font-light prose-headings:text-gray-900 prose-a:text-teal-700">
+            <article className="bg-white rounded-lg border border-stone-200 shadow-sm p-6 md:p-10 prose prose-stone max-w-none prose-headings:font-serif prose-headings:text-stone-900 prose-a:text-deep-teal">
               {renderSection(activeId)}
             </article>
 
             {/* Footer disclaimer */}
-            <div className="mt-6 text-xs text-gray-500 leading-relaxed">
+            <div className="mt-6 text-xs text-stone-500 leading-relaxed">
               <p>
                 <strong>Disclaimer:</strong> The content on this page is for general educational
                 purposes only and is not medical advice. Always consult a qualified healthcare
@@ -273,8 +273,8 @@ function NavButton({
         nested ? 'pl-4' : '',
         bold ? 'font-semibold' : 'font-normal',
         active
-          ? 'bg-teal-100 text-teal-900'
-          : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900',
+          ? 'bg-soft-aqua/50 text-deep-teal'
+          : 'text-stone-700 hover:bg-stone-50 hover:text-stone-900',
       ].join(' ')}
     >
       {label}

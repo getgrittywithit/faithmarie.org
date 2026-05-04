@@ -51,15 +51,15 @@ export default function PasswordGate({ slug, memorialName }: PasswordGateProps) 
   return (
     <div className="min-h-[60vh] flex items-center justify-center">
       <div className="max-w-md w-full mx-auto px-4">
-        <div className="bg-white rounded-xl border border-gray-200/50 shadow-sm p-8 text-center">
-          <div className="w-16 h-16 bg-memorial-bg-alt rounded-full flex items-center justify-center mx-auto mb-6">
-            <Lock className="w-8 h-8 text-gray-400" />
+        <div className="bg-white rounded-xl border border-stone-200 shadow-sm p-8 text-center">
+          <div className="w-16 h-16 bg-stone-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Lock className="w-8 h-8 text-stone-400" />
           </div>
 
-          <h1 className="font-serif text-2xl text-gray-800 mb-2">
-            Private Memorial
+          <h1 className="font-serif text-2xl text-stone-900 mb-2">
+            Private memorial
           </h1>
-          <p className="text-gray-600 mb-6">
+          <p className="text-stone-600 mb-6">
             The memorial for <span className="font-serif italic">{memorialName}</span> is password protected.
             Please enter the password to view.
           </p>
@@ -70,14 +70,14 @@ export default function PasswordGate({ slug, memorialName }: PasswordGateProps) 
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 text-center border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 bg-memorial-bg"
+                className="w-full px-4 py-3 text-center border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-deep-teal bg-warm-cream"
                 placeholder="Enter password"
                 autoFocus
               />
             </div>
 
             {error && (
-              <div className="flex items-center justify-center gap-2 text-red-600 text-sm">
+              <div className="flex items-center justify-center gap-2 text-rose-900 text-sm">
                 <AlertCircle className="w-4 h-4" />
                 {error}
               </div>
@@ -86,7 +86,7 @@ export default function PasswordGate({ slug, memorialName }: PasswordGateProps) 
             <button
               type="submit"
               disabled={isLoading || !password}
-              className="w-full bg-teal-600 text-white py-3 rounded-md hover:bg-teal-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+              className="w-full bg-deep-teal text-white py-3 rounded-lg hover:bg-forest-teal disabled:bg-stone-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
             >
               {isLoading ? (
                 <>
@@ -94,12 +94,12 @@ export default function PasswordGate({ slug, memorialName }: PasswordGateProps) 
                   Verifying...
                 </>
               ) : (
-                'View Memorial'
+                'View memorial'
               )}
             </button>
           </form>
 
-          <p className="text-sm text-gray-500 mt-6">
+          <p className="text-sm text-stone-500 mt-6">
             Don&apos;t have the password? Contact the memorial creator.
           </p>
         </div>

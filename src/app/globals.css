@@ -1,34 +1,118 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ========================================
+     FaithMarie.org Brand System v1.1
+     ======================================== */
 
-  /* Brand Colors */
-  --brand-primary: #0D9488; /* teal-600 */
-  --brand-primary-light: #CCFBF1; /* teal-100 */
-  --brand-primary-dark: #115E59; /* teal-800 */
-  --brand-secondary: #4F46E5; /* indigo-600 */
-  --brand-secondary-light: #E0E7FF; /* indigo-100 */
-  --brand-accent: #F59E0B; /* amber-500 */
-  --brand-accent-light: #FEF3C7; /* amber-100 */
-  --brand-crisis: #DC2626; /* red-600 */
+  /* Tier 1 — Foundation (~70% of any composition) */
+  --warm-cream: #F5EDE0;
+  --stone-50: #fafaf9;
+  --white: #ffffff;
+  --stone-200: #e7e5e4;
+  --stone-600: #57534e;
+  --stone-700: #44403c;
+  --stone-900: #1c1917;
+
+  /* Tier 2 — Brand Color (Teal) (~20% of any composition) */
+  --deep-teal: #1B6E68;
+  --vibrant-teal: #2BB8A8;
+  --soft-aqua: #8FD9D1;
+  --forest-teal: #1B4A47;
+
+  /* Tier 3 — Illustration Palette (illustration only, never UI) */
+  --coral: #E76B4D;
+  --soft-salmon: #F2A78F;
+  --magenta: #E54A7B;
+  --soft-pink: #F4B8C9;
+
+  /* Tier 4 — Memorial (memorial contexts only) */
+  --champagne-gold: #D4B976;
+  --light-champagne: #EDDCB4;
+  --deep-champagne: #8C7340;
+
+  /* Tier 5 — Crisis (crisis content only) */
+  --rose-50: #fff1f2;
+  --rose-900: #881337;
+
+  /* Semantic mappings */
+  --background: var(--warm-cream);
+  --background-alt: var(--stone-50);
+  --foreground: var(--stone-700);
+  --foreground-heading: var(--stone-900);
+  --foreground-muted: var(--stone-600);
+  --border: var(--stone-200);
+  --link: var(--deep-teal);
+  --button-primary: var(--deep-teal);
+  --button-primary-hover: var(--forest-teal);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-cormorant);
+  /* Colors */
+  --color-warm-cream: var(--warm-cream);
+  --color-stone-50: var(--stone-50);
+  --color-stone-200: var(--stone-200);
+  --color-stone-600: var(--stone-600);
+  --color-stone-700: var(--stone-700);
+  --color-stone-900: var(--stone-900);
 
-  /* Memorial page colors */
-  --color-memorial-bg: #FAF7F2;
-  --color-memorial-bg-alt: #F5F0E8;
+  --color-deep-teal: var(--deep-teal);
+  --color-vibrant-teal: var(--vibrant-teal);
+  --color-soft-aqua: var(--soft-aqua);
+  --color-forest-teal: var(--forest-teal);
+
+  --color-champagne-gold: var(--champagne-gold);
+  --color-light-champagne: var(--light-champagne);
+  --color-deep-champagne: var(--deep-champagne);
+
+  --color-rose-50: var(--rose-50);
+  --color-rose-900: var(--rose-900);
+
+  /* Legacy memorial colors (mapped to new system) */
+  --color-memorial-bg: var(--warm-cream);
+  --color-memorial-bg-alt: var(--stone-50);
+
+  /* Fonts */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: Georgia, Cambria, "Times New Roman", serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 }
 
+/* Base styles */
 body {
-  background: #ffffff;
-  color: #171717;
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--warm-cream);
+  color: var(--stone-700);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Typography defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-family: Georgia, Cambria, "Times New Roman", serif;
+  color: var(--stone-900);
+  font-weight: 600;
+}
+
+/* Link defaults */
+a {
+  color: var(--deep-teal);
+}
+
+/* Prose links should be underlined */
+.prose a,
+article a,
+p a {
+  text-decoration: underline;
+}
+
+/* Focus states */
+:focus-visible {
+  outline: 2px solid var(--deep-teal);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: var(--soft-aqua);
+  color: var(--forest-teal);
 }

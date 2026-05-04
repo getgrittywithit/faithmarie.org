@@ -14,16 +14,16 @@ const assessments = [
     name: 'Depression Screening (PHQ-9)',
     description: 'A 9-question tool that screens for symptoms of depression. Takes about 2 minutes.',
     href: '/assessments/depression',
-    color: 'bg-blue-50 border-blue-200 hover:border-blue-300',
-    iconColor: 'text-blue-600',
+    color: 'bg-soft-aqua/20 border-soft-aqua/50 hover:border-deep-teal',
+    iconColor: 'text-deep-teal',
   },
   {
     id: 'anxiety',
     name: 'Anxiety Screening (GAD-7)',
     description: 'A 7-question tool that screens for symptoms of generalized anxiety disorder. Takes about 2 minutes.',
     href: '/assessments/anxiety',
-    color: 'bg-purple-50 border-purple-200 hover:border-purple-300',
-    iconColor: 'text-purple-600',
+    color: 'bg-vibrant-teal/10 border-vibrant-teal/30 hover:border-vibrant-teal',
+    iconColor: 'text-vibrant-teal',
   },
   {
     id: 'ptsd',
@@ -31,7 +31,7 @@ const assessments = [
     description: 'A 20-question tool that screens for symptoms of post-traumatic stress disorder. Takes about 5 minutes.',
     href: '/assessments/ptsd',
     color: 'bg-rose-50 border-rose-200 hover:border-rose-300',
-    iconColor: 'text-rose-600',
+    iconColor: 'text-rose-700',
   },
 ];
 
@@ -39,17 +39,17 @@ export default function AssessmentsPage() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen pt-20 bg-white">
+      <main className="min-h-screen pt-20 bg-warm-cream">
         {/* Hero */}
-        <section className="py-16 bg-gradient-to-b from-teal-50 to-white">
+        <section className="py-16 bg-gradient-to-b from-soft-aqua/30 to-warm-cream">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <ClipboardCheck className="w-8 h-8 text-teal-600" />
+            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 border border-stone-200">
+              <ClipboardCheck className="w-8 h-8 text-deep-teal" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-light text-gray-800 mb-6">
-              Mental Health Self-Assessments
+            <h1 className="font-serif text-4xl md:text-5xl text-stone-900 mb-6">
+              Mental health self-assessments
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+            <p className="text-xl text-stone-600 max-w-2xl mx-auto mb-8">
               Free, anonymous screening tools to help you understand your symptoms
               and find relevant resources.
             </p>
@@ -57,13 +57,13 @@ export default function AssessmentsPage() {
         </section>
 
         {/* Important Disclaimer */}
-        <section className="py-6 bg-amber-50 border-y border-amber-200">
+        <section className="py-6 bg-light-champagne/30 border-y border-champagne-gold/30">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-start gap-4">
-              <AlertTriangle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" />
+              <AlertTriangle className="w-6 h-6 text-deep-champagne flex-shrink-0 mt-0.5" />
               <div>
-                <h2 className="font-semibold text-amber-800 mb-1">Important Disclaimer</h2>
-                <p className="text-amber-700 text-sm">
+                <h2 className="font-semibold text-stone-900 mb-1">Important disclaimer</h2>
+                <p className="text-stone-700 text-sm">
                   These screening tools are <strong>educational resources, not medical diagnoses</strong>.
                   Only a licensed mental health professional can diagnose mental health conditions.
                   These assessments can help you understand your symptoms and decide whether to seek
@@ -75,11 +75,11 @@ export default function AssessmentsPage() {
         </section>
 
         {/* Crisis Banner */}
-        <section className="py-4 bg-red-50 border-b border-red-200">
+        <section className="py-4 bg-rose-50 border-b border-rose-200">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-center justify-center gap-3 text-center">
-              <Phone className="w-5 h-5 text-red-600" />
-              <p className="text-red-700">
+              <Phone className="w-5 h-5 text-rose-900" />
+              <p className="text-rose-800">
                 <strong>In crisis?</strong> Call or text <strong>988</strong> (Suicide & Crisis Lifeline)
                 or text <strong>HOME</strong> to <strong>741741</strong> (Crisis Text Line)
               </p>
@@ -92,32 +92,32 @@ export default function AssessmentsPage() {
           <div className="max-w-4xl mx-auto px-4">
             <Link
               href="/assessments/grief"
-              className="block p-8 rounded-xl border-2 bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200 hover:border-amber-400 hover:shadow-lg transition-all"
+              className="block p-8 rounded-xl border-2 bg-gradient-to-br from-light-champagne/30 to-champagne-gold/10 border-champagne-gold/50 hover:border-champagne-gold hover:shadow-lg transition-all"
             >
               <div className="flex items-start gap-6">
-                <div className="p-4 bg-white rounded-xl text-amber-600 shadow-sm">
+                <div className="p-4 bg-white rounded-xl text-champagne-gold shadow-sm">
                   <Heart className="w-8 h-8" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-xl font-semibold text-gray-800">
+                    <h3 className="text-xl font-semibold text-stone-900">
                       Grief Assessment (PG-13)
                     </h3>
-                    <span className="text-xs font-medium bg-amber-200 text-amber-800 px-2 py-1 rounded-full">
+                    <span className="text-xs font-medium bg-champagne-gold/20 text-deep-champagne px-2 py-1 rounded-full">
                       Featured
                     </span>
                   </div>
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-stone-600 mb-4">
                     Understand the difference between typical grief and prolonged grief disorder.
                     This assessment helps you know whether your grief response might benefit from
                     specialized support — and why grief is <strong>not the same as depression</strong>.
                   </p>
                   <div className="flex items-center gap-4 text-sm">
-                    <span className="text-amber-700">13 questions</span>
-                    <span className="text-gray-400">•</span>
-                    <span className="text-amber-700">~5 minutes</span>
-                    <span className="text-gray-400">•</span>
-                    <span className="text-amber-700">Anonymous</span>
+                    <span className="text-deep-champagne">13 questions</span>
+                    <span className="text-stone-400">•</span>
+                    <span className="text-deep-champagne">~5 minutes</span>
+                    <span className="text-stone-400">•</span>
+                    <span className="text-deep-champagne">Anonymous</span>
                   </div>
                 </div>
               </div>
@@ -126,10 +126,10 @@ export default function AssessmentsPage() {
         </section>
 
         {/* Other Assessments */}
-        <section className="py-12 bg-gray-50">
+        <section className="py-12 bg-stone-50">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-medium text-gray-800 mb-8 text-center">
-              Other Assessments
+            <h2 className="font-serif text-2xl text-stone-900 mb-8 text-center">
+              Other assessments
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -144,10 +144,10 @@ export default function AssessmentsPage() {
                       <ClipboardCheck className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                      <h3 className="text-lg font-semibold text-stone-900 mb-2">
                         {assessment.name}
                       </h3>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-stone-600 text-sm">
                         {assessment.description}
                       </p>
                     </div>
@@ -160,43 +160,43 @@ export default function AssessmentsPage() {
         </section>
 
         {/* About These Tools */}
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-stone-50">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-medium text-gray-800 mb-8 text-center">
-              About These Screening Tools
+            <h2 className="font-serif text-2xl text-stone-900 mb-8 text-center">
+              About these screening tools
             </h2>
 
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white p-6 rounded-lg border border-gray-200">
-                <h3 className="font-semibold text-gray-800 mb-3">Validated & Research-Based</h3>
-                <p className="text-gray-600 text-sm">
+              <div className="bg-white p-6 rounded-lg border border-stone-200">
+                <h3 className="font-semibold text-stone-900 mb-3">Validated & research-based</h3>
+                <p className="text-stone-600 text-sm">
                   The PG-13, PHQ-9, and GAD-7 are clinically validated screening tools developed by
                   researchers and used by healthcare providers worldwide. They&apos;ve been tested
                   in numerous studies for accuracy and reliability.
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-lg border border-gray-200">
-                <h3 className="font-semibold text-gray-800 mb-3">Completely Anonymous</h3>
-                <p className="text-gray-600 text-sm">
+              <div className="bg-white p-6 rounded-lg border border-stone-200">
+                <h3 className="font-semibold text-stone-900 mb-3">Completely anonymous</h3>
+                <p className="text-stone-600 text-sm">
                   Your responses are anonymous by default. We don&apos;t collect any personally
                   identifying information. Aggregate data helps us understand what resources
                   our community needs most.
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-lg border border-gray-200">
-                <h3 className="font-semibold text-gray-800 mb-3">Educational Purpose</h3>
-                <p className="text-gray-600 text-sm">
+              <div className="bg-white p-6 rounded-lg border border-stone-200">
+                <h3 className="font-semibold text-stone-900 mb-3">Educational purpose</h3>
+                <p className="text-stone-600 text-sm">
                   These tools help you understand your symptoms and connect you with
                   research-backed information. They&apos;re a starting point for understanding,
                   not a replacement for professional care.
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-lg border border-gray-200">
-                <h3 className="font-semibold text-gray-800 mb-3">Connected to Resources</h3>
-                <p className="text-gray-600 text-sm">
+              <div className="bg-white p-6 rounded-lg border border-stone-200">
+                <h3 className="font-semibold text-stone-900 mb-3">Connected to resources</h3>
+                <p className="text-stone-600 text-sm">
                   After completing an assessment, you&apos;ll receive personalized recommendations
                   for research articles, coping strategies, and professional resources based
                   on your results.
@@ -209,18 +209,18 @@ export default function AssessmentsPage() {
         {/* CTA */}
         <section className="py-16">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-2xl font-medium text-gray-800 mb-4">
-              Need Help Finding Support?
+            <h2 className="font-serif text-2xl text-stone-900 mb-4">
+              Need help finding support?
             </h2>
-            <p className="text-gray-600 mb-8">
+            <p className="text-stone-600 mb-8">
               If you&apos;re looking for professional mental health support, we&apos;ve curated
               resources to help you find the right care.
             </p>
             <Link
               href="/find-help"
-              className="inline-block bg-teal-600 text-white px-8 py-3 rounded-lg hover:bg-teal-700 transition-colors"
+              className="inline-block bg-deep-teal text-white px-8 py-3 rounded-lg hover:bg-forest-teal transition-colors"
             >
-              Find Help Resources
+              Find help resources
             </Link>
           </div>
         </section>
