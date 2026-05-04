@@ -75,10 +75,10 @@ const initialData: WizardData = {
 
 const steps: { id: WizardStep; label: string }[] = [
   { id: 'account', label: 'Account' },
-  { id: 'deceased', label: 'Your Loved One' },
+  { id: 'deceased', label: 'Your loved one' },
   { id: 'proof', label: 'Verification' },
   { id: 'attestation', label: 'Attestation' },
-  { id: 'donation', label: 'Donation' },
+  { id: 'donation', label: 'Plan' },
   { id: 'review', label: 'Review' },
 ];
 
@@ -147,21 +147,21 @@ export default function MemorialWizard() {
   // Submitted success screen
   if (currentStep === 'submitted') {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-stone-200 overflow-hidden">
         <div className="p-8 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-8 h-8 text-green-600" />
+          <div className="w-16 h-16 bg-soft-aqua/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircle className="w-8 h-8 text-deep-teal" />
           </div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-            Memorial Submitted!
+          <h2 className="font-serif text-2xl text-stone-900 mb-4">
+            Memorial submitted
           </h2>
-          <p className="text-gray-600 mb-6 max-w-md mx-auto">
+          <p className="text-stone-600 mb-6 max-w-md mx-auto">
             Thank you. Your memorial for <strong>{data.deceasedFullName}</strong> is being reviewed.
             We&apos;ll publish it within 48 hours and email you the link.
           </p>
-          <div className="bg-teal-50 border border-teal-100 rounded-lg p-4 mb-6 text-left">
-            <h3 className="font-medium text-teal-800 mb-2">While you wait, you can:</h3>
-            <ul className="text-sm text-teal-700 space-y-2">
+          <div className="bg-soft-aqua/20 border border-soft-aqua rounded-lg p-4 mb-6 text-left">
+            <h3 className="font-medium text-stone-900 mb-2">While you wait, you can:</h3>
+            <ul className="text-sm text-stone-700 space-y-2">
               <li>• Start adding photos and stories to your memorial</li>
               <li>• Invite family members to contribute</li>
               <li>• Any edits you make will be visible to reviewers</li>
@@ -169,9 +169,9 @@ export default function MemorialWizard() {
           </div>
           <a
             href={`/memorials/dashboard/${memorialSlug}`}
-            className="inline-block bg-teal-600 text-white px-6 py-3 rounded-md hover:bg-teal-700 transition-colors"
+            className="inline-block bg-deep-teal text-white px-6 py-3 rounded-lg hover:bg-forest-teal transition-colors"
           >
-            Continue to Memorial Editor
+            Continue to memorial editor
           </a>
         </div>
       </div>
@@ -179,30 +179,30 @@ export default function MemorialWizard() {
   }
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+    <div className="bg-white rounded-xl border border-stone-200 overflow-hidden">
       {/* Progress indicator */}
-      <div className="px-6 py-4 bg-gray-50 border-b border-gray-100">
+      <div className="px-6 py-4 bg-stone-50 border-b border-stone-100">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-stone-500">
             Step {currentStepIndex + 1} of {steps.length}
           </span>
-          <span className="text-sm font-medium text-gray-700">
+          <span className="text-sm font-medium text-stone-700">
             {steps[currentStepIndex].label}
           </span>
         </div>
-        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
           <div
-            className="h-full bg-teal-600 transition-all duration-300"
+            className="h-full bg-deep-teal transition-all duration-300"
             style={{ width: `${((currentStepIndex + 1) / steps.length) * 100}%` }}
           />
         </div>
       </div>
 
-      {/* Pay-it-forward counter */}
+      {/* Pay-it-forward counter - now more subtle */}
       {availableCredits > 0 && currentStep === 'donation' && (
-        <div className="px-6 py-3 bg-green-50 border-b border-green-100">
-          <p className="text-sm text-green-700 text-center">
-            <strong>{availableCredits}</strong> free memorial{availableCredits === 1 ? '' : 's'} available through pay-it-forward donations
+        <div className="px-6 py-3 bg-soft-aqua/20 border-b border-soft-aqua/50">
+          <p className="text-sm text-deep-teal text-center">
+            Community support available for hardship requests
           </p>
         </div>
       )}
