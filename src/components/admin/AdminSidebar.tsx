@@ -12,6 +12,8 @@ import {
   LogOut,
   ExternalLink,
   Heart,
+  PenSquare,
+  Mail,
 } from 'lucide-react';
 import type { Database } from '@/lib/supabase/types';
 
@@ -23,6 +25,8 @@ interface AdminSidebarProps {
 
 const navItems = [
   { href: '/admin', icon: LayoutDashboard, label: 'Overview' },
+  { href: '/admin/content', icon: PenSquare, label: 'Content' },
+  { href: '/admin/newsletter', icon: Mail, label: 'Newsletter' },
   { href: '/admin/memorials', icon: Heart, label: 'Memorials' },
   { href: '/admin/research', icon: FileText, label: 'Research Digests' },
   { href: '/admin/donations', icon: DollarSign, label: 'Donations' },

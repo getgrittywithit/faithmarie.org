@@ -1,5 +1,10 @@
 export type UserRole = 'admin' | 'board_member' | 'contributor';
 
+// Content & Newsletter enums
+export type ContentStatus = 'draft' | 'review' | 'scheduled' | 'published' | 'archived';
+export type DistributionChannel = 'website' | 'newsletter' | 'both';
+export type NewsletterSendStatus = 'pending' | 'sending' | 'sent' | 'failed' | 'cancelled';
+
 // Memorial-specific enums
 export type MemorialStatus = 'draft' | 'pending_moderation' | 'published' | 'rejected' | 'taken_down';
 export type PrivacyMode = 'public' | 'password';
@@ -119,6 +124,10 @@ export interface Database {
           source: string | null;
           subscribed_at: string;
           unsubscribed_at: string | null;
+          resend_contact_id: string | null;
+          bounce_count: number;
+          last_email_sent_at: string | null;
+          last_email_opened_at: string | null;
         };
         Insert: {
           id?: string;
@@ -128,6 +137,10 @@ export interface Database {
           source?: string | null;
           subscribed_at?: string;
           unsubscribed_at?: string | null;
+          resend_contact_id?: string | null;
+          bounce_count?: number;
+          last_email_sent_at?: string | null;
+          last_email_opened_at?: string | null;
         };
         Update: {
           id?: string;
@@ -137,6 +150,172 @@ export interface Database {
           source?: string | null;
           subscribed_at?: string;
           unsubscribed_at?: string | null;
+          resend_contact_id?: string | null;
+          bounce_count?: number;
+          last_email_sent_at?: string | null;
+          last_email_opened_at?: string | null;
+        };
+      };
+      posts: {
+        Row: {
+          id: string;
+          title: string;
+          slug: string;
+          excerpt: string | null;
+          body: string;
+          body_html: string | null;
+          topics: string[];
+          featured_image_url: string | null;
+          reading_time_minutes: number | null;
+          distribution: DistributionChannel;
+          status: ContentStatus;
+          published_at: string | null;
+          email_subject: string | null;
+          email_preheader: string | null;
+          scheduled_publish_at: string | null;
+          scheduled_send_at: string | null;
+          created_by: string | null;
+          updated_by: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          title: string;
+          slug: string;
+          excerpt?: string | null;
+          body: string;
+          body_html?: string | null;
+          topics?: string[];
+          featured_image_url?: string | null;
+          reading_time_minutes?: number | null;
+          distribution?: DistributionChannel;
+          status?: ContentStatus;
+          published_at?: string | null;
+          email_subject?: string | null;
+          email_preheader?: string | null;
+          scheduled_publish_at?: string | null;
+          scheduled_send_at?: string | null;
+          created_by?: string | null;
+          updated_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          title?: string;
+          slug?: string;
+          excerpt?: string | null;
+          body?: string;
+          body_html?: string | null;
+          topics?: string[];
+          featured_image_url?: string | null;
+          reading_time_minutes?: number | null;
+          distribution?: DistributionChannel;
+          status?: ContentStatus;
+          published_at?: string | null;
+          email_subject?: string | null;
+          email_preheader?: string | null;
+          scheduled_publish_at?: string | null;
+          scheduled_send_at?: string | null;
+          created_by?: string | null;
+          updated_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      newsletter_sends: {
+        Row: {
+          id: string;
+          post_id: string | null;
+          target_topics: string[];
+          target_all_subscribers: boolean;
+          status: NewsletterSendStatus;
+          scheduled_at: string | null;
+          started_at: string | null;
+          completed_at: string | null;
+          total_recipients: number;
+          sent_count: number;
+          delivered_count: number;
+          opened_count: number;
+          clicked_count: number;
+          bounced_count: number;
+          resend_batch_id: string | null;
+          sent_by: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          post_id?: string | null;
+          target_topics?: string[];
+          target_all_subscribers?: boolean;
+          status?: NewsletterSendStatus;
+          scheduled_at?: string | null;
+          started_at?: string | null;
+          completed_at?: string | null;
+          total_recipients?: number;
+          sent_count?: number;
+          delivered_count?: number;
+          opened_count?: number;
+          clicked_count?: number;
+          bounced_count?: number;
+          resend_batch_id?: string | null;
+          sent_by?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          post_id?: string | null;
+          target_topics?: string[];
+          target_all_subscribers?: boolean;
+          status?: NewsletterSendStatus;
+          scheduled_at?: string | null;
+          started_at?: string | null;
+          completed_at?: string | null;
+          total_recipients?: number;
+          sent_count?: number;
+          delivered_count?: number;
+          opened_count?: number;
+          clicked_count?: number;
+          bounced_count?: number;
+          resend_batch_id?: string | null;
+          sent_by?: string | null;
+          created_at?: string;
+        };
+      };
+      newsletter_recipients: {
+        Row: {
+          id: string;
+          send_id: string | null;
+          subscriber_id: string | null;
+          resend_email_id: string | null;
+          sent_at: string | null;
+          delivered_at: string | null;
+          opened_at: string | null;
+          clicked_at: string | null;
+          bounced_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          send_id?: string | null;
+          subscriber_id?: string | null;
+          resend_email_id?: string | null;
+          sent_at?: string | null;
+          delivered_at?: string | null;
+          opened_at?: string | null;
+          clicked_at?: string | null;
+          bounced_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          send_id?: string | null;
+          subscriber_id?: string | null;
+          resend_email_id?: string | null;
+          sent_at?: string | null;
+          delivered_at?: string | null;
+          opened_at?: string | null;
+          clicked_at?: string | null;
+          bounced_at?: string | null;
         };
       };
       contact_submissions: {
@@ -705,6 +884,9 @@ export interface Database {
       proof_type: ProofType;
       relationship_type: RelationshipType;
       funding_type: FundingType;
+      content_status: ContentStatus;
+      distribution_channel: DistributionChannel;
+      newsletter_send_status: NewsletterSendStatus;
     };
   };
 }
@@ -723,3 +905,15 @@ export type Attestation = Database['public']['Tables']['attestations']['Row'];
 export type PayItForwardCredit = Database['public']['Tables']['pay_it_forward_credits']['Row'];
 export type ModerationAction = Database['public']['Tables']['moderation_actions']['Row'];
 export type MemorialReport = Database['public']['Tables']['memorial_reports']['Row'];
+
+// Content & Newsletter type aliases
+export type Post = Database['public']['Tables']['posts']['Row'];
+export type PostInsert = Database['public']['Tables']['posts']['Insert'];
+export type PostUpdate = Database['public']['Tables']['posts']['Update'];
+
+export type NewsletterSend = Database['public']['Tables']['newsletter_sends']['Row'];
+export type NewsletterSendInsert = Database['public']['Tables']['newsletter_sends']['Insert'];
+export type NewsletterSendUpdate = Database['public']['Tables']['newsletter_sends']['Update'];
+
+export type NewsletterRecipient = Database['public']['Tables']['newsletter_recipients']['Row'];
+export type Subscriber = Database['public']['Tables']['subscribers']['Row'];

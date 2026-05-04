@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { createAdminClient } from '@/lib/supabase/admin';
 
 type Topic = 'depression' | 'anxiety' | 'ptsd' | 'grief';
 
@@ -12,11 +13,14 @@ const TOPIC_LABELS: Record<Topic, string> = {
 
 export async function POST(request: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
+  const supabase = createAdminClient();
+
   try {
-    const { email, firstName, topics } = await request.json() as {
+    const { email, firstName, topics, source } = await request.json() as {
       email: string;
       firstName?: string;
       topics?: Topic[];
+      source?: string;
     };
 
     if (!email || !email.includes('@')) {
@@ -37,12 +41,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Add contact to audience
-    await resend.contacts.create({
+    // Add contact to Resend audience
+    const { data: contact } = await resend.contacts.create({
       email,
       firstName: firstName || undefined,
       audienceId,
     });
+
+    // Sync to Supabase subscribers table
+    const { error: dbError } = await supabase.from('subscribers').upsert(
+      {
+        email,
+        name: firstName || null,
+        topics: topics || [],
+        source: source || 'website',
+        resend_contact_id: contact?.id || null,
+        subscribed_at: new Date().toISOString(),
+        unsubscribed_at: null, // Clear any previous unsubscribe
+      },
+      { onConflict: 'email' }
+    );
+
+    if (dbError) {
+      console.error('Failed to sync subscriber to database:', dbError);
+      // Don't fail the request - Resend is the source of truth for email delivery
+    }
 
     // Format topics for email
     const topicLabels = topics && topics.length > 0
