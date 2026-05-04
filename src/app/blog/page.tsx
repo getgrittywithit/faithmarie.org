@@ -12,7 +12,7 @@ export const metadata = {
 export default async function BlogPage() {
   const supabase = await createClient();
 
-  const { data: posts } = await supabase
+  const { data: postsData } = await supabase
     .from('posts')
     .select('*')
     .eq('status', 'published')
@@ -20,8 +20,9 @@ export default async function BlogPage() {
     .lte('published_at', new Date().toISOString())
     .order('published_at', { ascending: false });
 
-  const featuredPost = posts?.[0];
-  const recentPosts = posts?.slice(1) || [];
+  const posts = (postsData || []) as Post[];
+  const featuredPost = posts[0];
+  const recentPosts = posts.slice(1);
 
   return (
     <div className="min-h-screen bg-gray-50">

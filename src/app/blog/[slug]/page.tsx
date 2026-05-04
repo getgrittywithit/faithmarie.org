@@ -1,8 +1,10 @@
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Clock, Calendar, ChevronRight } from 'lucide-react';
 import type { Metadata } from 'next';
+import type { Post } from '@/lib/supabase/types';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -12,12 +14,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const supabase = await createClient();
 
-  const { data: post } = await supabase
+  const { data: postData } = await supabase
     .from('posts')
     .select('title, excerpt, featured_image_url')
     .eq('slug', slug)
     .eq('status', 'published')
     .single();
+
+  const post = postData as Pick<Post, 'title' | 'excerpt' | 'featured_image_url'> | null;
 
   if (!post) {
     return { title: 'Post Not Found' };
@@ -35,15 +39,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const supabase = await createClient();
+  // Skip static generation if env vars aren't available (build time)
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return [];
+  }
 
-  const { data: posts } = await supabase
+  // Use admin client since generateStaticParams runs at build time without cookies
+  const supabase = createAdminClient();
+
+  const { data: postsData } = await supabase
     .from('posts')
     .select('slug')
     .eq('status', 'published')
     .in('distribution', ['website', 'both']);
 
-  return (posts || []).map((post) => ({
+  const posts = (postsData || []) as Pick<Post, 'slug'>[];
+
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }
@@ -52,7 +64,7 @@ export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const supabase = await createClient();
 
-  const { data: post, error } = await supabase
+  const { data: postData, error } = await supabase
     .from('posts')
     .select('*')
     .eq('slug', slug)
@@ -60,12 +72,14 @@ export default async function BlogPostPage({ params }: Props) {
     .in('distribution', ['website', 'both'])
     .single();
 
+  const post = postData as Post | null;
+
   if (error || !post) {
     notFound();
   }
 
   // Get related posts
-  const { data: relatedPosts } = await supabase
+  const { data: relatedPostsData } = await supabase
     .from('posts')
     .select('id, title, slug, excerpt, featured_image_url, reading_time_minutes')
     .eq('status', 'published')
@@ -73,6 +87,8 @@ export default async function BlogPostPage({ params }: Props) {
     .neq('id', post.id)
     .overlaps('topics', post.topics)
     .limit(3);
+
+  const relatedPosts = (relatedPostsData || []) as Pick<Post, 'id' | 'title' | 'slug' | 'excerpt' | 'featured_image_url' | 'reading_time_minutes'>[];
 
   const publishedDate = post.published_at
     ? new Date(post.published_at).toLocaleDateString('en-US', {

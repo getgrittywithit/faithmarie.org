@@ -6,7 +6,7 @@ import type { Post, ContentStatus, DistributionChannel } from '@/lib/supabase/ty
 export default async function ContentListPage() {
   const supabase = await createClient();
 
-  const { data: posts, error } = await supabase
+  const { data, error } = await supabase
     .from('posts')
     .select('*')
     .order('updated_at', { ascending: false });
@@ -15,7 +15,9 @@ export default async function ContentListPage() {
     console.error('Error loading posts:', error);
   }
 
-  const statusCounts = (posts || []).reduce(
+  const posts = (data || []) as Post[];
+
+  const statusCounts = posts.reduce(
     (acc, post) => {
       acc[post.status] = (acc[post.status] || 0) + 1;
       return acc;
@@ -43,7 +45,7 @@ export default async function ContentListPage() {
 
       {/* Status Filters */}
       <div className="flex items-center gap-4 mb-6">
-        <StatusFilter label="All" count={posts?.length || 0} active />
+        <StatusFilter label="All" count={posts.length} active />
         <StatusFilter label="Draft" count={statusCounts.draft || 0} />
         <StatusFilter label="Published" count={statusCounts.published || 0} />
         <StatusFilter label="Scheduled" count={statusCounts.scheduled || 0} />
@@ -62,7 +64,7 @@ export default async function ContentListPage() {
 
       {/* Content List */}
       <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-        {!posts || posts.length === 0 ? (
+        {posts.length === 0 ? (
           <div className="p-12 text-center">
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Edit className="h-8 w-8 text-gray-400" />

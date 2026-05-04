@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import crypto from 'crypto';
+import type { NewsletterRecipient, Subscriber } from '@/lib/supabase/types';
 
 // Resend webhook event types
 type ResendEventType =
@@ -100,16 +101,18 @@ export async function POST(request: NextRequest) {
     const supabase = createAdminClient();
 
     // Find the recipient record by resend_email_id
-    const { data: recipient, error: recipientError } = await supabase
+    const { data: recipientData, error: recipientError } = await supabase
       .from('newsletter_recipients')
       .select('id, send_id')
       .eq('resend_email_id', data.email_id)
       .single();
 
-    if (recipientError || !recipient) {
+    if (recipientError || !recipientData) {
       // Not a newsletter email or recipient not found
       return NextResponse.json({ received: true });
     }
+
+    const recipient = recipientData as Pick<NewsletterRecipient, 'id' | 'send_id'>;
 
     const now = new Date().toISOString();
 
@@ -118,11 +121,11 @@ export async function POST(request: NextRequest) {
         // Update recipient as delivered
         await supabase
           .from('newsletter_recipients')
-          .update({ delivered_at: now })
+          .update({ delivered_at: now } as never)
           .eq('id', recipient.id);
 
         // Increment delivered count on send
-        await supabase.rpc('increment_newsletter_stat', {
+        await (supabase.rpc as unknown as (fn: string, params: Record<string, unknown>) => Promise<unknown>)('increment_newsletter_stat', {
           p_send_id: recipient.send_id,
           p_column: 'delivered_count',
         });
@@ -130,34 +133,38 @@ export async function POST(request: NextRequest) {
 
       case 'email.opened':
         // Only count first open
-        const { data: existingOpen } = await supabase
+        const { data: existingOpenData } = await supabase
           .from('newsletter_recipients')
           .select('opened_at')
           .eq('id', recipient.id)
           .single();
 
+        const existingOpen = existingOpenData as Pick<NewsletterRecipient, 'opened_at'> | null;
+
         if (!existingOpen?.opened_at) {
           await supabase
             .from('newsletter_recipients')
-            .update({ opened_at: now })
+            .update({ opened_at: now } as never)
             .eq('id', recipient.id);
 
-          await supabase.rpc('increment_newsletter_stat', {
+          await (supabase.rpc as unknown as (fn: string, params: Record<string, unknown>) => Promise<unknown>)('increment_newsletter_stat', {
             p_send_id: recipient.send_id,
             p_column: 'opened_count',
           });
 
           // Update subscriber's last opened timestamp
-          const { data: recipientWithSub } = await supabase
+          const { data: recipientWithSubData } = await supabase
             .from('newsletter_recipients')
             .select('subscriber_id')
             .eq('id', recipient.id)
             .single();
 
+          const recipientWithSub = recipientWithSubData as Pick<NewsletterRecipient, 'subscriber_id'> | null;
+
           if (recipientWithSub?.subscriber_id) {
             await supabase
               .from('subscribers')
-              .update({ last_email_opened_at: now })
+              .update({ last_email_opened_at: now } as never)
               .eq('id', recipientWithSub.subscriber_id);
           }
         }
@@ -165,19 +172,21 @@ export async function POST(request: NextRequest) {
 
       case 'email.clicked':
         // Only count first click
-        const { data: existingClick } = await supabase
+        const { data: existingClickData } = await supabase
           .from('newsletter_recipients')
           .select('clicked_at')
           .eq('id', recipient.id)
           .single();
 
+        const existingClick = existingClickData as Pick<NewsletterRecipient, 'clicked_at'> | null;
+
         if (!existingClick?.clicked_at) {
           await supabase
             .from('newsletter_recipients')
-            .update({ clicked_at: now })
+            .update({ clicked_at: now } as never)
             .eq('id', recipient.id);
 
-          await supabase.rpc('increment_newsletter_stat', {
+          await (supabase.rpc as unknown as (fn: string, params: Record<string, unknown>) => Promise<unknown>)('increment_newsletter_stat', {
             p_send_id: recipient.send_id,
             p_column: 'clicked_count',
           });
@@ -187,47 +196,53 @@ export async function POST(request: NextRequest) {
       case 'email.bounced':
         await supabase
           .from('newsletter_recipients')
-          .update({ bounced_at: now })
+          .update({ bounced_at: now } as never)
           .eq('id', recipient.id);
 
-        await supabase.rpc('increment_newsletter_stat', {
+        await (supabase.rpc as unknown as (fn: string, params: Record<string, unknown>) => Promise<unknown>)('increment_newsletter_stat', {
           p_send_id: recipient.send_id,
           p_column: 'bounced_count',
         });
 
         // Increment subscriber bounce count
-        const { data: recipientForBounce } = await supabase
+        const { data: recipientForBounceData } = await supabase
           .from('newsletter_recipients')
           .select('subscriber_id')
           .eq('id', recipient.id)
           .single();
 
+        const recipientForBounce = recipientForBounceData as Pick<NewsletterRecipient, 'subscriber_id'> | null;
+
         if (recipientForBounce?.subscriber_id) {
-          const { data: subscriber } = await supabase
+          const { data: subscriberData } = await supabase
             .from('subscribers')
             .select('bounce_count')
             .eq('id', recipientForBounce.subscriber_id)
             .single();
 
+          const subscriber = subscriberData as Pick<Subscriber, 'bounce_count'> | null;
+
           await supabase
             .from('subscribers')
-            .update({ bounce_count: (subscriber?.bounce_count || 0) + 1 })
+            .update({ bounce_count: (subscriber?.bounce_count || 0) + 1 } as never)
             .eq('id', recipientForBounce.subscriber_id);
         }
         break;
 
       case 'email.complained':
         // User marked as spam - unsubscribe them
-        const { data: recipientForComplaint } = await supabase
+        const { data: recipientForComplaintData } = await supabase
           .from('newsletter_recipients')
           .select('subscriber_id')
           .eq('id', recipient.id)
           .single();
 
+        const recipientForComplaint = recipientForComplaintData as Pick<NewsletterRecipient, 'subscriber_id'> | null;
+
         if (recipientForComplaint?.subscriber_id) {
           await supabase
             .from('subscribers')
-            .update({ unsubscribed_at: now })
+            .update({ unsubscribed_at: now } as never)
             .eq('id', recipientForComplaint.subscriber_id);
         }
         break;

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { sendNewsletter } from '@/lib/email/send';
+import type { Post, NewsletterSend } from '@/lib/supabase/types';
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,11 +17,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Get admin user
-    const { data: adminUser } = await supabase
+    const { data: adminUserData } = await supabase
       .from('admin_users')
       .select('id')
       .eq('id', user.id)
       .single();
+
+    const adminUser = adminUserData as { id: string } | null;
 
     if (!adminUser) {
       return NextResponse.json({ error: 'Not an admin user' }, { status: 403 });
@@ -34,15 +37,17 @@ export async function POST(request: NextRequest) {
 
     // Get the post
     const adminSupabase = createAdminClient();
-    const { data: post, error: postError } = await adminSupabase
+    const { data: postData, error: postError } = await adminSupabase
       .from('posts')
       .select('*')
       .eq('id', postId)
       .single();
 
-    if (postError || !post) {
+    if (postError || !postData) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 });
     }
+
+    const post = postData as Post;
 
     // Verify post can be sent as newsletter
     if (post.distribution !== 'newsletter' && post.distribution !== 'both') {
@@ -53,7 +58,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create newsletter send record
-    const { data: send, error: sendError } = await adminSupabase
+    const { data: sendData, error: sendError } = await adminSupabase
       .from('newsletter_sends')
       .insert({
         post_id: postId,
@@ -61,17 +66,19 @@ export async function POST(request: NextRequest) {
         target_all_subscribers: targetAllSubscribers || false,
         status: 'pending',
         sent_by: adminUser.id,
-      })
+      } as never)
       .select()
       .single();
 
-    if (sendError || !send) {
+    if (sendError || !sendData) {
       console.error('Error creating newsletter send:', sendError);
       return NextResponse.json(
         { error: 'Failed to create newsletter send' },
         { status: 500 }
       );
     }
+
+    const send = sendData as NewsletterSend;
 
     // Start sending in the background (don't await)
     sendNewsletter({

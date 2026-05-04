@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
-import type { PostUpdate } from '@/lib/supabase/types';
+import type { Post, PostUpdate } from '@/lib/supabase/types';
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -20,7 +20,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { data: post, error } = await supabase
+    const { data, error } = await supabase
       .from('posts')
       .select('*')
       .eq('id', id)
@@ -31,6 +31,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 });
     }
 
+    const post = data as Post;
     return NextResponse.json({ post });
   } catch (error) {
     console.error('Error in GET /api/admin/content/[id]:', error);
@@ -53,11 +54,13 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
     }
 
     // Get admin user ID
-    const { data: adminUser } = await supabase
+    const { data: adminUserData } = await supabase
       .from('admin_users')
       .select('id')
       .eq('id', user.id)
       .single();
+
+    const adminUser = adminUserData as { id: string } | null;
 
     if (!adminUser) {
       return NextResponse.json({ error: 'Not an admin user' }, { status: 403 });
@@ -83,11 +86,13 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
     }
 
     // Get current post to check status change
-    const { data: currentPost } = await supabase
+    const { data: currentPostData } = await supabase
       .from('posts')
       .select('status, published_at')
       .eq('id', id)
       .single();
+
+    const currentPost = currentPostData as Pick<Post, 'status' | 'published_at'> | null;
 
     const updateData: PostUpdate = {
       title: body.title,
@@ -110,9 +115,9 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
       updateData.published_at = new Date().toISOString();
     }
 
-    const { data: post, error } = await supabase
+    const { data: updatedData, error } = await supabase
       .from('posts')
-      .update(updateData)
+      .update(updateData as never)
       .eq('id', id)
       .select()
       .single();
@@ -122,6 +127,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
       return NextResponse.json({ error: 'Failed to update post' }, { status: 500 });
     }
 
+    const post = updatedData as Post;
     return NextResponse.json({ success: true, post });
   } catch (error) {
     console.error('Error in PATCH /api/admin/content/[id]:', error);
@@ -144,11 +150,13 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     }
 
     // Verify admin role
-    const { data: adminUser } = await supabase
+    const { data: adminUserData } = await supabase
       .from('admin_users')
       .select('role')
       .eq('id', user.id)
       .single();
+
+    const adminUser = adminUserData as { role: string } | null;
 
     if (!adminUser || adminUser.role !== 'admin') {
       return NextResponse.json(

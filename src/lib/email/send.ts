@@ -43,7 +43,7 @@ export async function sendNewsletter({
       .update({
         status: 'sending',
         started_at: new Date().toISOString(),
-      })
+      } as never)
       .eq('id', sendId);
 
     // Get subscribers based on targeting
@@ -57,13 +57,15 @@ export async function sendNewsletter({
       query = query.overlaps('topics', targetTopics);
     }
 
-    const { data: subscribers, error: fetchError } = await query;
+    const { data: subscribersData, error: fetchError } = await query;
 
     if (fetchError) {
       throw new Error(`Failed to fetch subscribers: ${fetchError.message}`);
     }
 
-    if (!subscribers || subscribers.length === 0) {
+    const subscribers = (subscribersData || []) as Subscriber[];
+
+    if (subscribers.length === 0) {
       await supabase
         .from('newsletter_sends')
         .update({
@@ -71,7 +73,7 @@ export async function sendNewsletter({
           completed_at: new Date().toISOString(),
           total_recipients: 0,
           sent_count: 0,
-        })
+        } as never)
         .eq('id', sendId);
 
       return { success: true, totalSent: 0, errors: [] };
@@ -80,7 +82,7 @@ export async function sendNewsletter({
     // Update total recipients count
     await supabase
       .from('newsletter_sends')
-      .update({ total_recipients: subscribers.length })
+      .update({ total_recipients: subscribers.length } as never)
       .eq('id', sendId);
 
     // Process subscribers in batches
@@ -126,12 +128,12 @@ export async function sendNewsletter({
             subscriber_id: subscriber.id,
             resend_email_id: emailResult?.id || null,
             sent_at: new Date().toISOString(),
-          });
+          } as never);
 
           // Update subscriber's last email sent timestamp
           await supabase
             .from('subscribers')
-            .update({ last_email_sent_at: new Date().toISOString() })
+            .update({ last_email_sent_at: new Date().toISOString() } as never)
             .eq('id', subscriber.id);
 
           totalSent++;
@@ -140,7 +142,7 @@ export async function sendNewsletter({
           if (totalSent % 10 === 0) {
             await supabase
               .from('newsletter_sends')
-              .update({ sent_count: totalSent })
+              .update({ sent_count: totalSent } as never)
               .eq('id', sendId);
           }
         } catch (err) {
@@ -162,7 +164,7 @@ export async function sendNewsletter({
         status: 'sent',
         completed_at: new Date().toISOString(),
         sent_count: totalSent,
-      })
+      } as never)
       .eq('id', sendId);
 
     return { success: true, totalSent, errors };
@@ -177,7 +179,7 @@ export async function sendNewsletter({
         status: 'failed',
         completed_at: new Date().toISOString(),
         sent_count: totalSent,
-      })
+      } as never)
       .eq('id', sendId);
 
     return { success: false, totalSent, errors };

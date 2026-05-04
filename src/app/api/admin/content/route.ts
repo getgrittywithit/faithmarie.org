@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
-import type { PostInsert } from '@/lib/supabase/types';
+import type { Post, PostInsert } from '@/lib/supabase/types';
 
 // GET - List all posts
 export async function GET() {
@@ -46,11 +46,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Get admin user ID
-    const { data: adminUser } = await supabase
+    const { data: adminUserData } = await supabase
       .from('admin_users')
       .select('id')
       .eq('id', user.id)
       .single();
+
+    const adminUser = adminUserData as { id: string } | null;
 
     if (!adminUser) {
       return NextResponse.json({ error: 'Not an admin user' }, { status: 403 });
@@ -98,9 +100,9 @@ export async function POST(request: NextRequest) {
       published_at: body.status === 'published' ? new Date().toISOString() : null,
     };
 
-    const { data: post, error } = await supabase
+    const { data, error } = await supabase
       .from('posts')
-      .insert(postData)
+      .insert(postData as never)
       .select()
       .single();
 
@@ -109,6 +111,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to create post' }, { status: 500 });
     }
 
+    const post = data as Post;
     return NextResponse.json({ success: true, id: post.id, post });
   } catch (error) {
     console.error('Error in POST /api/admin/content:', error);

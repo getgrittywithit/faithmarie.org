@@ -17,6 +17,8 @@ export function generateNewsletterHtml({
 }: NewsletterTemplateProps): string {
   const unsubscribeUrl = generateUnsubscribeUrl(subscriberEmail);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://faithmarie.org';
+
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -30,13 +32,13 @@ export function generateNewsletterHtml({
     body {
       margin: 0;
       padding: 0;
-      background-color: #f6f9fc;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #F5EDE0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
     .wrapper {
       width: 100%;
-      background-color: #f6f9fc;
+      background-color: #F5EDE0;
       padding: 40px 20px;
     }
     .container {
@@ -45,21 +47,21 @@ export function generateNewsletterHtml({
       background-color: #ffffff;
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border: 1px solid #e7e5e4;
     }
     .header {
-      background-color: #0d9488;
-      padding: 30px;
-      text-align: center;
+      padding: 28px 30px;
+      border-bottom: 1px solid #e7e5e4;
     }
     .header h1 {
       margin: 0;
-      color: #ffffff;
-      font-size: 24px;
+      color: #1B6E68;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 22px;
       font-weight: 600;
     }
     .content {
-      padding: 40px 30px;
+      padding: 32px 30px;
     }
     .featured-image {
       width: 100%;
@@ -68,28 +70,33 @@ export function generateNewsletterHtml({
       margin-bottom: 24px;
     }
     .title {
+      font-family: Georgia, 'Times New Roman', serif;
       font-size: 28px;
-      font-weight: 700;
-      color: #111827;
+      font-weight: 600;
+      color: #1c1917;
       margin: 0 0 20px 0;
-      line-height: 1.3;
+      line-height: 1.2;
     }
     .body-content {
       font-size: 16px;
       line-height: 1.7;
-      color: #374151;
+      color: #44403c;
     }
     .body-content h2 {
+      font-family: Georgia, 'Times New Roman', serif;
       font-size: 22px;
       font-weight: 600;
-      color: #111827;
+      color: #1c1917;
       margin: 32px 0 16px 0;
+      line-height: 1.2;
     }
     .body-content h3 {
+      font-family: Georgia, 'Times New Roman', serif;
       font-size: 18px;
       font-weight: 600;
-      color: #111827;
+      color: #1c1917;
       margin: 24px 0 12px 0;
+      line-height: 1.3;
     }
     .body-content p {
       margin: 0 0 16px 0;
@@ -102,7 +109,7 @@ export function generateNewsletterHtml({
       margin-bottom: 8px;
     }
     .body-content a {
-      color: #0d9488;
+      color: #1B6E68;
       text-decoration: underline;
     }
     .body-content img {
@@ -113,48 +120,63 @@ export function generateNewsletterHtml({
     }
     .cta-button {
       display: inline-block;
-      background-color: #0d9488;
+      background-color: #1B6E68;
       color: #ffffff !important;
       text-decoration: none;
-      padding: 14px 28px;
-      border-radius: 6px;
-      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 16px;
       margin: 16px 0;
     }
+    .signoff {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #e7e5e4;
+      color: #44403c;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .signoff strong {
+      color: #1c1917;
+    }
+    .signoff .role {
+      color: #57534e;
+      font-size: 14px;
+    }
     .footer {
-      background-color: #f9fafb;
-      padding: 30px;
+      background-color: #fafaf9;
+      padding: 24px 30px;
       text-align: center;
-      border-top: 1px solid #e5e7eb;
+      border-top: 1px solid #e7e5e4;
     }
     .footer p {
       margin: 0 0 12px 0;
-      font-size: 14px;
-      color: #6b7280;
+      font-size: 13px;
+      color: #57534e;
+      line-height: 1.5;
     }
     .footer a {
-      color: #0d9488;
+      color: #1B6E68;
       text-decoration: underline;
     }
-    .footer .social {
-      margin: 20px 0;
-    }
-    .footer .social a {
-      display: inline-block;
-      margin: 0 8px;
-      text-decoration: none;
-    }
-    .footer .address {
-      font-size: 12px;
-      color: #9ca3af;
-      margin-top: 20px;
+    .footer .tagline {
+      font-size: 13px;
+      color: #57534e;
+      margin-bottom: 16px;
     }
     @media only screen and (max-width: 600px) {
       .content {
-        padding: 30px 20px;
+        padding: 24px 20px;
       }
       .title {
         font-size: 24px;
+      }
+      .header {
+        padding: 24px 20px;
+      }
+      .footer {
+        padding: 20px;
       }
     }
   </style>
@@ -163,7 +185,7 @@ export function generateNewsletterHtml({
   <div class="wrapper">
     <div class="container">
       <div class="header">
-        <h1>Faith Marie Foundation</h1>
+        <h1>FaithMarie.org</h1>
       </div>
 
       <div class="content">
@@ -175,25 +197,21 @@ export function generateNewsletterHtml({
           ${content}
         </div>
 
-        <div style="margin-top: 32px; text-align: center;">
-          <a href="https://faithmarie.org/blog" class="cta-button">
-            Read More on Our Blog
-          </a>
+        <div class="signoff">
+          With care,<br>
+          <strong>Levi</strong><br>
+          <span class="role">Faith Marie Foundation</span>
         </div>
       </div>
 
       <div class="footer">
-        <p>You're receiving this email because you subscribed to Faith Marie Foundation.</p>
+        <p class="tagline">FaithMarie.org — Mental health and grief education, explained with care.</p>
 
         <p>
-          <a href="${unsubscribeUrl}">Unsubscribe</a> •
-          <a href="https://faithmarie.org">Visit our website</a>
+          <a href="${unsubscribeUrl}">Unsubscribe</a> ·
+          <a href="${siteUrl}">Visit our website</a> ·
+          <a href="${siteUrl}/blog">Read our blog</a>
         </p>
-
-        <div class="address">
-          <p>Faith Marie Foundation</p>
-          <p>Making mental health research accessible to every family.</p>
-        </div>
       </div>
     </div>
   </div>
@@ -224,8 +242,10 @@ export function generatePlainText({
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://faithmarie.org';
+
   return `
-FAITH MARIE FOUNDATION
+FaithMarie.org
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ${title}
@@ -234,16 +254,16 @@ ${plainContent}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Read more on our blog: https://faithmarie.org/blog
+With care,
+Levi
+Faith Marie Foundation
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-You're receiving this email because you subscribed to Faith Marie Foundation.
+FaithMarie.org — Mental health and grief education, explained with care.
 
 Unsubscribe: ${unsubscribeUrl}
-Visit our website: https://faithmarie.org
-
-Faith Marie Foundation
-Making mental health research accessible to every family.
+Visit our website: ${siteUrl}
+Read our blog: ${siteUrl}/blog
 `.trim();
 }

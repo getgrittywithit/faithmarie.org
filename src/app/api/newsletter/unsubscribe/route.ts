@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
     // Mark as unsubscribed in Supabase
     await supabase
       .from('subscribers')
-      .update({ unsubscribed_at: new Date().toISOString() })
+      .update({ unsubscribed_at: new Date().toISOString() } as never)
       .eq('email', email);
 
     return new NextResponse(
@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
     // Mark as unsubscribed in Supabase
     await supabase
       .from('subscribers')
-      .update({ unsubscribed_at: new Date().toISOString() })
+      .update({ unsubscribed_at: new Date().toISOString() } as never)
       .eq('email', email);
 
     return NextResponse.json({ success: true });

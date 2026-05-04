@@ -11,17 +11,24 @@ import {
   Loader2,
   ChevronRight,
 } from 'lucide-react';
+import type { NewsletterSend } from '@/lib/supabase/types';
+
+interface SendWithPost extends NewsletterSend {
+  post: { title: string; slug: string } | null;
+}
 
 export default async function NewsletterHistoryPage() {
   const supabase = await createClient();
 
-  const { data: sends } = await supabase
+  const { data: sendsData } = await supabase
     .from('newsletter_sends')
     .select(`
       *,
       post:posts(title, slug)
     `)
     .order('created_at', { ascending: false });
+
+  const sends = (sendsData || []) as unknown as SendWithPost[];
 
   return (
     <div>
@@ -40,7 +47,7 @@ export default async function NewsletterHistoryPage() {
       </h1>
 
       <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-        {!sends || sends.length === 0 ? (
+        {sends.length === 0 ? (
           <div className="p-12 text-center">
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Mail className="h-8 w-8 text-gray-400" />

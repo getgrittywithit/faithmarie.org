@@ -2,25 +2,28 @@ import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import NewsletterSendClient from './NewsletterSendClient';
+import type { Post, Subscriber } from '@/lib/supabase/types';
 
 export default async function NewsletterSendPage() {
   const supabase = await createClient();
 
   // Get posts that can be sent as newsletter
-  const { data: posts } = await supabase
+  const { data: postsData } = await supabase
     .from('posts')
     .select('*')
     .in('distribution', ['newsletter', 'both'])
     .eq('status', 'published')
     .order('published_at', { ascending: false });
 
+  const posts = (postsData || []) as Post[];
+
   // Get subscriber counts
-  const { data: subscribers } = await supabase
+  const { data: subscribersData } = await supabase
     .from('subscribers')
     .select('id, topics')
     .is('unsubscribed_at', null);
 
-  const activeSubscribers = subscribers || [];
+  const activeSubscribers = (subscribersData || []) as Pick<Subscriber, 'id' | 'topics'>[];
   const totalSubscribers = activeSubscribers.length;
 
   // Count by topic
@@ -32,13 +35,15 @@ export default async function NewsletterSendPage() {
   });
 
   // Get drafts that could be published
-  const { data: drafts } = await supabase
+  const { data: draftsData } = await supabase
     .from('posts')
     .select('*')
     .in('distribution', ['newsletter', 'both'])
     .eq('status', 'draft')
     .order('updated_at', { ascending: false })
     .limit(5);
+
+  const drafts = (draftsData || []) as Post[];
 
   return (
     <div>

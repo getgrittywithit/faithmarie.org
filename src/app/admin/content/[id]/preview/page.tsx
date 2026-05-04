@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Globe, Mail } from 'lucide-react';
+import type { Post } from '@/lib/supabase/types';
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -11,15 +12,17 @@ export default async function PreviewContentPage({ params }: Props) {
   const { id } = await params;
   const supabase = await createClient();
 
-  const { data: post, error } = await supabase
+  const { data, error } = await supabase
     .from('posts')
     .select('*')
     .eq('id', id)
     .single();
 
-  if (error || !post) {
+  if (error || !data) {
     notFound();
   }
+
+  const post = data as Post;
 
   const showWebPreview = post.distribution === 'website' || post.distribution === 'both';
   const showEmailPreview = post.distribution === 'newsletter' || post.distribution === 'both';

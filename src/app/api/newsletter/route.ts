@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
         resend_contact_id: contact?.id || null,
         subscribed_at: new Date().toISOString(),
         unsubscribed_at: null, // Clear any previous unsubscribe
-      },
+      } as never,
       { onConflict: 'email' }
     );
 
@@ -74,32 +74,63 @@ export async function POST(request: NextRequest) {
 
     // Build what to expect content based on topics
     const topicContent = topicLabels
-      ? `<p>You've selected to receive updates about: <strong>${topicLabels}</strong></p>`
+      ? `<p style="color: #44403c; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">You mentioned an interest in <strong style="color: #1c1917;">${topicLabels}</strong>. We'll keep that in mind when we share resources.</p>`
       : '';
+
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://faithmarie.org';
 
     // Send welcome email to subscriber
     await resend.emails.send({
-      from: 'Faith Marie Foundation <noreply@faithmarie.org>',
+      from: 'Faith Marie Foundation <hello@faithmarie.org>',
       to: email,
       subject: 'Welcome to Faith Marie Foundation',
       html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-          <h1 style="color: #0D9488;">Welcome to Faith Marie Foundation</h1>
-          <p>Thank you for subscribing to our newsletter${firstName ? `, ${firstName}` : ''}!</p>
-          ${topicContent}
-          <p>Here's what to expect:</p>
-          <ul>
-            <li><strong>Tuesday:</strong> Research Roundup - the latest findings and practical takeaways</li>
-            <li><strong>Friday:</strong> Weekend Read - a featured deep-dive plus helpful resources</li>
-          </ul>
-          <p>We're working to make mental health research accessible to everyone through AI. Your support means the world to us.</p>
-          <p style="margin-top: 30px;">
-            <a href="https://faithmarie.org/research" style="background-color: #0D9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px;">Explore Our Research</a>
-          </p>
-          <p style="color: #666; font-size: 14px; margin-top: 40px;">
-            With gratitude,<br>
-            The Faith Marie Foundation Team
-          </p>
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #F5EDE0; padding: 40px 24px;">
+          <div style="background-color: #ffffff; border-radius: 8px; padding: 32px; border: 1px solid #e7e5e4;">
+            <h1 style="font-family: Georgia, 'Times New Roman', serif; color: #1c1917; font-size: 28px; font-weight: 600; margin: 0 0 24px 0; line-height: 1.2;">
+              ${firstName ? `Hello, ${firstName}` : 'Hello'}
+            </h1>
+
+            <p style="color: #44403c; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
+              Thank you for joining our community. We are glad you are here.
+            </p>
+
+            ${topicContent}
+
+            <p style="color: #44403c; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
+              We send a newsletter twice a week:
+            </p>
+
+            <ul style="color: #44403c; font-size: 16px; line-height: 1.8; margin: 0 0 24px 0; padding-left: 20px;">
+              <li><strong style="color: #1c1917;">Tuesdays</strong> — Research roundup with the latest findings and practical takeaways</li>
+              <li><strong style="color: #1c1917;">Fridays</strong> — A longer read, plus resources that might help</li>
+            </ul>
+
+            <p style="color: #44403c; font-size: 16px; line-height: 1.6; margin: 0 0 28px 0;">
+              Our mission is to make mental health and grief education clearer, kinder, and easier to act on. Everything we publish is free, ad-free, and written for the person reading on their phone at 2 a.m. who just wants to know what to do next.
+            </p>
+
+            <p style="margin: 0 0 32px 0;">
+              <a href="${siteUrl}/research" style="display: inline-block; background-color: #1B6E68; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-size: 16px; font-weight: 500;">
+                Explore our resources
+              </a>
+            </p>
+
+            <p style="color: #44403c; font-size: 16px; line-height: 1.6; margin: 0;">
+              With care,<br>
+              <strong style="color: #1c1917;">Levi</strong><br>
+              <span style="color: #57534e; font-size: 14px;">Faith Marie Foundation</span>
+            </p>
+          </div>
+
+          <div style="text-align: center; padding: 24px 0 0 0;">
+            <p style="color: #57534e; font-size: 13px; line-height: 1.5; margin: 0 0 8px 0;">
+              FaithMarie.org — Mental health and grief education, explained with care.
+            </p>
+            <p style="color: #57534e; font-size: 13px; line-height: 1.5; margin: 0;">
+              <a href="${siteUrl}/unsubscribe?email=${encodeURIComponent(email)}" style="color: #1B6E68; text-decoration: underline;">Unsubscribe</a>
+            </p>
+          </div>
         </div>
       `,
     });

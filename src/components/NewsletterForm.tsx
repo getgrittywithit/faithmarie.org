@@ -20,6 +20,7 @@ const TOPICS: { id: Topic; label: string }[] = [
 export default function NewsletterForm({ variant = 'full', preselectedTopic, className = '' }: NewsletterFormProps) {
   const [isExpanded, setIsExpanded] = useState(variant === 'compact');
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
   const [selectedTopics, setSelectedTopics] = useState<Topic[]>(preselectedTopic ? [preselectedTopic] : []);
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -58,6 +59,7 @@ export default function NewsletterForm({ variant = 'full', preselectedTopic, cla
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
+          firstName: firstName.trim() || undefined,
           topics: selectedTopics.length > 0 ? selectedTopics : undefined,
         }),
       });
@@ -67,6 +69,7 @@ export default function NewsletterForm({ variant = 'full', preselectedTopic, cla
       if (response.ok) {
         setStatus('success');
         setEmail('');
+        setFirstName('');
         setSelectedTopics([]);
       } else {
         setErrorMessage(data.error || 'Failed to subscribe');
@@ -133,19 +136,30 @@ export default function NewsletterForm({ variant = 'full', preselectedTopic, cla
 
   return (
     <div className={`space-y-4 ${className}`}>
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
-          className="flex-1 px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
-          disabled={isLoading}
-        />
+      <form onSubmit={handleSubmit} className="space-y-3">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            placeholder="First name (optional)"
+            className="sm:w-40 px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+            disabled={isLoading}
+          />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email address"
+            className="flex-1 px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+            disabled={isLoading}
+            required
+          />
+        </div>
         <button
           type="submit"
           disabled={isLoading}
-          className="bg-teal-600 text-white px-6 py-3 rounded-md hover:bg-teal-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed whitespace-nowrap"
+          className="w-full sm:w-auto bg-teal-600 text-white px-6 py-3 rounded-md hover:bg-teal-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
         >
           {isLoading ? 'Subscribing...' : 'Subscribe'}
         </button>

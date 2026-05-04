@@ -12,16 +12,26 @@ import {
   Clock,
   Loader2,
 } from 'lucide-react';
+import type { NewsletterSend, NewsletterRecipient } from '@/lib/supabase/types';
 
 interface Props {
   params: Promise<{ sendId: string }>;
+}
+
+interface SendWithRelations extends NewsletterSend {
+  post: { title: string; slug: string; excerpt: string | null } | null;
+  sent_by_user: { name: string } | null;
+}
+
+interface RecipientWithSubscriber extends NewsletterRecipient {
+  subscriber: { email: string; name: string | null } | null;
 }
 
 export default async function NewsletterSendDetailPage({ params }: Props) {
   const { sendId } = await params;
   const supabase = await createClient();
 
-  const { data: send, error } = await supabase
+  const { data, error } = await supabase
     .from('newsletter_sends')
     .select(`
       *,
@@ -31,12 +41,14 @@ export default async function NewsletterSendDetailPage({ params }: Props) {
     .eq('id', sendId)
     .single();
 
-  if (error || !send) {
+  if (error || !data) {
     notFound();
   }
 
+  const send = data as unknown as SendWithRelations;
+
   // Get recipient details
-  const { data: recipients } = await supabase
+  const { data: recipientsData } = await supabase
     .from('newsletter_recipients')
     .select(`
       *,
@@ -45,6 +57,8 @@ export default async function NewsletterSendDetailPage({ params }: Props) {
     .eq('send_id', sendId)
     .order('sent_at', { ascending: false })
     .limit(100);
+
+  const recipients = (recipientsData || []) as unknown as RecipientWithSubscriber[];
 
   const openRate =
     send.delivered_count > 0

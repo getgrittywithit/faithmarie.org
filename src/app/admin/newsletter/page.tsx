@@ -10,16 +10,22 @@ import {
   AlertCircle,
   Clock,
 } from 'lucide-react';
+import type { Subscriber, NewsletterSend } from '@/lib/supabase/types';
+
+interface SendWithPost extends NewsletterSend {
+  post: { title: string; slug: string } | null;
+}
 
 export default async function NewsletterDashboardPage() {
   const supabase = await createClient();
 
   // Get subscriber stats
-  const { data: subscribers } = await supabase
+  const { data: subscribersData } = await supabase
     .from('subscribers')
     .select('id, topics, unsubscribed_at');
 
-  const activeSubscribers = subscribers?.filter((s) => !s.unsubscribed_at) || [];
+  const subscribers = (subscribersData || []) as Pick<Subscriber, 'id' | 'topics' | 'unsubscribed_at'>[];
+  const activeSubscribers = subscribers.filter((s) => !s.unsubscribed_at);
   const totalSubscribers = activeSubscribers.length;
 
   // Count by topic
@@ -31,7 +37,7 @@ export default async function NewsletterDashboardPage() {
   });
 
   // Get recent sends
-  const { data: recentSends } = await supabase
+  const { data: recentSendsData } = await supabase
     .from('newsletter_sends')
     .select(`
       *,
@@ -40,13 +46,17 @@ export default async function NewsletterDashboardPage() {
     .order('created_at', { ascending: false })
     .limit(5);
 
+  const recentSends = (recentSendsData || []) as unknown as SendWithPost[];
+
   // Calculate aggregate stats from recent sends
-  const { data: allSends } = await supabase
+  const { data: allSendsData } = await supabase
     .from('newsletter_sends')
     .select('sent_count, delivered_count, opened_count, clicked_count, bounced_count')
     .eq('status', 'sent');
 
-  const aggregateStats = (allSends || []).reduce(
+  const allSends = (allSendsData || []) as Pick<NewsletterSend, 'sent_count' | 'delivered_count' | 'opened_count' | 'clicked_count' | 'bounced_count'>[];
+
+  const aggregateStats = allSends.reduce(
     (acc, send) => ({
       totalSent: acc.totalSent + (send.sent_count || 0),
       totalDelivered: acc.totalDelivered + (send.delivered_count || 0),
